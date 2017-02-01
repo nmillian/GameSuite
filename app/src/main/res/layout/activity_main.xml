@@ -24,7 +24,8 @@
         android:id="@+id/button"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/background"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:OnClick = "battleshipClick" />
 
     <Button
         android:text="Connect 4"
@@ -33,7 +34,8 @@
         android:layout_marginTop="48dp"
         android:id="@+id/button2"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:OnClick = "connect4Click"/>
 
     <Button
         android:text="Crazy 8s"
@@ -42,7 +44,8 @@
         android:id="@+id/button3"
         android:layout_marginTop="41dp"
         android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:OnClick = "crazy8sClick"/>
 
 
 </RelativeLayout>

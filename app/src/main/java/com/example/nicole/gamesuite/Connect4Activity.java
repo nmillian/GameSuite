@@ -9,7 +9,7 @@ public class Connect4Activity extends AppCompatActivity {
 
     /* *********************************************
 `   * Private class variables and objects
-********************************************* */
+    ********************************************* */
     //The Connect 4 board object
     private Connect4Board board;
 
@@ -43,7 +43,7 @@ public class Connect4Activity extends AppCompatActivity {
         String columnString = Character.toString(tile.charAt(5));
 
         if(currentPlayer.equals("H")){
-            if(board.choiceValid(rowString, columnString)){
+            if(board.validateMove(rowString, columnString)){
                 board.updateHumanMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.redcircle);
                 currentPlayer = "C";
@@ -51,7 +51,7 @@ public class Connect4Activity extends AppCompatActivity {
         }
 
         else{
-            if(board.choiceValid(rowString, columnString)){
+            if(board.validateMove(rowString, columnString)){
                 board.updateComputerMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.yellowcircle);
                 currentPlayer = "H";

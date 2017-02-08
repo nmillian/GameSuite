@@ -52,11 +52,12 @@ public class Connect4Board {
     }
 
     /* *********************************************
-`   * Public class variables
+`   * Public functions
     ********************************************* */
+
+    //Check that the placement is empty
     public boolean choiceValid(String row, String column){
         String tile = row + column;
-        Log.d("VALID", connect4Board.get(tile));
 
         if(connect4Board.get(tile).equals("B")){
             return true;
@@ -64,6 +65,40 @@ public class Connect4Board {
         else{
             return false;
         }
+    }
+
+    public boolean validateMove(String row, String column){
+        Integer rowInt = Integer.parseInt(row);
+        Integer colInt = Integer.parseInt(column);
+
+        //Check that the placement is empty
+        if(choiceValid(row, column)){
+
+            //Check if it's being placed on the first row
+            if(rowInt.equals(1)){
+                return true;
+            }
+
+            //Not the first row, check that the tile below is filled
+            else{
+                Integer newRowInt = rowInt - 1;
+                String underTile = Integer.toString(newRowInt) + column;
+
+                if(connect4Board.get(underTile).equals("C") || connect4Board.get(underTile).equals("H")){
+                    return true;
+                }
+            }
+        }
+
+        //Return false if player did not pick a blank tile or the tile under is not filled
+        return false;
+    }
+
+    public boolean checkForWinHuman(String row, String column){
+        Integer rowInt = Integer.parseInt(row);
+        Integer colInt = Integer.parseInt(column);
+
+        return false;
     }
 
     public void updateHumanMove(String row, String column){

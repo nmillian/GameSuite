@@ -349,10 +349,10 @@
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile17"
-                android:layout_width="74dp"
-                android:layout_height="79dp"
+                android:layout_width="75dp"
+                android:layout_height="81dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:onClick="tileClick"
                 android:background="@drawable/whitecircle"/>
         </TableRow>

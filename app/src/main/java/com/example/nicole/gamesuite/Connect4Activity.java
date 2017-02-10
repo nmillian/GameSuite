@@ -1,5 +1,7 @@
 package com.example.nicole.gamesuite;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,7 @@ public class Connect4Activity extends AppCompatActivity {
 `   * Constructor
     ********************************************* */
     public Connect4Activity(){
+
         board = new Connect4Board();
     }
 
@@ -43,15 +46,39 @@ public class Connect4Activity extends AppCompatActivity {
         String columnString = Character.toString(tile.charAt(5));
 
         if(currentPlayer.equals("H")){
-            if(board.validateMove(rowString, columnString)){
+            if(board.ValidateMove(rowString, columnString)){
                 board.updateHumanMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.redcircle);
-                currentPlayer = "C";
+
+                if(board.CheckForWinHuman()){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("You won by getting 4 in a row! Would you like to play again?");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            })
+
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+                }
+                else {
+                    currentPlayer = "C";
+                }
             }
         }
 
         else{
-            if(board.validateMove(rowString, columnString)){
+            if(board.ValidateMove(rowString, columnString)){
                 board.updateComputerMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.yellowcircle);
                 currentPlayer = "H";
@@ -63,6 +90,10 @@ public class Connect4Activity extends AppCompatActivity {
 `   * Private functions
     ********************************************* */
     private void playGame(){
+
+    }
+
+    private void resetGame(){
 
     }
 }

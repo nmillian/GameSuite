@@ -21,13 +21,13 @@ public class Connect4Board {
     public Connect4Board(){
         //Initialize the Hashtable with the defualt values at default locations
         connect4Board.clear();
-        initializeBoard();
+        InitializeBoard();
     }
 
     /* *********************************************
 `   * Private class functions
     ********************************************* */
-    private void initializeBoard(){
+    private void InitializeBoard(){
         String row;
         String column;
         String tile;
@@ -56,7 +56,7 @@ public class Connect4Board {
     ********************************************* */
 
     //Check that the placement is empty
-    public boolean choiceValid(String row, String column){
+    public boolean ChoiceValid(String row, String column){
         String tile = row + column;
 
         if(connect4Board.get(tile).equals("B")){
@@ -67,12 +67,12 @@ public class Connect4Board {
         }
     }
 
-    public boolean validateMove(String row, String column){
+    public boolean ValidateMove(String row, String column){
         Integer rowInt = Integer.parseInt(row);
         Integer colInt = Integer.parseInt(column);
 
         //Check that the placement is empty
-        if(choiceValid(row, column)){
+        if(ChoiceValid(row, column)){
 
             //Check if it's being placed on the first row
             if(rowInt.equals(1)){
@@ -94,9 +94,45 @@ public class Connect4Board {
         return false;
     }
 
-    public boolean checkForWinHuman(String row, String column){
-        Integer rowInt = Integer.parseInt(row);
-        Integer colInt = Integer.parseInt(column);
+    public boolean CheckForWinHuman(){
+        //Check horizontal win
+        //Row
+        for(int i = 1; i < 7; i++) {
+            //Column - only have to check to the middle column
+            for(int j = 1; j < 5; j++){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                String tileOne = rowString + Integer.toString(j);
+                String tileTwo = rowString + Integer.toString(j+1);
+                String tileThree = rowString + Integer.toString(j+2);
+                String tileFour = rowString + Integer.toString(j+3);
+
+                if(connect4Board.get(tileOne).equals("H") && connect4Board.get(tileTwo).equals("H") && connect4Board.get(tileThree).equals("H") && connect4Board.get(tileFour).equals("H")){
+                    return true;
+                }
+            }
+        }
+
+        //Check vertical win
+        //Column
+        for(int i = 1; i < 8; i++){
+            //Row - only have to check until the middle row
+            for(int j = 1; j < 4; j++){
+                //Column stays the same, column moves up until it gets to the middle, 3
+                String columnString = Integer.toString(i);
+
+                String tileOne = Integer.toString(j) + columnString;
+                String tileTwo = Integer.toString(j + 1) + columnString;
+                String tileThree = Integer.toString(j + 2) + columnString;
+                String tileFour = Integer.toString(j + 3) + columnString;
+
+                if(connect4Board.get(tileOne).equals("H") && connect4Board.get(tileTwo).equals("H") && connect4Board.get(tileThree).equals("H") && connect4Board.get(tileFour).equals("H")){
+                    return true;
+                }
+            }
+
+        }
 
         return false;
     }

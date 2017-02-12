@@ -67,6 +67,7 @@ public class Connect4Board {
         }
     }
 
+    //Validate that the tile is empty and if it's not on the first row there's a piece underneath
     public boolean ValidateMove(String row, String column){
         Integer rowInt = Integer.parseInt(row);
         Integer colInt = Integer.parseInt(column);
@@ -134,15 +135,127 @@ public class Connect4Board {
 
         }
 
+        //Check diagonal win up
+        //Row
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(connect4Board.get(tileOne).equals("H") && connect4Board.get(tileTwo).equals("H") && connect4Board.get(tileThree).equals("H") && connect4Board.get(tileFour).equals("H")){
+                    return true;
+                }
+            }
+        }
+
+        //Check diagonal win down
+        //Row
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+
+                if(connect4Board.get(tileOne).equals("H") && connect4Board.get(tileTwo).equals("H") && connect4Board.get(tileThree).equals("H") && connect4Board.get(tileFour).equals("H")){
+                    return true;
+                }
+            }
+        }
+
+        //No way to win
         return false;
     }
 
-    public void updateHumanMove(String row, String column){
+    //Check if the computer player won the game
+    public boolean CheckForWinComputer(){
+        //Check horizontal win
+        //Row
+        for(int i = 1; i < 7; i++) {
+            //Column - only have to check to the middle column
+            for(int j = 1; j < 5; j++){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                String tileOne = rowString + Integer.toString(j);
+                String tileTwo = rowString + Integer.toString(j+1);
+                String tileThree = rowString + Integer.toString(j+2);
+                String tileFour = rowString + Integer.toString(j+3);
+
+                if(connect4Board.get(tileOne).equals("C") && connect4Board.get(tileTwo).equals("C") && connect4Board.get(tileThree).equals("C") && connect4Board.get(tileFour).equals("C")){
+                    return true;
+                }
+            }
+        }
+
+        //Check vertical win
+        //Column
+        for(int i = 1; i < 8; i++){
+            //Row - only have to check until the middle row
+            for(int j = 1; j < 4; j++){
+                //Column stays the same, column moves up until it gets to the middle, 3
+                String columnString = Integer.toString(i);
+
+                String tileOne = Integer.toString(j) + columnString;
+                String tileTwo = Integer.toString(j + 1) + columnString;
+                String tileThree = Integer.toString(j + 2) + columnString;
+                String tileFour = Integer.toString(j + 3) + columnString;
+
+                if(connect4Board.get(tileOne).equals("C") && connect4Board.get(tileTwo).equals("C") && connect4Board.get(tileThree).equals("C") && connect4Board.get(tileFour).equals("C")){
+                    return true;
+                }
+            }
+
+        }
+
+        //Check diagonal win up
+        //Row
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(connect4Board.get(tileOne).equals("C") && connect4Board.get(tileTwo).equals("C") && connect4Board.get(tileThree).equals("C") && connect4Board.get(tileFour).equals("C")){
+                    return true;
+                }
+            }
+        }
+
+        //Check diagonal win down
+        //Row
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+
+                if(connect4Board.get(tileOne).equals("C") && connect4Board.get(tileTwo).equals("C") && connect4Board.get(tileThree).equals("C") && connect4Board.get(tileFour).equals("C")){
+                    return true;
+                }
+            }
+        }
+
+        //No way to win
+        return false;
+    }
+    
+    public void UpdateHumanMove(String row, String column){
         String tile = row + column;
         connect4Board.put(tile, "H");
     }
 
-    public void updateComputerMove(String row, String column){
+    public void UpdateComputerMove(String row, String column){
         String tile = row + column;
         connect4Board.put(tile, "C");
     }

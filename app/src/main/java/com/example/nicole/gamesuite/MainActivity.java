@@ -19,4 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    //When the user clicks the Battleship button
+    public void battleshipClick (View v){
+        Intent intent = new Intent(this, BattleshipActivity.class);
+
+        startActivity(intent);
+    }
 }

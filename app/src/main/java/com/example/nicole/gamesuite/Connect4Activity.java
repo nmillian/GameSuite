@@ -2,8 +2,11 @@ package com.example.nicole.gamesuite;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.Image;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,10 +17,10 @@ public class Connect4Activity extends AppCompatActivity {
     ********************************************* */
     //The Connect 4 board object
     private Connect4Board board;
+    private Connect4Computer computerPlayer;
 
     //The current player
     private String currentPlayer = "H";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,8 @@ public class Connect4Activity extends AppCompatActivity {
 `   * Constructor
     ********************************************* */
     public Connect4Activity(){
-
         board = new Connect4Board();
+        computerPlayer = new Connect4Computer();
     }
 
     /* *********************************************
@@ -46,8 +49,11 @@ public class Connect4Activity extends AppCompatActivity {
         String columnString = Character.toString(tile.charAt(5));
 
         if(currentPlayer.equals("H")){
+
+            Log.d("HUMNAN", currentPlayer);
+
             if(board.ValidateMove(rowString, columnString)){
-                board.updateHumanMove(rowString, columnString);
+                board.UpdateHumanMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.redcircle);
 
                 if(board.CheckForWinHuman()){
@@ -71,29 +77,115 @@ public class Connect4Activity extends AppCompatActivity {
                     alert11.show();
 
                 }
-                else {
+
+                else{
                     currentPlayer = "C";
+                    Handler compHandler = new Handler();
+                    compHandler.postDelayed(ComputerRunnable, 500);
+                    //PlayGameComputer();
                 }
             }
         }
 
-        else{
-            if(board.ValidateMove(rowString, columnString)){
-                board.updateComputerMove(rowString, columnString);
-                view.setBackgroundResource(R.drawable.yellowcircle);
-                currentPlayer = "H";
-            }
-        }
     }
 
     /* *********************************************
 `   * Private functions
     ********************************************* */
-    private void playGame(){
+
+    private Runnable ComputerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Log.d("COMP", currentPlayer);
+
+            //Decide move
+            String move = computerPlayer.DecideRandomMove(board);
+            String compRow = Character.toString(move.charAt(0));
+            String compCol = Character.toString(move.charAt(1));
+
+            //Change color
+            String tile = "Tile" + compRow + compCol;
+            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+            ImageButton toChange = (ImageButton)findViewById(idOriginal);
+            toChange.setBackgroundResource(R.drawable.yellowcircle);
+
+            //Update in board hashtable
+            board.UpdateComputerMove(compRow, compCol);
+
+            if (board.CheckForWinComputer()) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
+                builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+            else {
+                currentPlayer = "H";
+            }
+        }
+    };
+
+    private void PlayGameComputer(){
+        Log.d("COMP", currentPlayer);
+
+        //Decide move
+        String move = computerPlayer.DecideRandomMove(board);
+        String compRow = Character.toString(move.charAt(0));
+        String compCol = Character.toString(move.charAt(1));
+
+        //Change color
+        String tile = "Tile" + compRow + compCol;
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+        ImageButton toChange = (ImageButton)findViewById(idOriginal);
+        toChange.setBackgroundResource(R.drawable.yellowcircle);
+
+        //Update in board hashtable
+        board.UpdateComputerMove(compRow, compCol);
+
+        if (board.CheckForWinComputer()) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
+            builder1.setCancelable(false)
+
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
+        else {
+            currentPlayer = "H";
+        }
 
     }
 
-    private void resetGame(){
+    private void ResetGame(){
 
     }
 }

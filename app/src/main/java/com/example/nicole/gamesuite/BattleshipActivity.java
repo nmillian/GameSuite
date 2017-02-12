@@ -178,22 +178,16 @@ public class BattleshipActivity extends AppCompatActivity {
         //Check if they're in the same row - horizontal
         else if (startRow.equals(endRow)) {
             //Check which col is bigger before doing math
-
             Integer startColInt = Integer.parseInt(startColumn);
             Integer endColInt = Integer.parseInt(endColumn);
-
-            Log.d("STARTC", startColumn);
-            Log.d("ENDC", endColumn);
 
             //Check which is bigger
             if (startColInt < endColInt) {
                 //Check that total amount of tiles being selected is correct
 
                 if (position.equals("aircraft")) {
-                    Log.d("IN", position);
                     if ((endColInt - startColInt) != 4) {
                         //error
-                        Log.d("IF", "false");
                         return false;
                     }
                 }
@@ -233,8 +227,6 @@ public class BattleshipActivity extends AppCompatActivity {
                 }
 
                 return true;
-
-
             }
 
             else {
@@ -280,12 +272,105 @@ public class BattleshipActivity extends AppCompatActivity {
                 }
 
                 return true;
-
             }
         }
 
         //Check if they're in the same column - vertical
         else if (startColumn.equals(endColumn)) {
+            //Check which row is bigger before doing math
+            Integer startRowInt = Integer.parseInt(startRow);
+            Integer endRowInt = Integer.parseInt(endRow);
+
+            //Check which is bigger
+            if (startRowInt < endRowInt) {
+                //Check that total amount of tiles being selected is correct
+
+                if (position.equals("aircraft")) {
+                    if ((endRowInt - startRowInt) != 4) {
+                        //error
+                        return false;
+                    }
+                }
+
+                else if(position.equals("battleship")){
+                    if((endRowInt - startRowInt) != 3){
+                        return false;
+                    }
+                }
+
+                else if(position.equals("submarine")){
+                    if((endRowInt - startRowInt) != 2){
+                        return false;
+                    }
+                }
+
+                else if(position.equals("cruiser")){
+                    if((endRowInt - startRowInt) != 2){
+                        return false;
+                    }
+                }
+
+                else if(position.equals("destroyer")){
+                    if((endRowInt - startRowInt) != 1){
+                        return false;
+                    }
+                }
+
+                for (int i = startRowInt; i < endRowInt; i++) {
+                    //Change color
+                    String tile = "Tile" + startRow + i;
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+                }
+
+                return true;
+            }
+
+            else {
+                if (position.equals("aircraft")) {
+                    if ((startRowInt - endRowInt) != 4) {
+                        //error
+                        return false;
+                    }
+                }
+                else if (position.equals("battleship")) {
+                    if ((startRowInt - endRowInt) != 3) {
+                        //error
+                        return false;
+                    }
+                }
+                else if (position.equals("submarine")) {
+                    if ((startRowInt - endRowInt) != 2) {
+                        //error
+                        return false;
+                    }
+                }
+                else if (position.equals("cruiser")) {
+                    if ((startRowInt - endRowInt) != 2) {
+                        //error
+                        return false;
+                    }
+                }
+                else if (position.equals("destroyer")) {
+                    if ((startRowInt - endRowInt) != 1) {
+                        //error
+                        return false;
+                    }
+                }
+
+                for (int i = endRowInt; i < startRowInt; i++) {
+                    //Change color
+                    String tile = "Tile" + startRow + i;
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+                }
+
+                return true;
+            }
 
         }
 

@@ -1,5 +1,7 @@
 package com.example.nicole.gamesuite;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +17,10 @@ public class BattleshipActivity extends AppCompatActivity {
     private String endRow;
     private String endColumn;
 
-    private Integer totalShipsPlaced;
+    private String position; //The piece being put down
+    private String playing; //Whether playing the game or placing ships down
 
-    private String position = "aircraft";
-
-    private String playing = "place"; //or play for playing
+    private BattleshipBoard board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,16 @@ public class BattleshipActivity extends AppCompatActivity {
         endRow = "0";
         endColumn = "0";
 
+        position = "aircraft"; //the first piece being put down
+        playing = "place"; //or play for playing
+
+        board = new BattleshipBoard();
+
     }
 
     public void hTileClick(View view){
 
-        //Check if it's the placement stage
+        //Check if it's the placement stage, the only time the human should be hitting a human tile is when placing ships
         if(playing.equals("place")){
 
             if(startRow.equals("0")) {
@@ -49,7 +55,6 @@ public class BattleshipActivity extends AppCompatActivity {
                 startRow = Character.toString(tile.charAt(4));
                 startColumn = Character.toString(tile.charAt(5));
 
-                Log.d("STARTR", startRow);
                 //Set tile to blue
                 view.setBackgroundResource(R.drawable.bluesquaregrid);
             }
@@ -61,12 +66,9 @@ public class BattleshipActivity extends AppCompatActivity {
                 endRow = Character.toString(tile.charAt(4));
                 endColumn = Character.toString(tile.charAt(5));
 
-                Log.d("ENDR", endRow);
-
                 //Validate
                 if(validateTiles()){
                     //Color in any middle pieces to blue and set end to blue
-                    view.setBackgroundResource(R.drawable.bluesquaregrid);
 
                     //move on to the next piece placement
                     if(position.equals("aircraft")){
@@ -143,12 +145,17 @@ public class BattleshipActivity extends AppCompatActivity {
                 //There was an error
                 else {
                     Log.d("ERR", "ERROR SOMEWHERE");
-                    //Reset everything and pick again
                     String resetTile = "Tile" + startRow + startColumn;
-                    int idOriginal = getResources().getIdentifier(resetTile, "id", getPackageName());
 
-                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
-                    toChange.setBackgroundResource(R.drawable.squaregrid);
+                    if(board.GetPieceAtSpaceHuman(startRow + startColumn).equals("B")){
+                        //Reset everything and pick again
+
+                        int idOriginal = getResources().getIdentifier(resetTile, "id", getPackageName());
+
+                        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+                        toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                    }
 
                     //Reset tiles
                     startRow = "0";
@@ -156,16 +163,11 @@ public class BattleshipActivity extends AppCompatActivity {
 
                     endRow = "0";
                     endColumn = "0";
-
                 }
             }
         }
 
         //Otherwise it's the playing stage
-        else{
-
-        }
-
     }
 
     public boolean validateTiles(){
@@ -216,14 +218,27 @@ public class BattleshipActivity extends AppCompatActivity {
                     }
                 }
 
-                for (int i = startColInt; i < endColInt; i++) {
-                    //Change color
-                    Log.d("COLOR", "SHOULD BE COLOR");
-                    String tile = "Tile" + startRow + i;
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                //Check that all the tiles are empty
+                for(int i = startColInt; i <= endColInt; i++){
+                    String tile = startRow + i;
 
+                    //Piece already at space
+                    if(board.GetPieceAtSpaceHuman(tile).equals("S")){
+                        return false;
+                    }
+                }
+
+                for (int i = startColInt; i <= endColInt; i++) {
+                    //Change color
+                    String tile = "Tile" + startRow + i;
+
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
                     ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
                     toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                    String basicTile = startRow + Integer.toString(i);
+                    board.SetShipHuman(basicTile);
                 }
 
                 return true;
@@ -262,13 +277,24 @@ public class BattleshipActivity extends AppCompatActivity {
                     }
                 }
 
-                for (int i = endColInt; i < startColInt; i++) {
+                for(int i = endColInt; i <= startColInt; i++){
+                    String tile = startRow + i;
+                    //Piece already at space
+                    if(board.GetPieceAtSpaceHuman(tile).equals("S")){
+                        return false;
+                    }
+                }
+
+                for (int i = endColInt; i <= startColInt; i++) {
                     //Change color
                     String tile = "Tile" + startRow + i;
                     int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-
                     ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
                     toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                    String basicTile = startRow + Integer.toString(i);
+                    board.SetShipHuman(basicTile);
                 }
 
                 return true;
@@ -316,13 +342,24 @@ public class BattleshipActivity extends AppCompatActivity {
                     }
                 }
 
-                for (int i = startRowInt; i < endRowInt; i++) {
+                for(int i = startRowInt; i <= endRowInt; i++){
+                    String tile = i + startColumn;
+                    //Piece already at space
+                    if(board.GetPieceAtSpaceHuman(tile).equals("S")){
+                        return false;
+                    }
+                }
+
+                for (int i = startRowInt; i <= endRowInt; i++) {
                     //Change color
-                    String tile = "Tile" + startRow + i;
+                    String tile = "Tile" + i + startColumn;
                     int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
 
                     ImageButton toChange = (ImageButton) findViewById(idOriginal);
                     toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                    String basicTile = Integer.toString(i) + startColumn;
+                    board.SetShipHuman(basicTile);
                 }
 
                 return true;
@@ -360,13 +397,24 @@ public class BattleshipActivity extends AppCompatActivity {
                     }
                 }
 
-                for (int i = endRowInt; i < startRowInt; i++) {
-                    //Change color
-                    String tile = "Tile" + startRow + i;
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                for(int i = endRowInt; i <= startRowInt; i++){
+                    String tile = i + startColumn;
+                    //Piece already at space
+                    if(board.GetPieceAtSpaceHuman(tile).equals("S")){
+                        return false;
+                    }
+                }
 
+                for (int i = endRowInt; i <= startRowInt; i++) {
+                    //Change color
+                    String tile = "Tile" + i + startColumn;
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
                     ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
                     toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                    String basicTile = Integer.toString(i) + startColumn;
+                    board.SetShipHuman(basicTile);
                 }
 
                 return true;
@@ -378,4 +426,61 @@ public class BattleshipActivity extends AppCompatActivity {
         return false;
     }
 
+    public void cTileClick(View view){
+        Integer shipsLeft;
+
+        String row;
+        String column;
+        String tile;
+
+        if(playing.equals("play")){
+             tile = getResources().getResourceEntryName(view.getId());
+
+            //Get the tile row and column
+            row = Character.toString(tile.charAt(5));
+            column = Character.toString(tile.charAt(6));
+
+            tile = row + column;
+
+            if(board.CheckForComputerShipHit(tile).equals("S")){
+                //Set tile to hit square
+                view.setBackgroundResource(R.drawable.hitsquaregrid);
+                //Set to hit in the hashtable
+                board.SetShipHitComputer(tile);
+                //Switch turns
+            }
+            else if(board.CheckForComputerShipHit(tile).equals("B")){
+                view.setBackgroundResource(R.drawable.redsquaregrid);
+                board.SetShipHitComputer(tile);
+            }
+
+            else{
+                //hit a tile that already was hit
+            }
+
+            shipsLeft = board.GetNumberOfComputerShipTiles();
+
+            if(shipsLeft.equals(0)){
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("You won by hitting all ships. Play again?");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+        }
+    }
 }

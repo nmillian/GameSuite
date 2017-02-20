@@ -21,7 +21,7 @@ public class Connect4Computer {
         //Row
         for(int i = 1; i < 8; i++){
             //Column
-            for(int j = 1; j < 7; j++){
+            for(int j = 1; j < 8; j++){
 
                 String row = Integer.toString(i);
                 String column = Integer.toString(j);

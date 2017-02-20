@@ -314,7 +314,7 @@
                     android:onClick="cTileClick"
                     android:background="@drawable/squaregrid"/>
                 <ImageButton
-                    android:id="@+id/cTile40"
+                    android:id="@+id/cTile48"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"

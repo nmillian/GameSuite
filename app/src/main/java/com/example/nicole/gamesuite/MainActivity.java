@@ -26,4 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    public void crazy8sClick(View v){
+        Intent intent = new Intent(this, Crazy8sActivity.class);
+
+        startActivity(intent);
+    }
 }

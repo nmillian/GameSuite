@@ -430,18 +430,19 @@
             android:layout_centerHorizontal="true">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/leftcard"
             android:layout_width="125dp"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/bluesquaregrid"
+            android:background="@drawable/tapcard"
             android:layout_marginRight="157dp"
-            android:layout_marginEnd="157dp" />
+            android:layout_marginEnd="157dp"
+            android:onClick="leftCardClick"/>
 
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="125dp"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/bluesquaregrid"
+            android:background="@drawable/topofcard"
             android:layout_marginRight="17dp"
             android:layout_marginEnd="17dp" />
         </LinearLayout>

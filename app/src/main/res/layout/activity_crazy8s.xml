@@ -37,7 +37,7 @@
         android:layout_toEndOf="@+id/computerCardsRemaining"
         android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp"
-        android:id="@+id/textView2" />
+        android:id="@+id/computerCards" />
 
 
     <TableLayout
@@ -50,307 +50,113 @@
         android:id="@+id/tableLayout3">
 
         <TableRow>
+
             <ImageButton
-                android:id="@+id/Tile51"
+                android:id="@+id/Tile0"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile52"
+                android:id="@+id/Tile1"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile53"
+                android:id="@+id/Tile2"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile54"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile55"
+                android:id="@+id/Tile3"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile56"
+                android:id="@+id/Tile4"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile57"
+                android:id="@+id/Tile5"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile58"
+                android:id="@+id/Tile6"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile7"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
         </TableRow>
 
         <TableRow>
             <ImageButton
-                android:id="@+id/Tile41"
+                android:id="@+id/Tile8"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile42"
+                android:id="@+id/Tile9"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/Tile43"
+                android:id="@+id/Tile10"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile44"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile45"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile46"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile47"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile48"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-        </TableRow>
-
-        <TableRow>
-            <ImageButton
-                android:id="@+id/Tile31"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile32"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile33"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile34"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile35"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile36"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile37"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile38"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-        </TableRow>
-
-        <TableRow>
-            <ImageButton
-                android:id="@+id/Tile21"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile22"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile23"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile24"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile25"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile26"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile27"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-            <ImageButton
-                android:id="@+id/Tile28"
-                android:layout_width="40dp"
-                android:layout_height="90dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="cTileClick"
-                android:background="@drawable/squaregrid"/>
-        </TableRow>
-
-        <TableRow>
             <ImageButton
                 android:id="@+id/Tile11"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
                 android:id="@+id/Tile12"
@@ -359,7 +165,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
                 android:id="@+id/Tile13"
@@ -368,7 +174,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
                 android:id="@+id/Tile14"
@@ -377,43 +183,238 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/cTile15"
+                android:id="@+id/Tile15"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/Tile16"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/cTile16"
+                android:id="@+id/Tile17"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/cTile17"
+                android:id="@+id/Tile18"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
             <ImageButton
-                android:id="@+id/cTile18"
+                android:id="@+id/Tile19"
                 android:layout_width="40dp"
                 android:layout_height="90dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="cTileClick"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile20"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile21"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile22"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile23"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/Tile24"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile25"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile26"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile27"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile28"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile29"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile30"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile31"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/Tile32"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile33"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile34"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile35"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile36"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile37"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile38"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
+                android:background="@drawable/squaregrid"/>
+            <ImageButton
+                android:id="@+id/Tile39"
+                android:layout_width="40dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:onClick="TileClick"
                 android:background="@drawable/squaregrid"/>
         </TableRow>
 
@@ -439,12 +440,14 @@
             android:onClick="leftCardClick"/>
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/rightcard"
             android:layout_width="125dp"
             android:layout_height="200dp"
             android:background="@drawable/topofcard"
             android:layout_marginRight="17dp"
-            android:layout_marginEnd="17dp" />
+            android:layout_marginEnd="17dp"
+            android:onClick="rightCardClick"/>
+
         </LinearLayout>
 
     </RelativeLayout>

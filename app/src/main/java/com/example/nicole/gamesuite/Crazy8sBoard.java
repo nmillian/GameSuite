@@ -1,6 +1,8 @@
 package com.example.nicole.gamesuite;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 
 /**
@@ -10,8 +12,8 @@ import java.util.Hashtable;
 public class Crazy8sBoard {
 
     //Hold the hands for the comp and human
-    private static Hashtable<String, String> handHuman = new Hashtable<String, String>();
-    private static Hashtable<String, String> handComputer = new Hashtable<String, String>();
+    private static ArrayList<String> handHuman = new ArrayList();
+    private static ArrayList<String> handComputer = new ArrayList();
 
     //The deck of cards
     //Key is Suite/Value, second value
@@ -19,6 +21,58 @@ public class Crazy8sBoard {
 
     public Crazy8sBoard(){
         InitializeDeck();
+        InitializeHumanHand();
+        InitializeComputerHand();
+    }
+
+    private void InitializeComputerHand(){
+        for(int i = 0; i < 7; i++){
+            //Add to the human hand
+            handComputer.add(deck.get(i));
+        }
+
+        for(int i = 6; i >= 0; i--){
+            deck.remove(i);
+        }
+    }
+
+    private void InitializeHumanHand(){
+        for(int i = 0; i < 7; i++){
+            //Add to the human hand
+            handHuman.add(deck.get(i));
+        }
+
+        for(int i = 6; i >= 0; i--){
+            deck.remove(i);
+        }
+
+        /*
+        System.out.println("HUMAN");
+        for(int i = 0; i < handHuman.size(); i++){
+            System.out.println(handHuman.get(i));
+        }
+
+        System.out.println("DECK AFTER REMOVE");
+        for(int i = 0; i < deck.size(); i++){
+            System.out.println(deck.get(i));
+        }
+        */
+    }
+
+    public String GetHumanCard(int value){
+        return handHuman.get(value);
+    }
+
+    public int GetSizeOfHumanHand(){
+        return handHuman.size();
+    }
+
+    public int GetDeckSize(){
+        return deck.size();
+    }
+
+    public int GetSizeOfComputerHand(){
+        return handComputer.size();
     }
 
     private void InitializeDeck(){
@@ -38,20 +92,6 @@ public class Crazy8sBoard {
         deck.add("spades9");
         deck.add("spades10");
 
-        //Hearts
-        deck.add("heartsace");
-        deck.add("heartsjack");
-        deck.add("heartsqueen");
-        deck.add("heartsking");
-        deck.add("hearts2");
-        deck.add("hearts3");
-        deck.add("hearts4");
-        deck.add("hearts5");
-        deck.add("hearts6");
-        deck.add("hearts7");
-        deck.add("hearts8");
-        deck.add("hearts9");
-        deck.add("hearts10");
         
         //Diamonds
         deck.add("diamondsace");
@@ -84,9 +124,34 @@ public class Crazy8sBoard {
         deck.add("clubs9");
         deck.add("clubs10");
 
+
+        //Hearts
+        deck.add("heartsace");
+        deck.add("heartsjack");
+        deck.add("heartsqueen");
+        deck.add("heartsking");
+        deck.add("hearts2");
+        deck.add("hearts3");
+        deck.add("hearts4");
+        deck.add("hearts5");
+        deck.add("hearts6");
+        deck.add("hearts7");
+        deck.add("hearts8");
+        deck.add("hearts9");
+        deck.add("hearts10");
+
+        Collections.shuffle(deck);
+
+        for(int i = 0; i < deck.size(); i++){
+            System.out.println(deck.get(i));
+        }
     }
 
-    public String getTopCard(int value){
+    public void RemoveCardFromDeck(int value){
+        deck.remove(value);
+    }
+
+    public String GetTopCard(int value){
         return deck.get(value);
     }
 

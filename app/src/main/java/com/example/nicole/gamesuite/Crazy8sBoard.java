@@ -11,6 +11,8 @@ import java.util.Hashtable;
 
 public class Crazy8sBoard {
 
+    private String topCard;
+
     //Hold the hands for the comp and human
     private static ArrayList<String> handHuman = new ArrayList();
     private static ArrayList<String> handComputer = new ArrayList();
@@ -23,6 +25,8 @@ public class Crazy8sBoard {
         InitializeDeck();
         InitializeHumanHand();
         InitializeComputerHand();
+
+        topCard = deck.get(0);
     }
 
     private void InitializeComputerHand(){
@@ -42,6 +46,10 @@ public class Crazy8sBoard {
             handHuman.add(deck.get(i));
         }
 
+        handHuman.add("clubsace");
+        handHuman.add("clubsace");
+        handHuman.add("heartsace");
+
         for(int i = 6; i >= 0; i--){
             deck.remove(i);
         }
@@ -59,11 +67,66 @@ public class Crazy8sBoard {
         */
     }
 
+    public void AddCardToHumanHand(){
+        //Add the first card to the human hand
+        handHuman.add(deck.get(0));
+
+        //Remove card from deck
+        deck.remove(0);
+    }
+
+    public boolean VerifyHumanChoice(int value){
+        String card = handHuman.get(value);
+
+        String firstLetter = Character.toString(card.charAt(0));
+        String topFirstLetter = Character.toString(topCard.charAt(0));
+
+        if(card.contains("8")){
+            //valid because 8s are wild cards, human can place it
+            topCard = card;
+            return true;
+        }
+
+        //the cards match in suite, doesn't matter what it is
+        else if(firstLetter.equals(topFirstLetter)){
+            topCard = card;
+            return true;
+        }
+
+        else{
+            if(topFirstLetter.equals("c")){
+                String temp = topCard.substring(5, topCard.length());
+                System.out.println("TEMP " + temp);
+
+                if(card.contains(temp)){
+                    topCard = card;
+                    return true;
+                }
+
+            }
+
+            else if(topFirstLetter.equals("h")){
+                String temp = topCard.substring(6, topCard.length());
+                System.out.println("TEMP " + temp);
+
+                if(card.contains(temp)){
+                    topCard = card;
+                    return true;
+                }
+
+            }
+        }
+
+        //You can't play this card
+        return false;
+    }
+
     public String GetHumanCard(int value){
         return handHuman.get(value);
     }
 
     public int GetSizeOfHumanHand(){
+        System.out.println("SIZE " + handHuman.size() );
         return handHuman.size();
     }
 
@@ -151,6 +214,17 @@ public class Crazy8sBoard {
         deck.remove(value);
     }
 
+    public void RemoveCardFromHuman(int value){
+        handHuman.remove(value);
+    }
+
+    //Top trash card, the left pile
+    public String GetTopTrashCard(){
+        System.out.println("TOP: " + topCard);
+        return topCard;
+    }
+
+    //Get the top card in the deck
     public String GetTopCard(int value){
         return deck.get(value);
     }

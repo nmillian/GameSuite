@@ -31,7 +31,7 @@ public class Crazy8sBoard {
 
     private void InitializeComputerHand(){
         for(int i = 0; i < 7; i++){
-            //Add to the human hand
+            //Add to the computer
             handComputer.add(deck.get(i));
         }
 
@@ -45,10 +45,6 @@ public class Crazy8sBoard {
             //Add to the human hand
             handHuman.add(deck.get(i));
         }
-
-        handHuman.add("clubsace");
-        handHuman.add("clubsace");
-        handHuman.add("heartsace");
 
         for(int i = 6; i >= 0; i--){
             deck.remove(i);
@@ -70,6 +66,14 @@ public class Crazy8sBoard {
     public void AddCardToHumanHand(){
         //Add the first card to the human hand
         handHuman.add(deck.get(0));
+
+        //Remove card from deck
+        deck.remove(0);
+    }
+
+    public void AddCardToComputerHand(){
+        //Add the first card to the computer
+        handComputer.add(deck.get(0));
 
         //Remove card from deck
         deck.remove(0);
@@ -115,6 +119,28 @@ public class Crazy8sBoard {
                 }
 
             }
+
+            else if(topFirstLetter.equals("d")){
+                String temp = topCard.substring(8, topCard.length());
+                System.out.println("TEMP " + temp);
+
+                if(card.contains(temp)){
+                    topCard = card;
+                    return true;
+                }
+
+            }
+
+            else if(topFirstLetter.equals("s")){
+                String temp = topCard.substring(6, topCard.length());
+                System.out.println("TEMP " + temp);
+
+                if(card.contains(temp)){
+                    topCard = card;
+                    return true;
+                }
+
+            }
         }
 
         //You can't play this card
@@ -131,6 +157,8 @@ public class Crazy8sBoard {
     }
 
     public int GetDeckSize(){
+        System.out.println("DECK " + deck.size());
+
         return deck.size();
     }
 
@@ -140,7 +168,7 @@ public class Crazy8sBoard {
 
     private void InitializeDeck(){
         //Spades
-        /*
+
         deck.add("spadesace");
         deck.add("spadesjack");
         deck.add("spadesqueen");
@@ -170,7 +198,6 @@ public class Crazy8sBoard {
         deck.add("diamonds8");
         deck.add("diamonds9");
         deck.add("diamonds10");
-        */
 
         //Clubs
         deck.add("clubsace");
@@ -186,7 +213,6 @@ public class Crazy8sBoard {
         deck.add("clubs8");
         deck.add("clubs9");
         deck.add("clubs10");
-
 
         //Hearts
         deck.add("heartsace");

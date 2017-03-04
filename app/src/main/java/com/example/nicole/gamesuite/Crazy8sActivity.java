@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.Random;
 public class Crazy8sActivity extends AppCompatActivity {
 
     private Crazy8sBoard board;
+    private Crazy8sComputer computer;
 
     private String gameState = "start";
     private String currentPlayer = "human";
@@ -27,58 +29,112 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     public Crazy8sActivity(){
         board = new Crazy8sBoard();
+        computer = new Crazy8sComputer();
     }
 
     public void TileClick(View view){
         boolean valid = false;
 
-        if(gameState.equals("play")){
-            Integer card = 0;
-            String temp = "NULL";
+        if(gameState.equals("play")) {
+            if (currentPlayer.equals("human")) {
+                Integer card = 0;
+                String temp = "NULL";
 
-            String tile = view.getResources().getResourceEntryName(view.getId());
-            System.out.println(tile);
-            System.out.println(tile.length());
+                String tile = view.getResources().getResourceEntryName(view.getId());
+                System.out.println(tile);
+                System.out.println(tile.length());
 
-            //Parse char at 4
-            if(tile.length() == 5){
-                temp = Character.toString(tile.charAt(4));
-                card = Integer.parseInt(temp);
+                //Parse char at 4 to get the location of the card
+                if (tile.length() == 5) {
+                    temp = Character.toString(tile.charAt(4));
+                    card = Integer.parseInt(temp);
 
-                valid = board.VerifyHumanChoice(card);
-            }
+                    valid = board.VerifyHumanChoice(card);
+                }
 
-            //Parse char at 4 and 5
-            else if(tile.length() == 6){
-                temp = Character.toString(tile.charAt(4)) + Character.toString(tile.charAt(5));
-                card = Integer.parseInt(temp);
+                //Parse char at 4 and 5 to get the location of the card
+                else if (tile.length() == 6) {
+                    temp = Character.toString(tile.charAt(4)) + Character.toString(tile.charAt(5));
+                    card = Integer.parseInt(temp);
 
-               valid = board.VerifyHumanChoice(card);
-            }
+                    valid = board.VerifyHumanChoice(card);
+                }
 
-            if(valid){
-                //Make card the top card
-                String leftCard = "leftcard";
-                int idOriginal = getResources().getIdentifier(leftCard, "id", getPackageName());
-                ImageButton toChange = (ImageButton) findViewById(idOriginal);
+                if (valid) {
 
-                System.out.println("CARD TO SET " + board.GetTopTrashCard());
-                String mDrawableName = board.GetTopTrashCard();
-                Integer resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+                    UpdateTrashCard();
 
-                toChange.setBackgroundResource(resID);
+                    //Remove the card from the human hand
+                    board.RemoveCardFromHuman(card);
 
-                //Remove the card from the human hand
-                board.RemoveCardFromHuman(card);
+                    //Reprint human hand
+                    PrintHumanHand();
 
-                //Reprint human hand
-                PrintHumanHand();
 
-                //Check if human won
-                if(board.GetSizeOfHumanHand() == 0){
+                    //Check if human won
+                    if (board.GetSizeOfHumanHand() == 0) {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                        builder1.setMessage("You won the game by getting rid of your hand of cards!");
+                        builder1.setCancelable(false)
 
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        finish();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                    }
+
+                    //Check if the top card is an 8
+                    //Let the huamn place another card
+                    else if(board.GetTopTrashCard().contains("8")){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                        builder1.setMessage("After placing an 8, place another card from your hand to determine the suit.");
+                        builder1.setCancelable(false)
+
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                    }
+
+                    else{
+                        //Computer's turn
+                        currentPlayer = "computer";
+
+                        //Add a delay to the computer playing
+                        Handler compHandler = new Handler();
+                        compHandler.postDelayed(ComputerRunnable, 300);
+                        ComputerTurn();
+                    }
                 }
             }
+        }
+    }
+
+    private Runnable ComputerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            ComputerTurn();
+        }
+    };
+
+    private void ComputerTurn(){
+        if(currentPlayer.equals("computer")){
+            board.AddCardToComputerHand();
+
+            PrintComputerHand();
+
+            computer.DecideMove(board);
+
+            PrintComputerHand();
         }
     }
 
@@ -174,6 +230,19 @@ public class Crazy8sActivity extends AppCompatActivity {
 
         toChange.setBackgroundResource(resID);
         */
+    }
+
+    public void UpdateTrashCard(){
+        //Make card the top card
+        String leftCard = "leftcard";
+        int idOriginal = getResources().getIdentifier(leftCard, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        System.out.println("CARD TO SET " + board.GetTopTrashCard());
+        String mDrawableName = board.GetTopTrashCard();
+        Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
     }
 
     private void PrintComputerHand(){

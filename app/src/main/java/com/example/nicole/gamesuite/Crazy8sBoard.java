@@ -147,8 +147,16 @@ public class Crazy8sBoard {
         return false;
     }
 
+    public void ComputerUpdateTopCard(int value){
+        topCard = handComputer.get(value);
+    }
+
     public String GetHumanCard(int value){
         return handHuman.get(value);
+    }
+
+    public String GetComputerCard(int value){
+        return handComputer.get(value);
     }
 
     public int GetSizeOfHumanHand(){
@@ -156,14 +164,14 @@ public class Crazy8sBoard {
         return handHuman.size();
     }
 
+    public int GetSizeOfComputerHand(){
+        return handComputer.size();
+    }
+
     public int GetDeckSize(){
         System.out.println("DECK " + deck.size());
 
         return deck.size();
-    }
-
-    public int GetSizeOfComputerHand(){
-        return handComputer.size();
     }
 
     private void InitializeDeck(){

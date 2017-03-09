@@ -111,8 +111,7 @@ public class Crazy8sActivity extends AppCompatActivity {
 
                         //Add a delay to the computer playing
                         Handler compHandler = new Handler();
-                        compHandler.postDelayed(ComputerRunnable, 300);
-                        ComputerTurn();
+                        compHandler.postDelayed(ComputerRunnable, 1000);
                     }
                 }
             }
@@ -127,14 +126,48 @@ public class Crazy8sActivity extends AppCompatActivity {
     };
 
     private void ComputerTurn(){
+        board.printCompHand();
+
         if(currentPlayer.equals("computer")){
-            board.AddCardToComputerHand();
 
-            PrintComputerHand();
+            //Returned true so can move on
+            if(computer.DecideMove(board)){
+                UpdateTrashCard();
+                PrintComputerHand();
 
-            computer.DecideMove(board);
+                if(board.GetSizeOfComputerHand() == 0){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("The computer won the game by getting rid of all the cards!");
+                    builder1.setCancelable(false)
 
-            PrintComputerHand();
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+                }
+
+                //Computer gets to go again because it played an 8
+                else if(board.GetTopTrashCard().contains("8")){
+                    ComputerTurn();
+                }
+
+                else {
+
+                    currentPlayer = "human";
+                }
+            }
+
+            else{
+                //Returned false so draw another card
+                board.AddCardToComputerHand();
+                PrintComputerHand();
+                ComputerTurn();
+            }
         }
     }
 
@@ -248,6 +281,8 @@ public class Crazy8sActivity extends AppCompatActivity {
     private void PrintComputerHand(){
         String tile = "computerCards";
         String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
 
         int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
         TextView toChange = (TextView) findViewById(idOriginal);

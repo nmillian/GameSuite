@@ -29,6 +29,18 @@ public class Crazy8sBoard {
         topCard = deck.get(0);
     }
 
+    private void ResetGame(){
+        handComputer.clear();
+        handHuman.clear();
+        deck.clear();
+
+        InitializeDeck();
+        InitializeComputerHand();
+        InitializeHumanHand();
+
+        topCard = deck.get(0);
+    }
+
     private void InitializeComputerHand(){
         for(int i = 0; i < 7; i++){
             //Add to the computer
@@ -84,6 +96,12 @@ public class Crazy8sBoard {
 
         String firstLetter = Character.toString(card.charAt(0));
         String topFirstLetter = Character.toString(topCard.charAt(0));
+
+        if(topCard.contains("8")){
+            //Can play any card ontop to determine suite
+            topCard = card;
+            return true;
+        }
 
         if(card.contains("8")){
             //valid because 8s are wild cards, human can place it
@@ -252,6 +270,126 @@ public class Crazy8sBoard {
         handHuman.remove(value);
     }
 
+    public void RemoveCardFromComputer(int value){
+        handComputer.remove(value);
+    }
+
+    public boolean CheckForUnwinnableCondition(){
+        int humanSize = GetSizeOfHumanHand();
+        int computerSize = GetSizeOfComputerHand();
+
+        for(int i = 0; i < humanSize; i++) {
+            //Human can play a card
+            String card = handHuman.get(i);
+
+            String firstLetter = Character.toString(card.charAt(0));
+            String topFirstLetter = Character.toString(topCard.charAt(0));
+
+            if (topCard.contains("8")) {
+                //Can play any card ontop to determine suite
+                return true;
+            }
+
+            if (card.contains("8")) {
+                //valid because 8s are wild cards, human can place it
+                return true;
+            }
+
+            //the cards match in suite, doesn't matter what it is
+            else if (firstLetter.equals(topFirstLetter)) {
+                return true;
+            }
+
+            else {
+                if (topFirstLetter.equals("c")) {
+                    String temp = topCard.substring(5, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("h")) {
+                    String temp = topCard.substring(6, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("d")) {
+                    String temp = topCard.substring(8, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("s")) {
+                    String temp = topCard.substring(6, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i < computerSize; i++){
+            //Human can play a card
+            String card = handComputer.get(i);
+
+            String firstLetter = Character.toString(card.charAt(0));
+            String topFirstLetter = Character.toString(topCard.charAt(0));
+
+            if (topCard.contains("8")) {
+                //Can play any card ontop to determine suite
+                return true;
+            }
+
+            if (card.contains("8")) {
+                //valid because 8s are wild cards, human can place it
+                return true;
+            }
+
+            //the cards match in suite, doesn't matter what it is
+            else if (firstLetter.equals(topFirstLetter)) {
+                return true;
+            }
+
+            else {
+                if (topFirstLetter.equals("c")) {
+                    String temp = topCard.substring(5, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("h")) {
+                    String temp = topCard.substring(6, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("d")) {
+                    String temp = topCard.substring(8, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+
+                } else if (topFirstLetter.equals("s")) {
+                    String temp = topCard.substring(6, topCard.length());
+
+                    if (card.contains(temp)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        //Human and computer can't play a card
+        return false;
+    }
+
     //Top trash card, the left pile
     public String GetTopTrashCard(){
         System.out.println("TOP: " + topCard);
@@ -261,6 +399,12 @@ public class Crazy8sBoard {
     //Get the top card in the deck
     public String GetTopCard(int value){
         return deck.get(value);
+    }
+
+    public void printCompHand(){
+        for(int i = 0; i < GetSizeOfComputerHand(); i++){
+            System.out.println(handComputer.get(i));
+        }
     }
 
 }

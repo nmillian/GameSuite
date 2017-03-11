@@ -95,6 +95,7 @@ public class Connect4Board {
         return false;
     }
 
+    //Check if the huamn player won the game
     public boolean CheckForWinHuman(){
         //Check horizontal win
         //Row
@@ -260,5 +261,10 @@ public class Connect4Board {
         connect4Board.put(tile, "C");
     }
 
+    public String GetValueAtTile(String row, String column){
+        String tile = "Tile" + row + column;
+
+        return connect4Board.get(tile);
+    }
 
 }

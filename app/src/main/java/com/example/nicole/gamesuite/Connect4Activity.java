@@ -6,8 +6,10 @@ import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class Connect4Activity extends AppCompatActivity {
@@ -18,6 +20,9 @@ public class Connect4Activity extends AppCompatActivity {
     //The Connect 4 board object
     private Connect4Board board;
     private Connect4Computer computerPlayer;
+    private Connect4Save connectSave;
+
+    private String saveFileName;
 
     //The current player
     private String currentPlayer = "H";
@@ -34,6 +39,7 @@ public class Connect4Activity extends AppCompatActivity {
     public Connect4Activity(){
         board = new Connect4Board();
         computerPlayer = new Connect4Computer();
+        connectSave = new Connect4Save();
     }
 
     /* *********************************************
@@ -87,6 +93,44 @@ public class Connect4Activity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void saveGame(View view){
+
+        //Only let the human save on it's turn
+        if(currentPlayer.equals("H")) {
+
+            //Create an alert box to ask the human for a file name to save to
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter a file name (include .txt)");
+
+            final EditText input = new EditText(this);
+
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //Get the name and serialize
+                    saveFileName = input.getText().toString();
+                    connectSave.serializationToFile(saveFileName, board);
+
+                    //Go back to the beginning activity
+                    finish();
+                    System.exit(0);
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        }
     }
 
     /* *********************************************

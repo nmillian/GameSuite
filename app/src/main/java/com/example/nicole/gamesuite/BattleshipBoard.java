@@ -431,17 +431,21 @@ public class BattleshipBoard {
         battleshipBoardComputer.put(tile, "S");
     }
 
+    public void SetShipHuman(String tile){
+        battleshipBoardHuman.put(tile, "S");
+        Log.d("SHIP", tile + battleshipBoardHuman.get(tile));
+    }
+
     public void SetShipHitComputer(String tile){
         battleshipBoardComputer.put(tile, "H");
     }
 
-    public String GetPieceAtSpaceComputer(String tile){
-        return battleshipBoardComputer.get(tile);
+    public void SetShipHitHuman(String tile){
+        battleshipBoardHuman.put(tile, "H");
     }
 
-    public void SetShipHuman(String tile){
-        battleshipBoardHuman.put(tile, "S");
-        Log.d("SHIP", tile + battleshipBoardHuman.get(tile));
+    public String GetPieceAtSpaceComputer(String tile){
+        return battleshipBoardComputer.get(tile);
     }
 
     public String GetPieceAtSpaceHuman(String tile){
@@ -463,6 +467,21 @@ public class BattleshipBoard {
         return "H";
     }
 
+    public String CheckForHumanShipHit(String tile){
+        //Hit ship
+        if(GetPieceAtSpaceHuman(tile).equals("S")){
+            return "S";
+        }
+
+        //Hit blank
+        else if(GetPieceAtSpaceHuman(tile).equals("B")){
+            return "B";
+        }
+
+        //Hit already hit ship
+        return "H";
+    }
+
     public Integer GetNumberOfComputerShipTiles(){
         Integer count = 0;
 
@@ -470,6 +489,21 @@ public class BattleshipBoard {
             for(int j = 1; j < 9; j++){
                 String tile = Integer.toString(i) + Integer.toString(j);
                 if(GetPieceAtSpaceComputer(tile).equals("S")){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public Integer GetNumberOfHumanShipTiles(){
+        Integer count = 0;
+
+        for(int i = 1; i < 9; i++){
+            for(int j = 1; j < 9; j++){
+                String tile = Integer.toString(i) + Integer.toString(j);
+                if(GetPieceAtSpaceHuman(tile).equals("S")){
                     count++;
                 }
             }

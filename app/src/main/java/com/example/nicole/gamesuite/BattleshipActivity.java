@@ -2,6 +2,7 @@ package com.example.nicole.gamesuite;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,10 @@ public class BattleshipActivity extends AppCompatActivity {
     private String position; //The piece being put down
     private String playing; //Whether playing the game or placing ships down
 
+    private String currentPlayer = "human";
+
     private BattleshipBoard board;
+    private BattleshipComputer computerPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class BattleshipActivity extends AppCompatActivity {
         playing = "place"; //or play for playing
 
         board = new BattleshipBoard();
+        computerPlayer = new BattleshipComputer();
 
     }
 
@@ -138,6 +143,12 @@ public class BattleshipActivity extends AppCompatActivity {
                     }
 
                     else if(position.equals("destroyer")){
+                        String textNext = "shipType";
+                        int idOriginal = getResources().getIdentifier(textNext, "id", getPackageName());
+
+                        TextView toChange = (TextView) findViewById(idOriginal);
+                        toChange.setText("Click an opponent's tile to attack!");
+
                         playing = "play";
                     }
                 }
@@ -433,7 +444,7 @@ public class BattleshipActivity extends AppCompatActivity {
         String column;
         String tile;
 
-        if(playing.equals("play")){
+        if(playing.equals("play") && currentPlayer.equals("human")){
              tile = getResources().getResourceEntryName(view.getId());
 
             //Get the tile row and column
@@ -447,15 +458,26 @@ public class BattleshipActivity extends AppCompatActivity {
                 view.setBackgroundResource(R.drawable.hitsquaregrid);
                 //Set to hit in the hashtable
                 board.SetShipHitComputer(tile);
+
                 //Switch turns
+                currentPlayer = "computer";
+                Handler compHandler = new Handler();
+                compHandler.postDelayed(ComputerRunnable, 500);
             }
+
             else if(board.CheckForComputerShipHit(tile).equals("B")){
                 view.setBackgroundResource(R.drawable.redsquaregrid);
                 board.SetShipHitComputer(tile);
+
+                //Switch turns
+                currentPlayer = "computer";
+                Handler compHandler = new Handler();
+                compHandler.postDelayed(ComputerRunnable, 500);
             }
 
             else{
                 //hit a tile that already was hit
+                currentPlayer = "human";
             }
 
             shipsLeft = board.GetNumberOfComputerShipTiles();
@@ -483,4 +505,82 @@ public class BattleshipActivity extends AppCompatActivity {
 
         }
     }
+
+    private Runnable ComputerRunnable = new Runnable() {
+        public void run() {
+            ComputerMove();
+        }
+    };
+
+    private void ComputerMove(){
+        //Make move
+        String tile = computerPlayer.PlayGame(board);
+
+        //Hit a human ship
+        if(board.CheckForHumanShipHit(tile).equals("S")){
+            //Set tile to hit square
+            String hitTile = "Tile" + tile;
+            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            System.out.println("TILE COMP HIT " + tile);
+
+            String mDrawableName = "hitsquaregrid";
+            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+
+            board.SetShipHitHuman(tile);
+            currentPlayer = "human";
+        }
+
+        //Hit a blank
+        else if(board.CheckForHumanShipHit(tile).equals("B")){
+            //Set tile to hit square
+            String hitTile = "Tile" + tile;
+            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            System.out.println("TILE COMP HIT " + tile);
+
+            // System.out.println("CARD TO SET " + board.GetTopTrashCard());
+            String mDrawableName = "redsquaregrid";
+            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+
+            board.SetShipHitHuman(tile);
+            currentPlayer = "human";
+        }
+
+        else{
+            //hit a tile that already was hit
+            currentPlayer = "computer";
+            ComputerMove();
+        }
+
+        Integer shipsLeft = board.GetNumberOfHumanShipTiles();
+
+        if(shipsLeft.equals(0)){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("The computer won by hitting all ships. Play again?");
+            builder1.setCancelable(false)
+
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+    }
+
 }

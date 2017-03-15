@@ -467,7 +467,7 @@ public class BattleshipActivity extends AppCompatActivity {
 
             else if(board.CheckForComputerShipHit(tile).equals("B")){
                 view.setBackgroundResource(R.drawable.redsquaregrid);
-                board.SetShipHitComputer(tile);
+                board.SetBlankHitComputer(tile);
 
                 //Switch turns
                 currentPlayer = "computer";
@@ -549,7 +549,7 @@ public class BattleshipActivity extends AppCompatActivity {
 
             toChange.setBackgroundResource(resID);
 
-            board.SetShipHitHuman(tile);
+            board.SetBlankHitHuman(tile);
             currentPlayer = "human";
         }
 

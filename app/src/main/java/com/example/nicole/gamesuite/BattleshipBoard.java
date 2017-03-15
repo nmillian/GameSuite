@@ -15,7 +15,7 @@ public class BattleshipBoard {
     ********************************************* */
     //Hashtable to hold the the type of piece located at each space
 
-    //B for blank, S for ship, H for hit
+    //B for blank, S for ship, H for hit ship, BH for blank hit
     private static Hashtable<String, String> battleshipBoardHuman = new Hashtable<String, String>();
     private static Hashtable<String, String> battleshipBoardComputer = new Hashtable<String, String>();
 
@@ -440,8 +440,16 @@ public class BattleshipBoard {
         battleshipBoardComputer.put(tile, "H");
     }
 
+    public void SetBlankHitComputer(String tile){
+        battleshipBoardComputer.put(tile, "BH");
+    }
+
     public void SetShipHitHuman(String tile){
         battleshipBoardHuman.put(tile, "H");
+    }
+
+    public void SetBlankHitHuman(String tile){
+        battleshipBoardHuman.put(tile, "BH");
     }
 
     public String GetPieceAtSpaceComputer(String tile){
@@ -478,7 +486,7 @@ public class BattleshipBoard {
             return "B";
         }
 
-        //Hit already hit ship
+        //Hit already
         return "H";
     }
 

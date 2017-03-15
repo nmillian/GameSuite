@@ -64,6 +64,7 @@ public class BattleshipComputer {
 
                 if(!up.equals("00")){
                     tile = up;
+                    lastHitTile = up;
                     if(board.GetPieceAtSpaceHuman(tile).equals("S")){
                         direction = "up";
                     }
@@ -74,6 +75,7 @@ public class BattleshipComputer {
 
                 else if(!down.equals("00")){
                     tile = down;
+                    lastHitTile = down;
                     if(board.GetPieceAtSpaceHuman(tile).equals("S")){
                         direction = "down";
                     }
@@ -84,6 +86,7 @@ public class BattleshipComputer {
 
                 else if(!left.equals("00")){
                     tile = left;
+                    lastHitTile = left;
                     if(board.GetPieceAtSpaceHuman(tile).equals("S")){
                         direction = "left";
                     }
@@ -94,6 +97,7 @@ public class BattleshipComputer {
 
                 else if(!right.equals("00")){
                     tile = right;
+                    lastHitTile = right;
                     if(board.GetPieceAtSpaceHuman(tile).equals("S")){
                         direction = "right";
                     }
@@ -145,10 +149,23 @@ public class BattleshipComputer {
                     if(incrementRow != 9) {
                         //Increment
                         tile = Integer.toString(incrementRow) + column;
+                        lastHitTile = tile;
+
+                        //If last tile hit was a space stop checking
+                        if(board.GetPieceAtSpaceHuman(lastHitTile).equals("B") || incrementRow + 1 == 9){
+                            direction = "NONE";
+                            up = "00";
+                        }
                     }
+
                     else{
+                        //Goes back to check the rest of the tiles afterwards
+                        //Hits a random tile then goes back
+
+                        direction = "NONE";
+                        up = "00";
+
                         //Reached the end
-                        ResetTilesToCheck();
                         tile = RandomMove(board);
 
                         lastHitTile = tile;
@@ -158,6 +175,7 @@ public class BattleshipComputer {
                             state = "attack";
                             GenerateTilesToCheck();
                         }
+
                     }
                 }
 
@@ -179,10 +197,21 @@ public class BattleshipComputer {
                     if(incrementRow != 0) {
                         //Increment
                         tile = Integer.toString(incrementRow) + column;
+                        lastHitTile = tile;
+
+                        //If last tile hit was a space stop checking
+                        if(board.GetPieceAtSpaceHuman(lastHitTile).equals("B") || incrementRow - 1 == 0){
+                            direction = "NONE";
+                            down = "00";
+                        }
                     }
+
                     else{
                         //Reached the end
-                        ResetTilesToCheck();
+                        direction = "NONE";
+                        down = "00";
+
+                        //Reached the end
                         tile = RandomMove(board);
 
                         lastHitTile = tile;
@@ -213,11 +242,21 @@ public class BattleshipComputer {
                     if(incrementColumn != 9) {
                         //Increment
                         tile = row + Integer.toString(incrementColumn);
+                        lastHitTile = tile;
+
+                        //If last tile hit was a space stop checking
+                        if(board.GetPieceAtSpaceHuman(lastHitTile).equals("B") || incrementColumn + 1 == 9){
+                            direction = "NONE";
+                            right = "00";
+                        }
                     }
 
                     else{
                         //Reached the end
-                        ResetTilesToCheck();
+                        direction = "NONE";
+                        right = "00";
+
+                        //Reached the end
                         tile = RandomMove(board);
 
                         lastHitTile = tile;
@@ -248,10 +287,21 @@ public class BattleshipComputer {
                     if(incrementColumn != 0) {
                         //Increment
                         tile = row + Integer.toString(incrementColumn);
+                        lastHitTile = tile;
+
+                        //If last tile hit was a space stop checking
+                        if(board.GetPieceAtSpaceHuman(lastHitTile).equals("B") || incrementColumn - 1 == 0){
+                            direction = "NONE";
+                            left = "00";
+                        }
                     }
+
                     else{
                         //Reached the end
-                        ResetTilesToCheck();
+                        direction = "NONE";
+                        left = "00";
+
+                        //Reached the end
                         tile = RandomMove(board);
 
                         lastHitTile = tile;
@@ -263,9 +313,7 @@ public class BattleshipComputer {
                         }
                     }
                 }
-
             }
-
         }
 
         System.out.print("TILE FOR COMP " + tile + "\n");
@@ -345,9 +393,4 @@ public class BattleshipComputer {
         return tile;
     }
 
-    /*
-    private String TargetShip(BattleshipBoard board){
-
-    }
-    */
 }

@@ -262,7 +262,7 @@ public class Connect4Board {
     }
 
     public String GetValueAtTile(String row, String column){
-        String tile = "Tile" + row + column;
+        String tile = row + column;
 
         return connect4Board.get(tile);
     }

@@ -37,12 +37,32 @@ public class Connect4Activity extends AppCompatActivity {
 
         //Saved game
         if(isSave.equals("YES")){
+            boolean validSave;
+
             System.out.println("IN SAVE GAME FUNCTION ");
 
             String fileName = extras.getString("FILENAME");
-            connectSave.serializationFromFile(fileName, board);
+            validSave = connectSave.serializationFromFile(fileName, board);
 
-            setSerializedBoard();
+            if(validSave) {
+                setSerializedBoard();
+            }
+
+            else{
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("The save file was not for Connect 4, starting a fresh game.");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }
         }
     }
 

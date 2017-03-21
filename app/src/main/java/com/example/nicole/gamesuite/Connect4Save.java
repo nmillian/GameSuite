@@ -100,7 +100,7 @@ public class Connect4Save {
 
     }
 
-    public void serializationFromFile(String fileName, Connect4Board board){
+    public boolean serializationFromFile(String fileName, Connect4Board board){
         //The final string consisting of the entire serialized file read in
         String finalString;
 
@@ -153,6 +153,13 @@ public class Connect4Save {
 
             String [] words = newLine.split("\\W+");
 
+            //first line should say connect4
+            if(row == 7){
+                if(!words[0].equals("Connect4")){
+                    return false;
+                }
+            }
+
             if(!words[0].equals("Connect4")) {
                 row = row - 1;
                 column = 0;
@@ -189,6 +196,8 @@ public class Connect4Save {
                 System.out.print("\n");
             }
         }
+
+        return true;
     }
 
 }

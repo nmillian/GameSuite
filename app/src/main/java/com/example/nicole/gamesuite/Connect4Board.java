@@ -13,6 +13,7 @@ public class Connect4Board {
 `   * Private class variables
     ********************************************* */
     //Hashtable to hold the the type of piece located at each space
+    //B for blank, H for human, C for computer
     private static Hashtable<String, String> connect4Board = new Hashtable<String, String>();
 
     /* *********************************************
@@ -28,6 +29,8 @@ public class Connect4Board {
 `   * Private class functions
     ********************************************* */
     private void InitializeBoard(){
+        connect4Board.clear();
+
         String row;
         String column;
         String tile;
@@ -41,12 +44,8 @@ public class Connect4Board {
 
                 tile = row + column;
 
-                Log.d("TILE", tile);
-
                 //All the tiles are originally blank
                 connect4Board.put(tile, "B");
-
-                Log.d("BOARD", connect4Board.get(tile));
             }
         }
     }
@@ -259,6 +258,11 @@ public class Connect4Board {
     public void UpdateComputerMove(String row, String column){
         String tile = row + column;
         connect4Board.put(tile, "C");
+    }
+
+    public void UpdateBlankMove(String row, String column){
+        String tile = row + column;
+        connect4Board.put(tile, "B");
     }
 
     public String GetValueAtTile(String row, String column){

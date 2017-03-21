@@ -31,6 +31,56 @@ public class Connect4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect4);
+
+        Bundle extras = getIntent().getExtras();
+        String isSave = extras.getString("SAVE");
+
+        //Saved game
+        if(isSave.equals("YES")){
+            System.out.println("IN SAVE GAME FUNCTION ");
+
+            String fileName = extras.getString("FILENAME");
+            connectSave.serializationFromFile(fileName, board);
+
+            setSerializedBoard();
+        }
+    }
+
+    public void setSerializedBoard(){
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "Tile" + row + column;
+
+                System.out.print(board.GetValueAtTile(row, column) + " ");
+
+                if(board.GetValueAtTile(row, column).equals("C")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.yellowcircle);
+
+                }
+
+                else if(board.GetValueAtTile(row, column).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redcircle);
+
+                }
+            }
+            System.out.print("\n");
+        }
+
     }
 
     /* *********************************************
@@ -55,8 +105,6 @@ public class Connect4Activity extends AppCompatActivity {
         String columnString = Character.toString(tile.charAt(5));
 
         if(currentPlayer.equals("H")){
-
-            Log.d("HUMNAN", currentPlayer);
 
             if(board.ValidateMove(rowString, columnString)){
                 board.UpdateHumanMove(rowString, columnString);

@@ -44,5 +44,44 @@
         android:src = "@drawable/gamesuitelogo"
         android:layout_centerHorizontal="true"/>
 
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="450dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/background"
+        android:layout_alignEnd="@+id/background">
+
+
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel"
+            android:onClick="cancelClick"
+            android:layout_marginRight="35dp"
+            android:layout_marginEnd="35dp" />
+
+        <Button
+            android:text="Load Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save"
+            android:onClick="saveClick"
+            android:layout_marginTop="130dp" />
+
+        <Button
+            android:text="New Game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/newgame"
+            android:onClick="newClick"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"/>
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>

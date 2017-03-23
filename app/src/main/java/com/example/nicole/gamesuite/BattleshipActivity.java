@@ -149,6 +149,11 @@ public class BattleshipActivity extends AppCompatActivity {
                         TextView toChange = (TextView) findViewById(idOriginal);
                         toChange.setText("Click an opponent's tile to attack!");
 
+                        View visibility;
+
+                        visibility = findViewById(R.id.instructions);
+                        visibility.setVisibility(View.GONE);
+
                         playing = "play";
                     }
                 }

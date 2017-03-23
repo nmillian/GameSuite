@@ -109,6 +109,7 @@ public class Connect4Save {
 
         File file;
 
+        boolean first = true;
         int row = 7;
         int column = 0;
 
@@ -154,8 +155,11 @@ public class Connect4Save {
             String [] words = newLine.split("\\W+");
 
             //first line should say connect4
-            if(row == 7){
-                if(!words[0].equals("Connect4")){
+            if(first){
+                if(words[0].equals("Connect4")){
+                    first = false;
+                }
+                else{
                     return false;
                 }
             }
@@ -166,8 +170,6 @@ public class Connect4Save {
 
                 for(int i = 0; i < words.length; i++){
                     column = column + 1;
-
-                    System.out.print("TILE " + row + column);
 
                     if(words[i].equals("C")){
                         String rowString = String.valueOf(row);
@@ -192,8 +194,6 @@ public class Connect4Save {
 
                     }
                 }
-
-                System.out.print("\n");
             }
         }
 

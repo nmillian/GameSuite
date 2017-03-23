@@ -54,6 +54,28 @@ public class Connect4Board {
 `   * Public functions
     ********************************************* */
 
+    public void ResetBoard(){
+        connect4Board.clear();
+
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = row + column;
+
+                //All the tiles are originally blank
+                connect4Board.put(tile, "B");
+            }
+        }
+    }
+
     //Check that the placement is empty
     public boolean ChoiceValid(String row, String column){
         String tile = row + column;

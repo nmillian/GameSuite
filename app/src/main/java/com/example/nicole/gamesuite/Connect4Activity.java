@@ -66,7 +66,7 @@ public class Connect4Activity extends AppCompatActivity {
         }
     }
 
-    public void setSerializedBoard(){
+    private void setSerializedBoard(){
         String row;
         String column;
         String tile;
@@ -103,6 +103,32 @@ public class Connect4Activity extends AppCompatActivity {
 
     }
 
+    private void ResetBoard(){
+        board.ResetBoard();
+
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "Tile" + row + column;
+
+                int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                toChange.setBackgroundResource(R.drawable.whitecircle);
+
+            }
+        }
+
+    }
+
     /* *********************************************
 `   * Constructor
     ********************************************* */
@@ -130,6 +156,13 @@ public class Connect4Activity extends AppCompatActivity {
                 board.UpdateHumanMove(rowString, columnString);
                 view.setBackgroundResource(R.drawable.redcircle);
 
+                //Hide the save button, can't save on computer turn
+                View visibility;
+
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.GONE);
+
+
                 if(board.CheckForWinHuman()){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                     builder1.setMessage("You won by getting 4 in a row! Would you like to play again?");
@@ -137,7 +170,8 @@ public class Connect4Activity extends AppCompatActivity {
 
                             .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    finish();
+                                    dialog.cancel();
+                                    ResetBoard();
                                 }
                             })
 
@@ -232,7 +266,8 @@ public class Connect4Activity extends AppCompatActivity {
 
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                finish();
+                                dialog.cancel();
+                                ResetBoard();
                             }
                         })
 
@@ -248,6 +283,12 @@ public class Connect4Activity extends AppCompatActivity {
 
             else {
                 currentPlayer = "H";
+
+                //Show the save button again
+                View visibility;
+
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -297,7 +338,4 @@ public class Connect4Activity extends AppCompatActivity {
 
     }
 
-    private void ResetGame(){
-
-    }
 }

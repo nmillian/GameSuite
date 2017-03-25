@@ -25,6 +25,7 @@ public class BattleshipActivity extends AppCompatActivity {
 
     private BattleshipBoard board;
     private BattleshipComputer computerPlayer;
+    private BattleshipSave battleshipSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class BattleshipActivity extends AppCompatActivity {
 
         board = new BattleshipBoard();
         computerPlayer = new BattleshipComputer();
+        battleshipSave = new BattleshipSave();
 
     }
 

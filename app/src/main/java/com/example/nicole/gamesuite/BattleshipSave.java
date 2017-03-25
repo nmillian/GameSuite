@@ -5,5 +5,5 @@ package com.example.nicole.gamesuite;
  */
 
 public class BattleshipSave {
-    
+
 }

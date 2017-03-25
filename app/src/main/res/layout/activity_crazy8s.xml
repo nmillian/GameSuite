@@ -452,6 +452,17 @@
 
     </RelativeLayout>
 
+    <Button
+        android:text="SKIP TURN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/stuff"
+        android:layout_toRightOf="@+id/computerCards"
+        android:layout_toEndOf="@+id/computerCards"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:id="@+id/skipTurn"
+        android:onClick="skipClick"/>
 
 
 </RelativeLayout>

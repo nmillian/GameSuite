@@ -22,6 +22,10 @@ public class Crazy8sBoard {
     private static ArrayList<String> deck = new ArrayList();
 
     public Crazy8sBoard(){
+        handComputer.clear();
+        handHuman.clear();
+        deck.clear();
+
         InitializeDeck();
         InitializeHumanHand();
         InitializeComputerHand();

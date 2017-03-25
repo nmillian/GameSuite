@@ -19,8 +19,11 @@
         <activity
             android:name=".Connect4Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".BattleshipActivity" />
-        <activity android:name=".Crazy8sActivity"></activity>
+        <activity android:name=".BattleshipActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Crazy8sActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

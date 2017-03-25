@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -25,6 +26,11 @@ public class Crazy8sActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy8s);
+
+        View visibility;
+
+        visibility = findViewById(R.id.skipTurn);
+        visibility.setVisibility(View.GONE);
     }
 
     public Crazy8sActivity(){
@@ -91,18 +97,7 @@ public class Crazy8sActivity extends AppCompatActivity {
                     //Check if the top card is an 8
                     //Let the huamn place another card
                     else if(board.GetTopTrashCard().contains("8")){
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                        builder1.setMessage("After placing an 8, place another card from your hand to determine the suit.");
-                        builder1.setCancelable(false)
-
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        Toast.makeText(getApplicationContext(), "Placed an 8. Place another card to set the suite.", Toast.LENGTH_SHORT).show();
                     }
 
                     else{
@@ -154,19 +149,73 @@ public class Crazy8sActivity extends AppCompatActivity {
                 //Computer gets to go again because it played an 8
                 else if(board.GetTopTrashCard().contains("8")){
                     ComputerTurn();
+                    Toast.makeText(getApplicationContext(), "The computer played an 8, playing another card.", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
-
                     currentPlayer = "human";
+                    if(board.GetDeckSize() == 0){
+                        String tile = "rightcard";
+
+                        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+                        String mDrawableName = "squaregrid";
+                        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+                        toChange.setBackgroundResource(resID);
+
+                        View visibility;
+
+                        visibility = findViewById(R.id.skipTurn);
+                        visibility.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
             else{
-                //Returned false so draw another card
-                board.AddCardToComputerHand();
-                PrintComputerHand();
-                ComputerTurn();
+                if(board.CheckForUnwinnableCondition() == false){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("Neither player can make a move. No winner.");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
+                else if(board.GetDeckSize() == 0){
+                    Toast.makeText(getApplicationContext(), "The computer cannot make a move, turn passed.", Toast.LENGTH_SHORT).show();
+
+                    String tile = "rightcard";
+
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+                    String mDrawableName = "squaregrid";
+                    int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+                    toChange.setBackgroundResource(resID);
+
+                    currentPlayer = "human";
+
+                    View visibility;
+
+                    visibility = findViewById(R.id.skipTurn);
+                    visibility.setVisibility(View.VISIBLE);
+                }
+
+                else {
+                    //Returned false so draw another card
+                    board.AddCardToComputerHand();
+                    PrintComputerHand();
+                    ComputerTurn();
+                }
             }
         }
     }
@@ -191,6 +240,13 @@ public class Crazy8sActivity extends AppCompatActivity {
                     int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
 
                     toChange.setBackgroundResource(resID);
+
+                    View visibility;
+
+                    visibility = findViewById(R.id.skipTurn);
+                    visibility.setVisibility(View.VISIBLE);
+
+
                 }
             }
 
@@ -209,7 +265,9 @@ public class Crazy8sActivity extends AppCompatActivity {
 
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
-                } else if (board.GetSizeOfHumanHand() == 40) {
+
+                }
+                else if (board.GetSizeOfHumanHand() == 40) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                     builder1.setMessage("Your hand is full, you cannot draw anymore cards.");
                     builder1.setCancelable(false)
@@ -319,6 +377,16 @@ public class Crazy8sActivity extends AppCompatActivity {
             int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
 
             toChange.setBackgroundResource(resID);
+        }
+    }
+
+    public void skipClick(View view){
+        if(currentPlayer.equals("human")){
+            currentPlayer = "computer";
+
+            //Add a delay to the computer playing
+            Handler compHandler = new Handler();
+            compHandler.postDelayed(ComputerRunnable, 1000);
         }
     }
 }

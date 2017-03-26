@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ public class BattleshipActivity extends AppCompatActivity {
 
     private String currentPlayer = "human";
 
+    private String saveFileName;
+
     private BattleshipBoard board;
     private BattleshipComputer computerPlayer;
     private BattleshipSave battleshipSave;
@@ -31,6 +35,45 @@ public class BattleshipActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battleship);
+
+        Bundle extras = getIntent().getExtras();
+        String isSave = extras.getString("SAVE");
+
+        //Saved game
+        if(isSave.equals("YES")){
+            boolean validSave;
+
+            String fileName = extras.getString("FILENAME");
+            validSave = battleshipSave.serializationFromFile(fileName, board);
+
+            if(validSave) {
+                SetSerializedBoard();
+            }
+
+            else{
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("The save file was not for Battleship, starting a fresh game.");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }
+        }
+
+        //Don't allow human to save untill game is set up
+        else{
+            View visibility;
+
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.GONE);
+        }
     }
 
     public BattleshipActivity(){
@@ -46,6 +89,107 @@ public class BattleshipActivity extends AppCompatActivity {
         board = new BattleshipBoard();
         computerPlayer = new BattleshipComputer();
         battleshipSave = new BattleshipSave();
+
+    }
+
+    public void SetSerializedBoard(){
+        String row;
+        String column;
+        String tile;
+        String tileToGet;
+
+        //Computer
+        for(int i = 1; i < 9; i++ ){
+            //Column
+            for(int j = 1; j < 9; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "cTile" + row + column;
+                tileToGet = row + column;
+
+                if(board.GetPieceAtSpaceComputer(tileToGet).equals("B")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("BH")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.hitsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("S")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+            }
+        }
+
+        System.out.print("COMP");
+        board.print();
+
+        //Human
+        for(int i = 1; i < 9; i++ ){
+            //Column
+            for(int j = 1; j < 9; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "Tile" + row + column;
+                tileToGet = row + column;
+
+                if(board.GetPieceAtSpaceHuman(tileToGet).equals("B")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("BH")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.hitsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("S")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                }
+            }
+        }
+
+        playing = "play";
 
     }
 
@@ -155,6 +299,9 @@ public class BattleshipActivity extends AppCompatActivity {
 
                         visibility = findViewById(R.id.instructions);
                         visibility.setVisibility(View.GONE);
+
+                        visibility = findViewById(R.id.save);
+                        visibility.setVisibility(View.VISIBLE);
 
                         playing = "play";
                     }
@@ -466,6 +613,10 @@ public class BattleshipActivity extends AppCompatActivity {
                 //Set to hit in the hashtable
                 board.SetShipHitComputer(tile);
 
+                View visibility;
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.GONE);
+
                 //Switch turns
                 currentPlayer = "computer";
                 Handler compHandler = new Handler();
@@ -475,6 +626,10 @@ public class BattleshipActivity extends AppCompatActivity {
             else if(board.CheckForComputerShipHit(tile).equals("B")){
                 view.setBackgroundResource(R.drawable.redsquaregrid);
                 board.SetBlankHitComputer(tile);
+
+                View visibility;
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.GONE);
 
                 //Switch turns
                 currentPlayer = "computer";
@@ -530,8 +685,6 @@ public class BattleshipActivity extends AppCompatActivity {
             int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
             ImageButton toChange = (ImageButton) findViewById(idOriginal);
 
-            System.out.println("TILE COMP HIT " + tile);
-
             String mDrawableName = "hitsquaregrid";
             Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
 
@@ -539,6 +692,10 @@ public class BattleshipActivity extends AppCompatActivity {
 
             board.SetShipHitHuman(tile);
             currentPlayer = "human";
+
+            View visibility;
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.VISIBLE);
         }
 
         //Hit a blank
@@ -548,8 +705,6 @@ public class BattleshipActivity extends AppCompatActivity {
             int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
             ImageButton toChange = (ImageButton) findViewById(idOriginal);
 
-            System.out.println("TILE COMP HIT " + tile);
-
             // System.out.println("CARD TO SET " + board.GetTopTrashCard());
             String mDrawableName = "redsquaregrid";
             Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
@@ -558,6 +713,10 @@ public class BattleshipActivity extends AppCompatActivity {
 
             board.SetBlankHitHuman(tile);
             currentPlayer = "human";
+
+            View visibility;
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.VISIBLE);
         }
 
         else{
@@ -587,6 +746,43 @@ public class BattleshipActivity extends AppCompatActivity {
 
             AlertDialog alert11 = builder1.create();
             alert11.show();
+        }
+    }
+
+    public void saveGame(View view){
+        //Only let the human save on it's turn
+        if(currentPlayer.equals("human")) {
+
+            //Create an alert box to ask the human for a file name to save to
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter a file name");
+
+            final EditText input = new EditText(this);
+
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //Get the name and serialize
+                    saveFileName = input.getText().toString() + ".txt";
+                    battleshipSave.serializationToFile(saveFileName, board);
+
+                    //Go back to the beginning activity
+                    finish();
+                    System.exit(0);
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
         }
     }
 

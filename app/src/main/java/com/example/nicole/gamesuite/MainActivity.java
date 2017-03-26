@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         isSave = "YES";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter a file name (include .txt)");
+        builder.setTitle("Enter a file name");
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                fileName = input.getText().toString();
+                fileName = input.getText().toString() + ".txt";
                 File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
                 File file = new File(docsFolder.getAbsolutePath(), fileName);
 

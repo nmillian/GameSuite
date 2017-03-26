@@ -35,6 +35,11 @@ public class BattleshipBoard {
         print();
     }
 
+    public void ClearTables(){
+        battleshipBoardHuman.clear();
+        battleshipBoardComputer.clear();
+    }
+
     private void InitializeBoardComputer(){
 
         String row;
@@ -427,6 +432,14 @@ public class BattleshipBoard {
 
     }
 
+    public void SetBlankComputer(String tile){
+        battleshipBoardComputer.put(tile, "B");
+    }
+
+    public void SetBlankHuman(String tile){
+        battleshipBoardHuman.put(tile, "B");
+    }
+
     public void SetShipComputer(String tile){
         battleshipBoardComputer.put(tile, "S");
     }
@@ -522,7 +535,7 @@ public class BattleshipBoard {
 
     public void print(){
         //Row
-        for(int i = 9; i > 0; i-- ){
+        for(int i = 8; i > 0; i-- ){
             //Column
             for(int j = 1; j < 9; j++){
                 String tile = Integer.toString(i) + Integer.toString(j);

@@ -293,6 +293,7 @@ public class Connect4Activity extends AppCompatActivity {
         }
     };
 
+    /*
     private void PlayGameComputer(){
         Log.d("COMP", currentPlayer);
 
@@ -337,5 +338,5 @@ public class Connect4Activity extends AppCompatActivity {
         }
 
     }
-
+    */
 }

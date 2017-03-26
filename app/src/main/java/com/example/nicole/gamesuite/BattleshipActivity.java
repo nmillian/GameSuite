@@ -234,7 +234,7 @@ public class BattleshipActivity extends AppCompatActivity {
                         int idOriginal = getResources().getIdentifier(textNext, "id", getPackageName());
 
                         TextView toChange = (TextView) findViewById(idOriginal);
-                        toChange.setText("Battleship - Size 4");
+                        toChange.setText("Battleship - Size 4 tiles");
                         position = "battleship";
                     }
 
@@ -250,7 +250,7 @@ public class BattleshipActivity extends AppCompatActivity {
                         int idOriginal = getResources().getIdentifier(textNext, "id", getPackageName());
 
                         TextView toChange = (TextView) findViewById(idOriginal);
-                        toChange.setText("Submarine - Size 3");
+                        toChange.setText("Submarine - Size 3 tiles");
 
                         position = "submarine";
                     }
@@ -267,7 +267,7 @@ public class BattleshipActivity extends AppCompatActivity {
                         int idOriginal = getResources().getIdentifier(textNext, "id", getPackageName());
 
                         TextView toChange = (TextView) findViewById(idOriginal);
-                        toChange.setText("Cruiser - Size 3");
+                        toChange.setText("Cruiser - Size 3 tiles");
                         position = "cruiser";
                     }
 
@@ -801,6 +801,28 @@ public class BattleshipActivity extends AppCompatActivity {
         position = "aircraft"; //the first piece being put down
 
         board.ResetGame();
+
+        String text = "instructions";
+        int original = getResources().getIdentifier(text, "id", getPackageName());
+
+        TextView change = (TextView) findViewById(original);
+        change.setText("Please select a start and end tile for:");
+
+        text = "shipType";
+        original = getResources().getIdentifier(text, "id", getPackageName());
+
+        change = (TextView) findViewById(original);
+        change.setText("Aircraft - Size 5 tiles");
+
+        View visibility;
+
+        visibility = findViewById(R.id.instructions);
+        visibility.setVisibility(View.VISIBLE);
+
+        visibility = findViewById(R.id.save);
+        visibility.setVisibility(View.GONE);
+
+        playing = "play";
 
         String row;
         String column;

@@ -35,12 +35,15 @@ public class BattleshipBoard {
         print();
     }
 
-    public void ClearTables(){
-        battleshipBoardHuman.clear();
-        battleshipBoardComputer.clear();
+    public void ResetGame(){
+        InitializeBoardHuman();
+        InitializeBoardComputer();
+
+        PlaceOriginalShipsComputer();
     }
 
     private void InitializeBoardComputer(){
+        battleshipBoardComputer.clear();
 
         String row;
         String column;
@@ -63,6 +66,8 @@ public class BattleshipBoard {
     }
 
     private void InitializeBoardHuman(){
+        battleshipBoardHuman.clear();
+
         String row;
         String column;
         String tile;

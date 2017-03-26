@@ -651,7 +651,8 @@ public class BattleshipActivity extends AppCompatActivity {
 
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                finish();
+                                ResetGame();
+                                dialog.cancel();
                             }
                         })
 
@@ -734,7 +735,8 @@ public class BattleshipActivity extends AppCompatActivity {
 
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            finish();
+                            ResetGame();
+                            dialog.cancel();
                         }
                     })
 
@@ -784,6 +786,115 @@ public class BattleshipActivity extends AppCompatActivity {
 
             builder.show();
         }
+    }
+
+    public void ResetGame(){
+        currentPlayer = "human";
+        playing = "place";
+
+        startRow = "0";
+        startColumn = "0";
+
+        endRow = "0";
+        endColumn = "0";
+
+        position = "aircraft"; //the first piece being put down
+
+        board.ResetGame();
+
+        String row;
+        String column;
+        String tile;
+        String tileToGet;
+
+        //Computer
+        for(int i = 1; i < 9; i++ ){
+            //Column
+            for(int j = 1; j < 9; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "cTile" + row + column;
+                tileToGet = row + column;
+
+                if(board.GetPieceAtSpaceComputer(tileToGet).equals("B")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("BH")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.hitsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceComputer(tileToGet).equals("S")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+            }
+        }
+
+        //Human
+        for(int i = 1; i < 9; i++ ){
+            //Column
+            for(int j = 1; j < 9; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "Tile" + row + column;
+                tileToGet = row + column;
+
+                if(board.GetPieceAtSpaceHuman(tileToGet).equals("B")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.squaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("BH")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.hitsquaregrid);
+
+                }
+
+                else if(board.GetPieceAtSpaceHuman(tileToGet).equals("S")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.bluesquaregrid);
+
+                }
+            }
+        }
+
     }
 
 }

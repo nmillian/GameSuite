@@ -55,20 +55,20 @@
 
 
         <Button
-            android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cancel"
-            android:onClick="cancelClick"
-            android:layout_marginRight="35dp"
-            android:layout_marginEnd="35dp" />
-
-        <Button
             android:text="Load Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/save"
             android:onClick="saveClick"
+            android:layout_marginRight="35dp"
+            android:layout_marginEnd="35dp" />
+
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel"
+            android:onClick="cancelClick"
             android:layout_marginTop="130dp" />
 
         <Button

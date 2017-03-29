@@ -79,6 +79,14 @@ public class Crazy8sBoard {
         */
     }
 
+    public void AddCardComputerFromSerial(String value){
+        handComputer.add(value);
+    }
+
+    public void AddCardHumanFromSerial(String value){
+        handHuman.add(value);
+    }
+
     public void AddCardToHumanHand(){
         //Add the first card to the human hand
         handHuman.add(deck.get(0));

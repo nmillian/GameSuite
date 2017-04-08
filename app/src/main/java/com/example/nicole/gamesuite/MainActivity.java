@@ -19,6 +19,17 @@ public class MainActivity extends AppCompatActivity {
     private String isSave;
     private String fileName;
 
+    /**
+     * Name - onCreate
+     *
+     * Synopsis:
+     * @param savedInstanceState
+     *
+     * Description:
+     *
+     * Returns:
+     * None
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

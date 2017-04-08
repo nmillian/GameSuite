@@ -204,7 +204,7 @@ public class Connect4Activity extends AppCompatActivity {
 
             //Create an alert box to ask the human for a file name to save to
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Enter a file name (include .txt)");
+            builder.setTitle("Enter a file name");
 
             final EditText input = new EditText(this);
 
@@ -215,7 +215,7 @@ public class Connect4Activity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //Get the name and serialize
-                    saveFileName = input.getText().toString();
+                    saveFileName = input.getText().toString() + ".txt";
                     connectSave.serializationToFile(saveFileName, board);
 
                     //Go back to the beginning activity

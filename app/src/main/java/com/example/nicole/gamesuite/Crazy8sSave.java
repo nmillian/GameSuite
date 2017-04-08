@@ -57,6 +57,7 @@ public class Crazy8sSave {
                 for (int i = 0; i < board.GetSizeOfComputerHand(); i++) {
 
                     line = board.GetComputerCard(i);
+                    content.append(line);
 
                     content.append(System.getProperty("line.separator"));
                 }
@@ -67,9 +68,31 @@ public class Crazy8sSave {
                 for (int j = 0; j < board.GetSizeOfHumanHand(); j++) {
 
                     line = board.GetHumanCard(j);
+                    content.append(line);
 
                     content.append(System.getProperty("line.separator"));
                 }
+
+                line = "Deck";
+                content.append(line);
+                content.append(System.getProperty("line.separator"));
+                for (int d = 0; d < board.GetDeckSize(); d++) {
+
+                    line = board.GetDeckCard(d);
+                    content.append(line);
+
+                    content.append(System.getProperty("line.separator"));
+                }
+
+                line = "Trash";
+                content.append(line);
+                content.append(System.getProperty("line.separator"));
+
+                line = board.GetTopTrashCard();
+                System.out.println("TRASH CARD" + board.GetTopTrashCard());
+                content.append(line);
+                content.append(System.getProperty("line.separator"));
+
 
                 String finalString = content.toString();
                 outputStream.write(finalString.getBytes());
@@ -92,6 +115,10 @@ public class Crazy8sSave {
     }
 
     public boolean serializationFromFile(String fileName, Crazy8sBoard board){
+        System.out.println("IN SERIAL FROM FILE");
+
+        board.ClearGame();
+
         //The final string consisting of the entire serialized file read in
         String finalString;
 
@@ -133,8 +160,12 @@ public class Crazy8sSave {
 
         boolean computer = false;
         boolean human = false;
+        boolean deck = false;
+        boolean trash = false;
 
         finalString = sb.toString();
+
+        System.out.println("FINAL " + finalString);
 
         //Break the string into individual lines
         Scanner scanner = new Scanner(finalString);
@@ -146,7 +177,7 @@ public class Crazy8sSave {
 
             String [] words = newLine.split("\\W+");
 
-            //first line should say connect4
+            //first line should say crazy8s
             if(first){
                 if(words[0].equals("Crazy8s")){
                     first = false;
@@ -157,7 +188,7 @@ public class Crazy8sSave {
                 }
             }
 
-            if(computer) {
+            else if(computer) {
 
                 if(words[0].equals("Human")){
                     computer = false;
@@ -165,13 +196,36 @@ public class Crazy8sSave {
                 }
 
                 else{
-                    board.AddCardComputerFromSerial(words[0]);
-
+                    if(!words[0].equals("Computer")){
+                        board.AddCardComputerFromSerial(words[0]);
+                    }
                 }
             }
 
-            if(human){
-                board.AddCardHumanFromSerial(words[0]);
+            else if(human){
+
+                if(words[0].equals("Deck")){
+                    human = false;
+                    deck = true;
+                }
+                else {
+                    board.AddCardHumanFromSerial(words[0]);
+                }
+            }
+
+            else if(deck){
+                if(words[0].equals("Trash")){
+                    deck = false;
+                    trash = true;
+                }
+                else {
+                    board.AddCardDeckFromSerial(words[0]);
+                }
+            }
+
+            else if(trash){
+                System.out.println("IN SAVE TRASH CARD" + words[0]);
+                board.SetTopTrashCard(words[0]);
             }
         }
 

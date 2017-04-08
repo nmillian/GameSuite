@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,9 +20,12 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     private Crazy8sBoard board;
     private Crazy8sComputer computer;
+    private Crazy8sSave crazy8sSave;
 
     private String gameState = "start";
     private String currentPlayer = "human";
+
+    private String saveFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,159 @@ public class Crazy8sActivity extends AppCompatActivity {
 
         View visibility;
 
-        visibility = findViewById(R.id.skipTurn);
-        visibility.setVisibility(View.GONE);
+        Bundle extras = getIntent().getExtras();
+        String isSave = extras.getString("SAVE");
+
+        System.out.print("HELLO? ");
+
+        //Saved game
+        if(isSave.equals("YES")){
+            System.out.print("IN SAVE ");
+
+            boolean validSave;
+
+            String fileName = extras.getString("FILENAME");
+            validSave = crazy8sSave.serializationFromFile(fileName, board);
+
+            if(validSave) {
+                SetSerializedBoard();
+                gameState = "play";
+
+                visibility = findViewById(R.id.skipTurn);
+                visibility.setVisibility(View.GONE);
+            }
+
+            else{
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("The save file was not for Crazy8s, starting a fresh game.");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }
+        }
+
+        //Don't allow human to save untill game is set up
+        else{
+            visibility = findViewById(R.id.skipTurn);
+            visibility.setVisibility(View.GONE);
+
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.GONE);
+        }
     }
 
     public Crazy8sActivity(){
         board = new Crazy8sBoard();
         computer = new Crazy8sComputer();
+        crazy8sSave = new Crazy8sSave();
+    }
+
+    public void ResetGame(){
+        View visibility;
+        visibility = findViewById(R.id.skipTurn);
+        visibility.setVisibility(View.GONE);
+
+        visibility = findViewById(R.id.save);
+        visibility.setVisibility(View.GONE);
+
+        //Set top trash card to the click to play card
+        String tile = "leftcard";
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        String mDrawableName = "tapcard";
+        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Set the right card to the top deck card
+        tile = "rightcard";
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        toChange = (ImageButton) findViewById(idOriginal);
+
+        mDrawableName = "topofcard";
+        resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Clear the human cards
+        //Show the cards
+        for(int i = 0; i < 40; i++){
+            tile = "Tile" + i;
+
+            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            toChange = (ImageButton) findViewById(idOriginal);
+
+            mDrawableName = "squaregrid";
+            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+
+        //Update computer text
+        tile = "computerCards";
+        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        TextView textToChange = (TextView) findViewById(idOriginal);
+
+        textToChange.setText("0");
+
+        gameState = "start";
+        board.ResetGame();
+    }
+
+    public void SetSerializedBoard(){
+        //Set top trash card
+        String tile = "leftcard";
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        String mDrawableName = board.GetTopTrashCard();
+        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Set human hand
+        Integer humanHandSize = board.GetSizeOfHumanHand();
+
+        //Show the cards
+        for(int i = 0; i < humanHandSize; i++){
+            tile = "Tile" + i;
+
+            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            toChange = (ImageButton) findViewById(idOriginal);
+
+            mDrawableName = board.GetHumanCard(i);
+            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+
+
+        //Update computer text
+        tile = "computerCards";
+        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
+        System.out.println("PRINTING COMP HAND");
+        board.printCompHand();
+
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        TextView textToChange = (TextView) findViewById(idOriginal);
+
+        textToChange.setText(cardNum);
+
+        gameState = "play";
+        currentPlayer = "human";
     }
 
     public void TileClick(View view){
@@ -77,25 +228,30 @@ public class Crazy8sActivity extends AppCompatActivity {
                     PrintHumanHand();
 
 
+
                     //Check if human won
                     if (board.GetSizeOfHumanHand() == 0) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                        builder1.setMessage("You won the game by getting rid of your hand of cards!");
-                        builder1.setCancelable(false)
-
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("You won the game by getting rid of your hand of cards! Play again?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        ResetGame();
+                                        board.ResetGame();
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
                                         finish();
                                     }
                                 });
-
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
-
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
 
                     //Check if the top card is an 8
-                    //Let the huamn place another card
+                    //Let the human place another card
                     else if(board.GetTopTrashCard().contains("8")){
                         Toast.makeText(getApplicationContext(), "Placed an 8. Place another card to set the suite.", Toast.LENGTH_SHORT).show();
                     }
@@ -103,6 +259,12 @@ public class Crazy8sActivity extends AppCompatActivity {
                     else{
                         //Computer's turn
                         currentPlayer = "computer";
+
+                        //Hide save button
+                        View visibility;
+
+                        visibility = findViewById(R.id.save);
+                        visibility.setVisibility(View.GONE);
 
                         //Add a delay to the computer playing
                         Handler compHandler = new Handler();
@@ -125,24 +287,31 @@ public class Crazy8sActivity extends AppCompatActivity {
 
         if(currentPlayer.equals("computer")){
 
-            //Returned true so can move on
+            //Decide computer move
             if(computer.DecideMove(board)){
                 UpdateTrashCard();
                 PrintComputerHand();
 
+                //Check if the computer won
                 if(board.GetSizeOfComputerHand() == 0){
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                    builder1.setMessage("The computer won the game by getting rid of all the cards!");
-                    builder1.setCancelable(false)
 
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("The computer won by getting rid of all cards! Play again?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    ResetGame();
+                                    board.ResetGame();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
                                     finish();
                                 }
                             });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
+                    AlertDialog alert = builder.create();
+                    alert.show();
 
                 }
 
@@ -152,8 +321,13 @@ public class Crazy8sActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The computer played an 8, playing another card.", Toast.LENGTH_SHORT).show();
                 }
 
+                //The computer played a card, now the humans turn
                 else {
                     currentPlayer = "human";
+                    View visibility;
+                    visibility = findViewById(R.id.save);
+                    visibility.setVisibility(View.VISIBLE);
+
                     if(board.GetDeckSize() == 0){
                         String tile = "rightcard";
 
@@ -165,15 +339,15 @@ public class Crazy8sActivity extends AppCompatActivity {
 
                         toChange.setBackgroundResource(resID);
 
-                        View visibility;
-
                         visibility = findViewById(R.id.skipTurn);
                         visibility.setVisibility(View.VISIBLE);
                     }
                 }
             }
 
+            //The computer could not play a card
             else{
+                //Check if it's impossible for either player to win
                 if(board.CheckForUnwinnableCondition() == false){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                     builder1.setMessage("Neither player can make a move. No winner.");
@@ -189,6 +363,7 @@ public class Crazy8sActivity extends AppCompatActivity {
                     alert11.show();
                 }
 
+                //Check if the deck is empty
                 else if(board.GetDeckSize() == 0){
                     Toast.makeText(getApplicationContext(), "The computer cannot make a move, turn passed.", Toast.LENGTH_SHORT).show();
 
@@ -208,8 +383,12 @@ public class Crazy8sActivity extends AppCompatActivity {
 
                     visibility = findViewById(R.id.skipTurn);
                     visibility.setVisibility(View.VISIBLE);
+
+                    visibility = findViewById(R.id.save);
+                    visibility.setVisibility(View.VISIBLE);
                 }
 
+                //Draw another card
                 else {
                     //Returned false so draw another card
                     board.AddCardToComputerHand();
@@ -295,20 +474,26 @@ public class Crazy8sActivity extends AppCompatActivity {
             int num = 0;
 
             //Show the top card
-            String mDrawableName = board.GetTopCard(num);
+            String mDrawableName = board.GetTopTrashCard();
+            System.out.println("TOP CARD AFTER LEFT CLICK" + board.GetTopTrashCard());
 
             int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
             view.setBackgroundResource(resID);
 
             //Remove card from deck
             board.RemoveCardFromDeck(num);
-            System.out.println("SIZE AFTRE LEFT CLICK: " + board.GetDeckSize());
 
             //Print human hand
             PrintHumanHand();
             PrintComputerHand();
 
             gameState = "play";
+            currentPlayer = "human";
+
+            View visibility;
+
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.VISIBLE);
         }
 
         /*
@@ -387,6 +572,42 @@ public class Crazy8sActivity extends AppCompatActivity {
             //Add a delay to the computer playing
             Handler compHandler = new Handler();
             compHandler.postDelayed(ComputerRunnable, 1000);
+        }
+    }
+
+    public void saveGame(View view){
+        //Only let the human save on it's turn
+        if(currentPlayer.equals("human")) {
+
+            //Create an alert box to ask the human for a file name to save to
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter a file name");
+
+            final EditText input = new EditText(this);
+
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //Get the name and serialize
+                    saveFileName = input.getText().toString() + ".txt";
+                    crazy8sSave.serializationToFile(saveFileName, board);
+
+                    //Go back to the beginning activity
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
         }
     }
 }

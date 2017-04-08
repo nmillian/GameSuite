@@ -11,7 +11,7 @@ import java.util.Hashtable;
 
 public class Crazy8sBoard {
 
-    private String topCard;
+    private String topCard = "bluesquaregrid";
 
     //Hold the hands for the comp and human
     private static ArrayList<String> handHuman = new ArrayList();
@@ -33,7 +33,13 @@ public class Crazy8sBoard {
         topCard = deck.get(0);
     }
 
-    private void ResetGame(){
+    public void ClearGame(){
+        handComputer.clear();
+        handHuman.clear();
+        deck.clear();
+    }
+
+    public void ResetGame(){
         handComputer.clear();
         handHuman.clear();
         deck.clear();
@@ -87,6 +93,14 @@ public class Crazy8sBoard {
         handHuman.add(value);
     }
 
+    public void AddCardDeckFromSerial(String value){
+        deck.add(value);
+    }
+
+    public void SetTopTrashCard(String value){
+        topCard = value;
+    }
+
     public void AddCardToHumanHand(){
         //Add the first card to the human hand
         handHuman.add(deck.get(0));
@@ -105,6 +119,7 @@ public class Crazy8sBoard {
 
     public boolean VerifyHumanChoice(int value){
         String card = handHuman.get(value);
+        System.out.print("CARD IN VERIFY HUMAN" + card);
 
         String firstLetter = Character.toString(card.charAt(0));
         String topFirstLetter = Character.toString(topCard.charAt(0));
@@ -404,12 +419,16 @@ public class Crazy8sBoard {
 
     //Top trash card, the left pile
     public String GetTopTrashCard(){
-        System.out.println("TOP: " + topCard);
+        //System.out.println("TOP: " + topCard);
         return topCard;
     }
 
     //Get the top card in the deck
     public String GetTopCard(int value){
+        return deck.get(value);
+    }
+
+    public String GetDeckCard(int value){
         return deck.get(value);
     }
 

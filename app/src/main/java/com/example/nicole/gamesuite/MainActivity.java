@@ -15,20 +15,28 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private String game;
-
     private String isSave;
     private String fileName;
 
     /**
-     * Name - onCreate
+     * Name:
+     * onCreate
      *
      * Synopsis:
-     * @param savedInstanceState
+     * protected void onCreate(Bundle savedInstanceState);
+     * @param savedInstanceState -> The Bundle used in order to initialize the activity.
      *
      * Description:
+     * This function is called when the activity is created and used to initialize the activity.
      *
      * Returns:
      * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +55,29 @@ public class MainActivity extends AppCompatActivity {
         visibility.setVisibility(View.GONE);
     }
 
-    //When the user clicks the Connect 4 button
+    /**
+     * Name:
+     * connect4Click
+     *
+     * Synopsis:
+     * public void connect4Click(View v);
+     * @param v -> The activity view.
+     *
+     * Description:
+     * This function is called when the human player taps the button to select the connect 4 game.
+     * After the button is clicked, the option to select other games is invisible.
+     * Buttons appear so the player can choose to load a saved game or to start a fresh game.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void connect4Click(View v){
-        //Intent intent = new Intent(this, Connect4Activity.class);
-        //startActivity(intent);
 
         game = "connect4";
 
@@ -75,10 +102,29 @@ public class MainActivity extends AppCompatActivity {
         visibility.setVisibility(View.VISIBLE);
     }
 
-    //When the user clicks the Battleship button
+    /**
+     * Name:
+     * battleshipClick
+     *
+     * Synopsis:
+     * public void battleshipClick (View v);
+     * @param v -> The activity view.
+     *
+     * Description
+     * This function is called when the human player taps the button to select the battleship game.
+     * After the button is clicked, the option to select other games is invisible.
+     * Buttons appear so the player can choose to load a saved game or to start a fresh game.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void battleshipClick (View v){
-        //Intent intent = new Intent(this, BattleshipActivity.class);
-        //startActivity(intent);
 
         game = "battleship";
 
@@ -104,12 +150,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Name:
+     * crazy8sClick
      *
-     * @param v
+     * Synopsis:
+     * public void crazy8sClick(View v);
+     * @param v -> The activity view.
+     *
+     * Description:
+     * This function is called when the human player taps the button to select the crazy 8s game.
+     * After the button is clicked, the option to select other games is invisible.
+     * Buttons appear so the player can choose to load a saved game or to start a fresh game.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
      */
     public void crazy8sClick(View v){
-       // Intent intent = new Intent(this, Crazy8sActivity.class);
-        // startActivity(intent);
 
         game = "crazy8s";
 
@@ -134,6 +196,26 @@ public class MainActivity extends AppCompatActivity {
         visibility.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Name:
+     * newClick
+     *
+     * Synopsis:
+     * public void newClick(View v);
+     * @param v -> The activity view.
+     *
+     * Description:
+     * Used in order to launch a new game and starts a new game activity.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void newClick(View v){
         isSave = "NO";
 
@@ -157,6 +239,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Name:
+     * saveClick
+     *
+     * Synopsis:
+     * public void saveClick(View v);
+     * @param v -> The activity view.
+     *
+     * Description:
+     * Used in order to launch a saved game. Asks the user to specify a text file to get information from.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void saveClick(View v){
         isSave = "YES";
 
@@ -236,6 +338,26 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Name:
+     * cancelClick
+     *
+     * Synopsis:
+     * cancelClick(View v);
+     * @param v -> The activity view.
+     *
+     * Description:
+     * Used in order to cancel starting a selected game and go back to the screen to select a game type.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void cancelClick(View v){
         View visibility;
 

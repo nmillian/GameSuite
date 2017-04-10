@@ -11,7 +11,7 @@ import java.util.Random;
 public class Connect4Computer {
 
     /*
-    public String DecideMove(){
+    public String DecideMove(Connect4Board a_board ){
 
     }
 */
@@ -29,7 +29,6 @@ public class Connect4Computer {
                 String tile = row  + column;
 
                 if(a_board.ValidateMove(row, column)){
-                    Log.d("CTILE", tile);
                     return tile;
                 }
 

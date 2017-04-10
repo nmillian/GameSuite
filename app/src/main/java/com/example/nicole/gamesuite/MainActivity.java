@@ -14,10 +14,16 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
+    /* *********************************************
+`   * Private class variables and objects
+    ********************************************* */
     private String game;
     private String isSave;
     private String fileName;
 
+    /* *********************************************
+`   * Constructors
+    ********************************************* */
     /**
      * Name:
      * onCreate
@@ -55,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         visibility.setVisibility(View.GONE);
     }
 
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
     /**
      * Name:
      * connect4Click

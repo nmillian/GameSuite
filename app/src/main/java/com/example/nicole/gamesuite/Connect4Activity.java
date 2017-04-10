@@ -27,6 +27,29 @@ public class Connect4Activity extends AppCompatActivity {
     //The current player
     private String currentPlayer = "H";
 
+    /* *********************************************
+`   * Constructors
+    ********************************************* */
+    /**
+     * Name:
+     * onCreate
+     *
+     * Synopsis:
+     * protected void onCreate(Bundle savedInstanceState);
+     * @param savedInstanceState -> The Bundle used in order to initialize the activity.
+     *
+     * Description:
+     * This function is called when the activity is created and used to initialize the activity.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,72 +89,26 @@ public class Connect4Activity extends AppCompatActivity {
         }
     }
 
-    private void setSerializedBoard(){
-        String row;
-        String column;
-        String tile;
-
-        //Row
-        for(int i = 1; i < 7; i++ ){
-            //Column
-            for(int j = 1; j < 8; j++){
-                row = String.valueOf(i);
-                column = String.valueOf(j);
-
-                tile = "Tile" + row + column;
-
-                System.out.print(board.GetValueAtTile(row, column) + " ");
-
-                if(board.GetValueAtTile(row, column).equals("C")){
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-
-                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
-                    toChange.setBackgroundResource(R.drawable.yellowcircle);
-
-                }
-
-                else if(board.GetValueAtTile(row, column).equals("H")){
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-
-                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
-                    toChange.setBackgroundResource(R.drawable.redcircle);
-
-                }
-            }
-            System.out.print("\n");
-        }
-
-    }
-
-    private void ResetBoard(){
-        board.ResetBoard();
-
-        String row;
-        String column;
-        String tile;
-
-        //Row
-        for(int i = 1; i < 7; i++ ){
-            //Column
-            for(int j = 1; j < 8; j++){
-                row = String.valueOf(i);
-                column = String.valueOf(j);
-
-                tile = "Tile" + row + column;
-
-                int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-
-                ImageButton toChange = (ImageButton)findViewById(idOriginal);
-                toChange.setBackgroundResource(R.drawable.whitecircle);
-
-            }
-        }
-
-    }
-
-    /* *********************************************
-`   * Constructor
-    ********************************************* */
+    /**
+     * Name:
+     * Connect4Activity
+     *
+     * Synopsis:
+     * public Connect4Activity()
+     * No params.
+     *
+     * Description:
+     * This is the constuctor for the connect 4 activity. Used in order to initialize the board, computer, and save.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public Connect4Activity(){
         board = new Connect4Board();
         computerPlayer = new Connect4Computer();
@@ -141,7 +118,30 @@ public class Connect4Activity extends AppCompatActivity {
     /* *********************************************
 `   * Public functions
     ********************************************* */
-    public void tileClick(View view){
+
+    /**
+     * Name:
+     * TileClick
+     *
+     * Synopsis:
+     * public void TileClick(View view);
+     * @param view -> The connect 4 activity view.
+     *
+     * Description:
+     * This function is called when the human player taps a space on the connect 4 board.
+     * The function validates that it is the human player's turn and that a piece is able to be
+     *  played at the given space.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    public void TileClick(View view){
 
         //Get the id of the tile clicked
         String tile = getResources().getResourceEntryName(view.getId());
@@ -197,7 +197,28 @@ public class Connect4Activity extends AppCompatActivity {
 
     }
 
-    public void saveGame(View view){
+    /**
+     * Name:
+     * SaveGame
+     *
+     * Synopsis:
+     * public void SaveGame(View view);
+     * @param view -> The connect 4 activity view.
+     *
+     * Description:
+     * This function is called when the human player taps the button to save the game.
+     * Prompts the user to enter what to name the file, and finshes the activity.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    public void SaveGame(View view){
 
         //Only let the human save on it's turn
         if(currentPlayer.equals("H")) {
@@ -220,7 +241,7 @@ public class Connect4Activity extends AppCompatActivity {
 
                     //Go back to the beginning activity
                     finish();
-                    System.exit(0);
+                    //System.exit(0);
                 }
             });
 
@@ -239,6 +260,27 @@ public class Connect4Activity extends AppCompatActivity {
 `   * Private functions
     ********************************************* */
 
+    /**
+     * Name:
+     * ComputerRunnable
+     *
+     * Synopsis:
+     * private Runnable ComputerRunnable;
+     * No params.
+     *
+     * Description:
+     * This function is called when it's the computer's turn to make a move.
+     * Calls the DecideMove function from the computer class, and updates the board with the move the computer made.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     private Runnable ComputerRunnable = new Runnable() {
         @Override
         public void run() {
@@ -246,6 +288,7 @@ public class Connect4Activity extends AppCompatActivity {
 
             //Decide move
             String move = computerPlayer.DecideRandomMove(board);
+
             String compRow = Character.toString(move.charAt(0));
             String compCol = Character.toString(move.charAt(1));
 
@@ -293,50 +336,110 @@ public class Connect4Activity extends AppCompatActivity {
         }
     };
 
-    /*
-    private void PlayGameComputer(){
-        Log.d("COMP", currentPlayer);
+    /**
+     * Name:
+     * setSerializedBoard
+     *
+     * Synopsis:
+     * private void setSerializedBoard;
+     * No params.
+     *
+     * Description:
+     * This function is called in order to set the board from a save file.
+     * Sets the pieces on the board to the correct color.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    private void setSerializedBoard(){
+        String row;
+        String column;
+        String tile;
 
-        //Decide move
-        String move = computerPlayer.DecideRandomMove(board);
-        String compRow = Character.toString(move.charAt(0));
-        String compCol = Character.toString(move.charAt(1));
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
 
-        //Change color
-        String tile = "Tile" + compRow + compCol;
-        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                tile = "Tile" + row + column;
 
-        ImageButton toChange = (ImageButton)findViewById(idOriginal);
-        toChange.setBackgroundResource(R.drawable.yellowcircle);
+                System.out.print(board.GetValueAtTile(row, column) + " ");
 
-        //Update in board hashtable
-        board.UpdateComputerMove(compRow, compCol);
+                if(board.GetValueAtTile(row, column).equals("C")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
 
-        if (board.CheckForWinComputer()) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
-            builder1.setCancelable(false)
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.yellowcircle);
 
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    })
+                }
 
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    });
+                else if(board.GetValueAtTile(row, column).equals("H")){
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
+                    ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                    toChange.setBackgroundResource(R.drawable.redcircle);
 
-        else {
-            currentPlayer = "H";
+                }
+            }
+            System.out.print("\n");
         }
 
     }
-    */
+
+
+    /**
+     * Name:
+     * ResetBoard
+     *
+     * Synopsis:
+     * private void ResetBoard()
+     * No params.
+     *
+     * Description:
+     * This function is called in order to reset the board to it's original state.
+     * Sets the pieces on the board to the correct color.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    private void ResetBoard(){
+        board.ResetBoard();
+
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = "Tile" + row + column;
+
+                int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+
+                ImageButton toChange = (ImageButton)findViewById(idOriginal);
+                toChange.setBackgroundResource(R.drawable.whitecircle);
+
+            }
+        }
+
+    }
+
 }

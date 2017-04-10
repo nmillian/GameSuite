@@ -19,6 +19,28 @@ public class Connect4Board {
     /* *********************************************
  `   * Constructor
      ********************************************* */
+
+    /**
+     * Name:
+     * Connect4Board()
+     *
+     * Synopsis:
+     * public Connect4Board();
+     * No params.
+     *
+     * Description:
+     * This function is the constructor for the board class.
+     * Used in order to initialized the board to all blanks.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public Connect4Board(){
         //Initialize the Hashtable with the defualt values at default locations
         connect4Board.clear();
@@ -28,6 +50,28 @@ public class Connect4Board {
     /* *********************************************
 `   * Private class functions
     ********************************************* */
+
+    /**
+     * Name:
+     * InitializeBoard
+     *
+     * Synopsis:
+     * private void InitializeBoard()
+     * No params.
+     *
+     * Description:
+     * This function is used in order to initialize the default values in the Hashtable connect4Board to B for blank.
+     * Used in order to initialized the board to all blanks.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     private void InitializeBoard(){
         connect4Board.clear();
 
@@ -54,29 +98,12 @@ public class Connect4Board {
 `   * Public functions
     ********************************************* */
 
-    public void ResetBoard(){
-        connect4Board.clear();
-
-        String row;
-        String column;
-        String tile;
-
-        //Row
-        for(int i = 1; i < 7; i++ ){
-            //Column
-            for(int j = 1; j < 8; j++){
-                row = String.valueOf(i);
-                column = String.valueOf(j);
-
-                tile = row + column;
-
-                //All the tiles are originally blank
-                connect4Board.put(tile, "B");
-            }
-        }
-    }
-
-    //Check that the placement is empty
+    /**
+     * 
+     * @param row
+     * @param column
+     * @return
+     */
     public boolean ChoiceValid(String row, String column){
         String tile = row + column;
 
@@ -291,6 +318,48 @@ public class Connect4Board {
         String tile = row + column;
 
         return connect4Board.get(tile);
+    }
+
+    /**
+     * Name:
+     * ResetBoard
+     *
+     * Synopsis:
+     * public void ResetBoard();
+     * No params.
+     *
+     * Description:
+     * This function is used in order to reset the default values in the Hashtable connect4Board to B for blank.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    public void ResetBoard(){
+        connect4Board.clear();
+
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = row + column;
+
+                //All the tiles are originally blank
+                connect4Board.put(tile, "B");
+            }
+        }
     }
 
 }

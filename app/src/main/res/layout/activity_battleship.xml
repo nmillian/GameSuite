@@ -1028,7 +1028,7 @@
             android:layout_marginEnd="46dp"
             android:layout_marginTop="12dp"
             android:id="@+id/save"
-            android:onClick="saveGame"/>
+            android:onClick="SaveGame"/>
 
     </RelativeLayout>
 

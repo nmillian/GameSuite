@@ -472,7 +472,7 @@
         android:layout_toRightOf="@+id/skipTurn"
         android:layout_toEndOf="@+id/skipTurn"
         android:id="@+id/save"
-        android:onClick = "saveGame"/>
+        android:onClick = "SaveGame"/>
 
 
 </RelativeLayout>

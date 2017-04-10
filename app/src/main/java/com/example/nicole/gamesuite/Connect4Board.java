@@ -98,14 +98,9 @@ public class Connect4Board {
 `   * Public functions
     ********************************************* */
 
-    /**
-     * 
-     * @param row
-     * @param column
-     * @return
-     */
-    public boolean ChoiceValid(String row, String column){
-        String tile = row + column;
+
+    public boolean ChoiceValid(String a_row, String a_column){
+        String tile = a_row + a_column;
 
         if(connect4Board.get(tile).equals("B")){
             return true;
@@ -116,12 +111,12 @@ public class Connect4Board {
     }
 
     //Validate that the tile is empty and if it's not on the first row there's a piece underneath
-    public boolean ValidateMove(String row, String column){
-        Integer rowInt = Integer.parseInt(row);
-        Integer colInt = Integer.parseInt(column);
+    public boolean ValidateMove(String a_row, String a_column){
+        Integer rowInt = Integer.parseInt(a_row);
+        Integer colInt = Integer.parseInt(a_column);
 
         //Check that the placement is empty
-        if(ChoiceValid(row, column)){
+        if(ChoiceValid(a_row, a_column)){
 
             //Check if it's being placed on the first row
             if(rowInt.equals(1)){
@@ -131,7 +126,7 @@ public class Connect4Board {
             //Not the first row, check that the tile below is filled
             else{
                 Integer newRowInt = rowInt - 1;
-                String underTile = Integer.toString(newRowInt) + column;
+                String underTile = Integer.toString(newRowInt) + a_column;
 
                 if(connect4Board.get(underTile).equals("C") || connect4Board.get(underTile).equals("H")){
                     return true;
@@ -143,7 +138,28 @@ public class Connect4Board {
         return false;
     }
 
-    //Check if the huamn player won the game
+
+    public void UpdateHumanMove(String a_row, String a_column){
+        String tile = a_row + a_column;
+        connect4Board.put(tile, "H");
+    }
+
+    public void UpdateComputerMove(String a_row, String a_column){
+        String tile = a_row + a_column;
+        connect4Board.put(tile, "C");
+    }
+
+    public void UpdateBlankMove(String a_row, String a_column){
+        String tile = a_row + a_column;
+        connect4Board.put(tile, "B");
+    }
+
+    public String GetValueAtTile(String a_row, String a_column){
+        String tile = a_row + a_column;
+        return connect4Board.get(tile);
+    }
+
+    //Check if the human player won the game
     public boolean CheckForWinHuman(){
         //Check horizontal win
         //Row
@@ -297,27 +313,6 @@ public class Connect4Board {
 
         //No way to win
         return false;
-    }
-    
-    public void UpdateHumanMove(String row, String column){
-        String tile = row + column;
-        connect4Board.put(tile, "H");
-    }
-
-    public void UpdateComputerMove(String row, String column){
-        String tile = row + column;
-        connect4Board.put(tile, "C");
-    }
-
-    public void UpdateBlankMove(String row, String column){
-        String tile = row + column;
-        connect4Board.put(tile, "B");
-    }
-
-    public String GetValueAtTile(String row, String column){
-        String tile = row + column;
-
-        return connect4Board.get(tile);
     }
 
     /**

@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 public class BattleshipActivity extends AppCompatActivity {
 
+    /* *********************************************
+`   * Private class variables and objects
+    ********************************************* */
     private String startRow;
     private String startColumn;
 
@@ -31,6 +34,9 @@ public class BattleshipActivity extends AppCompatActivity {
     private BattleshipComputer computerPlayer;
     private BattleshipSave battleshipSave;
 
+    /* *********************************************
+`   * Constructor
+    ********************************************* */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +98,9 @@ public class BattleshipActivity extends AppCompatActivity {
 
     }
 
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
     public void SetSerializedBoard(){
         String row;
         String column;
@@ -669,89 +678,7 @@ public class BattleshipActivity extends AppCompatActivity {
         }
     }
 
-    private Runnable ComputerRunnable = new Runnable() {
-        public void run() {
-            ComputerMove();
-        }
-    };
-
-    private void ComputerMove(){
-        //Make move
-        String tile = computerPlayer.PlayGame(board);
-
-        //Hit a human ship
-        if(board.CheckForHumanShipHit(tile).equals("S")){
-            //Set tile to hit square
-            String hitTile = "Tile" + tile;
-            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
-            ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-            String mDrawableName = "hitsquaregrid";
-            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-
-            board.SetShipHitHuman(tile);
-            currentPlayer = "human";
-
-            View visibility;
-            visibility = findViewById(R.id.save);
-            visibility.setVisibility(View.VISIBLE);
-        }
-
-        //Hit a blank
-        else if(board.CheckForHumanShipHit(tile).equals("B")){
-            //Set tile to hit square
-            String hitTile = "Tile" + tile;
-            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
-            ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-            // System.out.println("CARD TO SET " + board.GetTopTrashCard());
-            String mDrawableName = "redsquaregrid";
-            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-
-            board.SetBlankHitHuman(tile);
-            currentPlayer = "human";
-
-            View visibility;
-            visibility = findViewById(R.id.save);
-            visibility.setVisibility(View.VISIBLE);
-        }
-
-        else{
-            //hit a tile that already was hit
-            currentPlayer = "computer";
-            ComputerMove();
-        }
-
-        Integer shipsLeft = board.GetNumberOfHumanShipTiles();
-
-        if(shipsLeft.equals(0)){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("The computer won by hitting all ships. Play again?");
-            builder1.setCancelable(false)
-
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            ResetGame();
-                            dialog.cancel();
-                        }
-                    })
-
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    });
-
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-    }
-
-    public void saveGame(View view){
+    public void SaveGame(View view){
         //Only let the human save on it's turn
         if(currentPlayer.equals("human")) {
 
@@ -917,6 +844,91 @@ public class BattleshipActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    /* *********************************************
+`   * Private functions
+    ********************************************* */
+    private Runnable ComputerRunnable = new Runnable() {
+        public void run() {
+            ComputerMove();
+        }
+    };
+
+    private void ComputerMove(){
+        //Make move
+        String tile = computerPlayer.PlayGame(board);
+
+        //Hit a human ship
+        if(board.CheckForHumanShipHit(tile).equals("S")){
+            //Set tile to hit square
+            String hitTile = "Tile" + tile;
+            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            String mDrawableName = "hitsquaregrid";
+            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+
+            board.SetShipHitHuman(tile);
+            currentPlayer = "human";
+
+            View visibility;
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.VISIBLE);
+        }
+
+        //Hit a blank
+        else if(board.CheckForHumanShipHit(tile).equals("B")){
+            //Set tile to hit square
+            String hitTile = "Tile" + tile;
+            int idOriginal = getResources().getIdentifier(hitTile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            // System.out.println("CARD TO SET " + board.GetTopTrashCard());
+            String mDrawableName = "redsquaregrid";
+            Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+
+            board.SetBlankHitHuman(tile);
+            currentPlayer = "human";
+
+            View visibility;
+            visibility = findViewById(R.id.save);
+            visibility.setVisibility(View.VISIBLE);
+        }
+
+        else{
+            //hit a tile that already was hit
+            currentPlayer = "computer";
+            ComputerMove();
+        }
+
+        Integer shipsLeft = board.GetNumberOfHumanShipTiles();
+
+        if(shipsLeft.equals(0)){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("The computer won by hitting all ships. Play again?");
+            builder1.setCancelable(false)
+
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            ResetGame();
+                            dialog.cancel();
+                        }
+                    })
+
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
 
 }

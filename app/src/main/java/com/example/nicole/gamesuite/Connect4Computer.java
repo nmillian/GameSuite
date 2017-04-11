@@ -15,6 +15,27 @@ public class Connect4Computer {
 
     }
 */
+
+    /**
+     * Name:
+     * DecideRandomMove
+     *
+     * Synopsis:
+     * public String DecideRandomMove(Connect4Board a_board);
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     * Used in order to decide a random piece to place on the board for the computer.
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public String DecideRandomMove(Connect4Board a_board){
         String noMove = "none";
 

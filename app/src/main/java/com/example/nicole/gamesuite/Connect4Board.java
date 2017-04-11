@@ -99,6 +99,27 @@ public class Connect4Board {
     ********************************************* */
 
 
+    /**
+     * Name:
+     * ChoiceValid
+     *
+     * Synopsis:
+     * public boolean ChoiceValid(String a_row, String a_column)
+     * @param a_row -> The row the tile is located at.
+     * @param a_column -> The column the tile is located at.
+     *
+     * Description:
+     * Used in order to validate if a piece can be placed on the tile, aka it's empty.
+     *
+     * Returns:
+     * @return Boolean, true if the piece can be placed, false if the piece can't be placed.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public boolean ChoiceValid(String a_row, String a_column){
         String tile = a_row + a_column;
 
@@ -110,7 +131,27 @@ public class Connect4Board {
         }
     }
 
-    //Validate that the tile is empty and if it's not on the first row there's a piece underneath
+    /**
+     * Name:
+     * ValidateMove
+     *
+     * Synopsis:
+     * public boolean ValidateMove(String a_row, String a_column);
+     * @param a_row -> The row the tile is located at.
+     * @param a_column -> The column the tile is located at.
+     *
+     * Description:
+     * Validate that the tile is empty and if it's not on the first row there's a piece underneath.
+     *
+     * Returns:
+     * @return Boolean, true if the piece can be placed, false if the piece can't be placed.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public boolean ValidateMove(String a_row, String a_column){
         Integer rowInt = Integer.parseInt(a_row);
         Integer colInt = Integer.parseInt(a_column);
@@ -138,28 +179,133 @@ public class Connect4Board {
         return false;
     }
 
-
+    /**
+     * Name:
+     * UpdateHumanMove
+     *
+     * Synopsis:
+     * public void UpdateHumanMove(String a_row, String a_column);
+     * @param a_row -> The row the tile is located at.
+     * @param a_column -> The column the tile is located at.
+     *
+     * Description:
+     * Used in order to update the tile in the connect4Board hashtable, updates the tile from a B to H.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void UpdateHumanMove(String a_row, String a_column){
         String tile = a_row + a_column;
         connect4Board.put(tile, "H");
     }
 
+    /**
+     * Name:
+     * UpdateComputerMove
+     *
+     * Synopsis:
+     * public void UpdateComputerMove(String a_row, String a_column);
+     * @param a_row -> The row the tile is located at.
+     * @param a_column -> The column the tile is located at.
+     *
+     * Description:
+     * Used in order to update the tile in the connect4Board hashtable, updates the tile from a B to C.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void UpdateComputerMove(String a_row, String a_column){
         String tile = a_row + a_column;
         connect4Board.put(tile, "C");
     }
 
+    /**
+     * Name:
+     * UpdateBlankMove
+     *
+     * Synopsis:
+     * public void UpdateBlankMove(String a_row, String a_column);
+     * @param a_row -> The row the tile is located at.
+     * @param a_column-> The column the tile is located at.
+     *
+     * Description:
+     * Used in order to update the connect4Board hashtable with a blank value, B.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public void UpdateBlankMove(String a_row, String a_column){
         String tile = a_row + a_column;
         connect4Board.put(tile, "B");
     }
 
+    /**
+     * Name:
+     * GetValueAtTile
+     *
+     * Synopsis:
+     * public String GetValueAtTile(String a_row, String a_column);
+     * @param a_row -> The row the tile is located at.
+     * @param a_column -> The column the tile is located at.
+     *
+     * Description:
+     * Used in order to get the type of the tile at a specified location.
+     *
+     * Returns:
+     * @return String, the value located at the tile, either a B for blank, C for computer, or H for human.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public String GetValueAtTile(String a_row, String a_column){
         String tile = a_row + a_column;
         return connect4Board.get(tile);
     }
 
-    //Check if the human player won the game
+    /**
+     * Name:
+     * CheckForWinHuman
+     *
+     * Synopsis:
+     * public boolean CheckForWinHuman();
+     * No params.
+     *
+     * Description:
+     * Used in order to check if the human won by getting four in a row.
+     *
+     * Returns:
+     * @return Boolean, true if the human won, false if the human did not win.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public boolean CheckForWinHuman(){
         //Check horizontal win
         //Row
@@ -237,6 +383,26 @@ public class Connect4Board {
         return false;
     }
 
+    /**
+     * Name:
+     * CheckForWinComputer
+     *
+     * Synopsis:
+     * public boolean CheckForWinComputer();
+     * No params.
+     *
+     * Description:
+     * Checks if the computer player won the game by getting four in a row.
+     *
+     * Returns:
+     * @return Boolean, true if the computer won, false if the computer did not win.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     //Check if the computer player won the game
     public boolean CheckForWinComputer(){
         //Check horizontal win

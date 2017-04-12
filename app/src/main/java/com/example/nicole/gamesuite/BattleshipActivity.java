@@ -37,6 +37,28 @@ public class BattleshipActivity extends AppCompatActivity {
     /* *********************************************
 `   * Constructor
     ********************************************* */
+
+    /**
+     * Name:
+     * onCreate
+     *
+     * Synopsis:
+     * protected void onCreate(Bundle savedInstanceState);
+     * @param savedInstanceState -> The Bundle used in order to initialize the activity.
+     *
+     * Description:
+     * This function is the constructor for the board class.
+     * Used in order to initialized the board to all blanks.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/10/2017
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +104,27 @@ public class BattleshipActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Name:
+     * BattleshipActivity()
+     *
+     * Synopsis:
+     * public BattleshipActivity()
+     * No params.
+     *
+     * Description:
+     * This is the constuctor for the battleship activity. Used in order to initialize the starting columns and rows,
+     * position, play state, board, computer, and save.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/10/2017
+     */
     public BattleshipActivity(){
         startRow = "0";
         startColumn = "0";
@@ -101,6 +144,27 @@ public class BattleshipActivity extends AppCompatActivity {
     /* *********************************************
 `   * Public functions
     ********************************************* */
+
+    /**
+     * Name:
+     * SetSerializedBoard
+     *
+     * Synopsis:
+     * public void SetSerializedBoard();
+     * No params.
+     *
+     * Description:
+     * This function is called in order to set the pieces of the board from a serialized file.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public void SetSerializedBoard(){
         String row;
         String column;
@@ -202,6 +266,27 @@ public class BattleshipActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Name:
+     * hTileClick
+     *
+     * Synopsis:
+     * public void hTileClick(View view);
+     * @param view -> The battleship activity view.
+     *
+     * Description:
+     * This function is called when the human player taps a human tile. If a human tile is pressed, it should
+     * only be when the human player has to place their original ships.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/10/2017
+     */
     public void hTileClick(View view){
 
         //Check if it's the placement stage, the only time the human should be hitting a human tile is when placing ships
@@ -344,6 +429,124 @@ public class BattleshipActivity extends AppCompatActivity {
         //Otherwise it's the playing stage
     }
 
+    /**
+     * Name:
+     * cTileClick
+     *
+     * Synopsis:
+     * @param view -> The battleship activity view.
+     *
+     * Description:
+     * This function is called when the human player taps a computer tile. It checks to see if the human
+     * hit a valid tile and what kind of tile was hit, a blank or an enemy ship.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/10/2017
+     */
+    public void cTileClick(View view){
+        Integer shipsLeft;
+
+        String row;
+        String column;
+        String tile;
+
+        if(playing.equals("play") && currentPlayer.equals("human")){
+            tile = getResources().getResourceEntryName(view.getId());
+
+            //Get the tile row and column
+            row = Character.toString(tile.charAt(5));
+            column = Character.toString(tile.charAt(6));
+
+            tile = row + column;
+
+            if(board.CheckForComputerShipHit(tile).equals("S")){
+                //Set tile to hit square
+                view.setBackgroundResource(R.drawable.hitsquaregrid);
+                //Set to hit in the hashtable
+                board.SetShipHitComputer(tile);
+
+                View visibility;
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.GONE);
+
+                //Switch turns
+                currentPlayer = "computer";
+                Handler compHandler = new Handler();
+                compHandler.postDelayed(ComputerRunnable, 500);
+            }
+
+            else if(board.CheckForComputerShipHit(tile).equals("B")){
+                view.setBackgroundResource(R.drawable.redsquaregrid);
+                board.SetBlankHitComputer(tile);
+
+                View visibility;
+                visibility = findViewById(R.id.save);
+                visibility.setVisibility(View.GONE);
+
+                //Switch turns
+                currentPlayer = "computer";
+                Handler compHandler = new Handler();
+                compHandler.postDelayed(ComputerRunnable, 500);
+            }
+
+            else{
+                //hit a tile that already was hit
+                currentPlayer = "human";
+            }
+
+            shipsLeft = board.GetNumberOfComputerShipTiles();
+
+            if(shipsLeft.equals(0)){
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("You won by hitting all ships. Play again?");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                ResetGame();
+                                dialog.cancel();
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+        }
+    }
+
+    /**
+     * Name:
+     * validateTiles
+     *
+     * Synopsis:
+     * public boolean validateTiles();
+     * No params.
+     *
+     * Description:
+     * Validate the position the player is trying to place the battleships on.
+     *
+     * Returns:
+     * @return Boolean, true if the ship is able to be placed, false if the ship is not able to be placed.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public boolean validateTiles(){
 
         //Check if they selected the same tile
@@ -600,84 +803,27 @@ public class BattleshipActivity extends AppCompatActivity {
         return false;
     }
 
-    public void cTileClick(View view){
-        Integer shipsLeft;
-
-        String row;
-        String column;
-        String tile;
-
-        if(playing.equals("play") && currentPlayer.equals("human")){
-             tile = getResources().getResourceEntryName(view.getId());
-
-            //Get the tile row and column
-            row = Character.toString(tile.charAt(5));
-            column = Character.toString(tile.charAt(6));
-
-            tile = row + column;
-
-            if(board.CheckForComputerShipHit(tile).equals("S")){
-                //Set tile to hit square
-                view.setBackgroundResource(R.drawable.hitsquaregrid);
-                //Set to hit in the hashtable
-                board.SetShipHitComputer(tile);
-
-                View visibility;
-                visibility = findViewById(R.id.save);
-                visibility.setVisibility(View.GONE);
-
-                //Switch turns
-                currentPlayer = "computer";
-                Handler compHandler = new Handler();
-                compHandler.postDelayed(ComputerRunnable, 500);
-            }
-
-            else if(board.CheckForComputerShipHit(tile).equals("B")){
-                view.setBackgroundResource(R.drawable.redsquaregrid);
-                board.SetBlankHitComputer(tile);
-
-                View visibility;
-                visibility = findViewById(R.id.save);
-                visibility.setVisibility(View.GONE);
-
-                //Switch turns
-                currentPlayer = "computer";
-                Handler compHandler = new Handler();
-                compHandler.postDelayed(ComputerRunnable, 500);
-            }
-
-            else{
-                //hit a tile that already was hit
-                currentPlayer = "human";
-            }
-
-            shipsLeft = board.GetNumberOfComputerShipTiles();
-
-            if(shipsLeft.equals(0)){
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setMessage("You won by hitting all ships. Play again?");
-                builder1.setCancelable(false)
-
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                ResetGame();
-                                dialog.cancel();
-                            }
-                        })
-
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                finish();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-            }
-
-        }
-    }
-
+    /**
+     * Name:
+     * SaveGame
+     *
+     * Synopsis:
+     * public void SaveGame(View view);
+     * @param view -> The battleship activity view.
+     *
+     * Description:
+     * When the save game button is clicked, the human is asked to enter a file name to save to. If the save
+     * name is valid the game is saved, and the game is closed.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public void SaveGame(View view){
         //Only let the human save on it's turn
         if(currentPlayer.equals("human")) {
@@ -715,6 +861,26 @@ public class BattleshipActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Name:
+     * ResetGame
+     *
+     * Synopsis:
+     * public void ResetGame();
+     * No params.
+     *
+     * Description:
+     * Used in order to reset the board back to a fresh game after either the human or computer player won the game.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/14/2017
+     */
     public void ResetGame(){
         currentPlayer = "human";
         playing = "place";
@@ -849,12 +1015,52 @@ public class BattleshipActivity extends AppCompatActivity {
     /* *********************************************
 `   * Private functions
     ********************************************* */
+    /**
+     * Name:
+     * ComputerRunnable
+     *
+     * Synopsis:
+     * private Runnable ComputerRunnable = new Runnable();
+     * No params.
+     *
+     * Description:
+     * Calls the function ComputerMove on a delay in order to simulate waiting.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private Runnable ComputerRunnable = new Runnable() {
         public void run() {
             ComputerMove();
         }
     };
 
+    /**
+     * Name:
+     * ComputerMove
+     *
+     * Synopsis:
+     * private void ComputerMove();
+     * No params.
+     *
+     * Description:
+     * Decides which move the computer should make and makes the move.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void ComputerMove(){
         //Make move
         String tile = computerPlayer.PlayGame(board);

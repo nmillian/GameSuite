@@ -14,7 +14,6 @@ public class BattleshipBoard {
    `* Private class variables
     ********************************************* */
     //Hashtable to hold the the type of piece located at each space
-
     //B for blank, S for ship, H for hit ship, BH for blank hit
     private static Hashtable<String, String> battleshipBoardHuman = new Hashtable<String, String>();
     private static Hashtable<String, String> battleshipBoardComputer = new Hashtable<String, String>();
@@ -22,6 +21,28 @@ public class BattleshipBoard {
     /* *********************************************
  `   * Constructor
      ********************************************* */
+
+    /**
+     * Name:
+     * BattleshipBoard()
+     *
+     * Synopsis:
+     * public BattleshipBoard()
+     * No params.
+     *
+     * Description:
+     * This function is the constructor for the board class.
+     * Used in order to initialized the board to all blanks.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public BattleshipBoard(){
         //Initialize the Hashtable with the defualt values at default locations
         battleshipBoardHuman.clear();
@@ -35,6 +56,31 @@ public class BattleshipBoard {
         print();
     }
 
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
+
+    /**
+     * Name:
+     * ResetGame
+     *
+     * Synopsis:
+     * public void ResetGame();
+     * No params.
+     *
+     * Description:
+     * This function is used in order to reset the board back
+     * to it's default values.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public void ResetGame(){
         InitializeBoardHuman();
         InitializeBoardComputer();
@@ -42,6 +88,378 @@ public class BattleshipBoard {
         PlaceOriginalShipsComputer();
     }
 
+    /**
+     * Name:
+     * SetBlankComputer
+     *
+     * Synopsis:
+     * public void SetBlankComputer(String tile);
+     * @param tile -> The tile to update with a blank value, B.
+     *
+     * Description:
+     * Updates a tile in the battleshipBoardComputer hashtable with a B for blank.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetBlankComputer(String tile){
+        battleshipBoardComputer.put(tile, "B");
+    }
+
+    /**
+     * Name:
+     * SetBlankHuman
+     *
+     * Synopsis:
+     * public void SetBlankHuman(String tile);
+     * @param tile -> The tile to be updated to a blank in the battleshipBoardHuman hashtable.
+     *
+     * Description:
+     * Used in order to update a tile in the battleshipBoardHuman hashtable to blank.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetBlankHuman(String tile){
+        battleshipBoardHuman.put(tile, "B");
+    }
+
+    /**
+     * Name:
+     * SetShipComputer
+     *
+     * Synopsis:
+     * public void SetShipComputer(String tile);
+     * @param tile -> The tile to be updated to a ship in the battleshipBoardComputer hashtable.
+     *
+     * Description:
+     * Used in order to update a tile in the battleshipBoardComputer hashtable to a ship, S.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetShipComputer(String tile){
+        battleshipBoardComputer.put(tile, "S");
+    }
+
+    /**
+     * Name:
+     * SetShipHuman
+     *
+     * Synopsis:
+     * public void SetShipHuman(String tile);
+     * @param tile -> The tile to be updated to a ship in the battleshipBoardHuman hashtable.
+     *
+     * Description:
+     * Used in order to update a tile in the battleshipBoardHuman hashtable to a ship, S.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetShipHuman(String tile){
+        battleshipBoardHuman.put(tile, "S");
+    }
+
+    /**
+     * Name:
+     * SetShipHitComputer
+     *
+     * Synopsis:
+     * public void SetShipHitComputer(String tile);
+     * @param tile -> The tile to be updated to hit in the battleshipBoardComputer hashtable.
+     *
+     * Description:
+     * Used in order to update a tile in the battleshipBoardComputer hashtable to hit, H.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetShipHitComputer(String tile){
+        battleshipBoardComputer.put(tile, "H");
+    }
+
+    /**
+     * Name:
+     * SetBlankHitComputer
+     *
+     * Synopsis:
+     *
+     * @param tile
+     *
+     * Description:
+     *
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetBlankHitComputer(String tile){
+        battleshipBoardComputer.put(tile, "BH");
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * @param tile
+     *
+     * Description:
+     *
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetShipHitHuman(String tile){
+        battleshipBoardHuman.put(tile, "H");
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * @param tile
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public void SetBlankHitHuman(String tile){
+        battleshipBoardHuman.put(tile, "BH");
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * @param tile
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public String GetPieceAtSpaceComputer(String tile){
+        return battleshipBoardComputer.get(tile);
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * @param tile
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public String GetPieceAtSpaceHuman(String tile){
+        return battleshipBoardHuman.get(tile);
+    }
+
+    /**
+     *
+     * @param tile
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public String CheckForComputerShipHit(String tile){
+        //Hit ship
+        if(GetPieceAtSpaceComputer(tile).equals("S")){
+            return "S";
+        }
+
+        //Hit blank
+        else if(GetPieceAtSpaceComputer(tile).equals("B")){
+            return "B";
+        }
+
+        //Hit already hit ship
+        return "H";
+    }
+
+    /**
+     *
+     * @param tile
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public String CheckForHumanShipHit(String tile){
+        //Hit ship
+        if(GetPieceAtSpaceHuman(tile).equals("S")){
+            return "S";
+        }
+
+        //Hit blank
+        else if(GetPieceAtSpaceHuman(tile).equals("B")){
+            return "B";
+        }
+
+        //Hit already
+        return "H";
+    }
+
+    /**
+     *
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public Integer GetNumberOfComputerShipTiles(){
+        Integer count = 0;
+
+        for(int i = 1; i < 9; i++){
+            for(int j = 1; j < 9; j++){
+                String tile = Integer.toString(i) + Integer.toString(j);
+                if(GetPieceAtSpaceComputer(tile).equals("S")){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     *
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
+    public Integer GetNumberOfHumanShipTiles(){
+        Integer count = 0;
+
+        for(int i = 1; i < 9; i++){
+            for(int j = 1; j < 9; j++){
+                String tile = Integer.toString(i) + Integer.toString(j);
+                if(GetPieceAtSpaceHuman(tile).equals("S")){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    //Remove
+    public void print(){
+        //Row
+        for(int i = 8; i > 0; i-- ){
+            //Column
+            for(int j = 1; j < 9; j++){
+                String tile = Integer.toString(i) + Integer.toString(j);
+
+                System.out.print(battleshipBoardComputer.get(tile) + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+
+    /* *********************************************
+`   * Private functions
+    ********************************************* */
+
+    /**
+     * Name:
+     * InitializeBoardComputer
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void InitializeBoardComputer(){
         battleshipBoardComputer.clear();
 
@@ -65,6 +483,23 @@ public class BattleshipBoard {
 
     }
 
+    /**
+     * Name:
+     *
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void InitializeBoardHuman(){
         battleshipBoardHuman.clear();
 
@@ -87,6 +522,23 @@ public class BattleshipBoard {
         }
     }
 
+    /**
+     * Name:
+     *
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void PlaceOriginalShipsComputer(){
         /*
         5 Ship Types:
@@ -435,119 +887,5 @@ public class BattleshipBoard {
 
         }
 
-    }
-
-    public void SetBlankComputer(String tile){
-        battleshipBoardComputer.put(tile, "B");
-    }
-
-    public void SetBlankHuman(String tile){
-        battleshipBoardHuman.put(tile, "B");
-    }
-
-    public void SetShipComputer(String tile){
-        battleshipBoardComputer.put(tile, "S");
-    }
-
-    public void SetShipHuman(String tile){
-        battleshipBoardHuman.put(tile, "S");
-        Log.d("SHIP", tile + battleshipBoardHuman.get(tile));
-    }
-
-    public void SetShipHitComputer(String tile){
-        battleshipBoardComputer.put(tile, "H");
-    }
-
-    public void SetBlankHitComputer(String tile){
-        battleshipBoardComputer.put(tile, "BH");
-    }
-
-    public void SetShipHitHuman(String tile){
-        battleshipBoardHuman.put(tile, "H");
-    }
-
-    public void SetBlankHitHuman(String tile){
-        battleshipBoardHuman.put(tile, "BH");
-    }
-
-    public String GetPieceAtSpaceComputer(String tile){
-        return battleshipBoardComputer.get(tile);
-    }
-
-    public String GetPieceAtSpaceHuman(String tile){
-        return battleshipBoardHuman.get(tile);
-    }
-
-    public String CheckForComputerShipHit(String tile){
-        //Hit ship
-        if(GetPieceAtSpaceComputer(tile).equals("S")){
-            return "S";
-        }
-
-        //Hit blank
-        else if(GetPieceAtSpaceComputer(tile).equals("B")){
-            return "B";
-        }
-
-        //Hit already hit ship
-        return "H";
-    }
-
-    public String CheckForHumanShipHit(String tile){
-        //Hit ship
-        if(GetPieceAtSpaceHuman(tile).equals("S")){
-            return "S";
-        }
-
-        //Hit blank
-        else if(GetPieceAtSpaceHuman(tile).equals("B")){
-            return "B";
-        }
-
-        //Hit already
-        return "H";
-    }
-
-    public Integer GetNumberOfComputerShipTiles(){
-        Integer count = 0;
-
-        for(int i = 1; i < 9; i++){
-            for(int j = 1; j < 9; j++){
-                String tile = Integer.toString(i) + Integer.toString(j);
-                if(GetPieceAtSpaceComputer(tile).equals("S")){
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
-    public Integer GetNumberOfHumanShipTiles(){
-        Integer count = 0;
-
-        for(int i = 1; i < 9; i++){
-            for(int j = 1; j < 9; j++){
-                String tile = Integer.toString(i) + Integer.toString(j);
-                if(GetPieceAtSpaceHuman(tile).equals("S")){
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
-    public void print(){
-        //Row
-        for(int i = 8; i > 0; i-- ){
-            //Column
-            for(int j = 1; j < 9; j++){
-                String tile = Integer.toString(i) + Integer.toString(j);
-
-                System.out.print(battleshipBoardComputer.get(tile) + " ");
-            }
-            System.out.print("\n");
-        }
     }
 }

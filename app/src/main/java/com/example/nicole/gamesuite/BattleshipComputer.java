@@ -64,14 +64,17 @@ public class BattleshipComputer {
 
     /**
      * Name:
+     * PlayGame
      *
      * Synopsis:
-     * @param board
+     * public String PlayGame(BattleshipBoard board);
+     * @param board -> The board used in order to play the game.
      *
      * Description:
+     * Used in order to determine which tile the computer player should attack.
      *
      * Return:
-     * @return
+     * @return String, the tile the computer player decided to attack.
      *
      * Author:
      * Nicole Millian
@@ -373,12 +376,16 @@ public class BattleshipComputer {
 
     /**
      * Name:
+     * ResetTilesToCheck
      *
      * Synopsis:
+     * private void ResetTilesToCheck();
      *
      * Description:
+     * Reset which tiles need to be checked in order to ensure that a ship was hit completely.
      *
      * Return:
+     * None.
      *
      * Author:
      * Nicole Millian
@@ -401,12 +408,16 @@ public class BattleshipComputer {
 
     /**
      * Name:
+     * GenerateTilesToCheck
      *
      * Synopsis:
+     * private void GenerateTilesToCheck();
      *
      * Description:
+     * Used in order to generate the next tile to hit when a ship piece has been hit.
      *
      * Return:
+     * None.
      *
      * Author:
      * Nicole Millian
@@ -461,15 +472,17 @@ public class BattleshipComputer {
 
     /**
      * Name:
+     * RandomMove
      *
      * Synopsis:
-     *
-     * @param board
+     * private String RandomMove(BattleshipBoard board);
+     * @param board -> The board used in order to keep track of pieces of the human and computer players.
      *
      * Description:
+     * Used in order to pick a random tile to hit on the human board.
      *
      * Return:
-     * @return
+     * @return String, the tile that will be hit.
      *
      * Author:
      * Nicole Millian

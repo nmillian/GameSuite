@@ -213,11 +213,11 @@ public class BattleshipBoard {
      * SetBlankHitComputer
      *
      * Synopsis:
-     *
-     * @param tile
+     * public void SetBlankHitComputer(String tile)
+     * @param tile -> The tile location to update from B to BH.
      *
      * Description:
-     *
+     * Used in order to set the tile in the battleshipBoardComputer hashtable to BH for blank hit.
      *
      * Returns:
      * None.
@@ -234,13 +234,14 @@ public class BattleshipBoard {
 
     /**
      * Name:
+     * SetShipHitHuman
      *
      * Synopsis:
-     *
-     * @param tile
+     * public void SetShipHitHuman(String tile);
+     * @param tile -> The tile to update to hit.
      *
      * Description:
-     *
+     * Updates a tile in the battleshipBoardHuman hashtable to H for hit.
      *
      * Returns:
      * None.
@@ -257,12 +258,14 @@ public class BattleshipBoard {
 
     /**
      * Name:
+     * SetBlankHitHuman
      *
      * Synopsis:
-     *
-     * @param tile
+     * public void SetBlankHitHuman(String tile);
+     * @param tile -> The tile to update to a blank hit.
      *
      * Description:
+     * Updates a tile in the battleshipBoardHuman hashtable to a blank hit, BH.
      *
      * Returns:
      * None.
@@ -279,15 +282,17 @@ public class BattleshipBoard {
 
     /**
      * Name:
+     * GetPieceAtSpaceComputer
      *
      * Synopsis:
-     *
-     * @param tile
+     * public String GetPieceAtSpaceComputer(String tile);
+     * @param tile -> The tile to get the piece at.
      *
      * Description:
+     * Returns the type of piece located a specified tile.
      *
      * Returns:
-     * @return
+     * @return String, the type of tile at the specified tile.
      *
      * Author:
      * Nicole Millian
@@ -301,15 +306,17 @@ public class BattleshipBoard {
 
     /**
      * Name:
+     * GetPieceAtSpaceHuman
      *
      * Synopsis:
-     *
-     * @param tile
+     * public String GetPieceAtSpaceHuman(String tile);
+     * @param tile -> The tile to get the piece at.
      *
      * Description:
+     * Returns the type of piece located at the specified tile.
      *
      * Returns:
-     * @return
+     * @return String, the type of piece located at the specified tile.
      *
      * Author:
      * Nicole Millian
@@ -322,11 +329,18 @@ public class BattleshipBoard {
     }
 
     /**
+     * Name:
+     * CheckForComputerShipHit
      *
-     * @param tile
+     * Synopsis:
+     * public String CheckForComputerShipHit(String tile);
+     * @param tile -> The tile to be checked in the battleshipBoardComputer hashtable.
+     *
+     * Description:
+     * Used in order to check if a tile that was hit by the computer was a ship that was already hit.
      *
      * Returns:
-     * @return
+     * @return String, the type of piece located at the specified tile.
      *
      * Author:
      * Nicole Millian
@@ -350,9 +364,18 @@ public class BattleshipBoard {
     }
 
     /**
+     * Name:
+     * CheckForHumanShipHit
      *
-     * @param tile
-     * @return
+     * Synopsis:
+     * public String CheckForHumanShipHit(String tile);
+     * @param tile -> The tile to be checked in the battleshipBoardHuman hashtable.
+     *
+     * Description:
+     * Used in order to check the type of piece that was hit in the battleshipBoardHuman hashtable.
+     *
+     * Return:
+     * @return String, the type of piece located at the specified tile.
      *
      * Author:
      * Nicole Millian
@@ -376,8 +399,17 @@ public class BattleshipBoard {
     }
 
     /**
+     * Name:
+     * GetNumberOfComputerShipTiles
      *
-     * @return
+     * Synopsis:
+     * public Integer GetNumberOfComputerShipTiles();
+     *
+     * Description:
+     * Used in order to get the remaining number of ship tiles still not hit in the computer hashtable.
+     *
+     * Return:
+     * @return Integer, the number of ships that are remaining in the computer board hashtable.
      *
      * Author:
      * Nicole Millian
@@ -401,8 +433,17 @@ public class BattleshipBoard {
     }
 
     /**
+     * Name:
+     * GetNumberOfHumanShipTiles
      *
-     * @return
+     * Synopsis:
+     * public Integer GetNumberOfHumanShipTiles();
+     *
+     * Description:
+     * Used in order to get the remaining number of ship tiles still not hit in the human board hashtable.
+     *
+     * Return:
+     * @return Integer, the number of ships remaining in the human board hashtable.
      *
      * Author:
      * Nicole Millian
@@ -448,8 +489,10 @@ public class BattleshipBoard {
      * InitializeBoardComputer
      *
      * Synopsis:
+     * private void InitializeBoardComputer();
      *
      * Description:
+     * Used in order to set all the spaces in the battleshipBoardComputer hashtable to B for blank.
      *
      * Returns:
      * None.
@@ -485,11 +528,13 @@ public class BattleshipBoard {
 
     /**
      * Name:
-     *
+     * InitializeBoardHuman
      *
      * Synopsis:
+     * private void InitializeBoardHuman();
      *
      * Description:
+     * Used in order to set all the spaces in the battleshipBoardHuman hashtable to B for blank.
      *
      * Returns:
      * None.
@@ -524,11 +569,13 @@ public class BattleshipBoard {
 
     /**
      * Name:
-     *
+     * PlaceOriginalShipsComputer
      *
      * Synopsis:
+     * private void PlaceOriginalShipsComputer();
      *
      * Description:
+     * Sets the original five ships in the battleshipBoardComputer hashtable.
      *
      * Returns:
      * None.

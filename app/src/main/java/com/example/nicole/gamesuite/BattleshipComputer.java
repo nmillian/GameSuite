@@ -24,6 +24,31 @@ public class BattleshipComputer {
     private int incrementRow = 0;
     private int incrementColumn = 0;
 
+    /* *********************************************
+`   * Constructor
+    ********************************************* */
+
+    /**
+     * Name:
+     * BattleshipComputer()
+     *
+     * Synopsis:
+     * public BattleshipComputer()
+     * No params.
+     *
+     * Description:
+     * This function is the constructor for the computer class.
+     * Used in order to initialize all variables to their default state.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public BattleshipComputer(){
         state = "search";
 
@@ -33,6 +58,27 @@ public class BattleshipComputer {
         shipTile = "00";
     }
 
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     * @param board
+     *
+     * Description:
+     *
+     * Return:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     public String PlayGame(BattleshipBoard board){
         String tile = "00";
 
@@ -321,6 +367,25 @@ public class BattleshipComputer {
 
     }
 
+    /* *********************************************
+`   * Private functions
+    ********************************************* */
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Return:
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void ResetTilesToCheck(){
         direction = "NONE";
         state = "search";
@@ -334,6 +399,21 @@ public class BattleshipComputer {
         incrementColumn = 0;
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Return:
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private void GenerateTilesToCheck(){
         char row = lastHitTile.charAt(0);
         char column = lastHitTile.charAt(1);
@@ -379,6 +459,24 @@ public class BattleshipComputer {
 
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * @param board
+     *
+     * Description:
+     *
+     * Return:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/13/2017
+     */
     private String RandomMove(BattleshipBoard board){
         int row;
         int column;

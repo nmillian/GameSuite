@@ -18,6 +18,9 @@ import java.util.Random;
 
 public class Crazy8sActivity extends AppCompatActivity {
 
+    /* *********************************************
+`   * Private class variables
+    ********************************************* */
     private Crazy8sBoard board;
     private Crazy8sComputer computer;
     private Crazy8sSave crazy8sSave;
@@ -27,6 +30,30 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     private String saveFileName;
 
+    /* *********************************************
+`   * Constructor
+    ********************************************* */
+
+    /**
+     * Name:
+     * onCreate
+     *
+     * Synopsis:
+     * protected void onCreate(Bundle savedInstanceState);
+     * @param savedInstanceState -> The Bundle used in order to initialize the activity.
+     *
+     * Description:
+     * Used in order to initialize the crazy 8s activity.
+     *
+     * Returns:
+     * None
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +110,301 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public Crazy8sActivity(){
         board = new Crazy8sBoard();
         computer = new Crazy8sComputer();
         crazy8sSave = new Crazy8sSave();
+    }
+
+    /* *********************************************
+`   * Private functions
+    ********************************************* */
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
+    private void PrintComputerHand(){
+        String tile = "computerCards";
+        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
+
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        TextView toChange = (TextView) findViewById(idOriginal);
+
+        toChange.setText(cardNum);
+
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * Description:
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
+    private void PrintHumanHand(){
+        String tile;
+        Integer humanHandSize = board.GetSizeOfHumanHand();
+
+        //Show the cards
+        for(int i = 0; i < humanHandSize; i++){
+            tile = "Tile" + i;
+
+            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            String mDrawableName = board.GetHumanCard(i);
+            int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+
+        //Clear the blank cards
+        for(int i = humanHandSize; i < 40; i++){
+            tile = "Tile" + i;
+
+            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+            String mDrawableName = "squaregrid";
+            int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+    }
+
+    private Runnable ComputerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            ComputerTurn();
+        }
+    };
+
+    private void ComputerTurn(){
+        board.printCompHand();
+
+        if(currentPlayer.equals("computer")){
+
+            //Decide computer move
+            if(computer.DecideMove(board)){
+                UpdateTrashCard();
+                PrintComputerHand();
+
+                //Check if the computer won
+                if(board.GetSizeOfComputerHand() == 0){
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("The computer won by getting rid of all cards! Play again?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    ResetGame();
+                                    board.ResetGame();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+
+                //Computer gets to go again because it played an 8
+                else if(board.GetTopTrashCard().contains("8")){
+                    ComputerTurn();
+                    Toast.makeText(getApplicationContext(), "The computer played an 8, playing another card.", Toast.LENGTH_SHORT).show();
+                }
+
+                //The computer played a card, now the humans turn
+                else {
+                    currentPlayer = "human";
+                    View visibility;
+                    visibility = findViewById(R.id.save);
+                    visibility.setVisibility(View.VISIBLE);
+
+                    if(board.GetDeckSize() == 0){
+                        String tile = "rightcard";
+
+                        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+                        String mDrawableName = "squaregrid";
+                        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+                        toChange.setBackgroundResource(resID);
+
+                        visibility = findViewById(R.id.skipTurn);
+                        visibility.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            //The computer could not play a card
+            else{
+                //Check if it's impossible for either player to win
+                if(board.CheckForUnwinnableCondition() == false){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("Neither player can make a move. No winner.");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
+                //Check if the deck is empty
+                else if(board.GetDeckSize() == 0){
+                    Toast.makeText(getApplicationContext(), "The computer cannot make a move, turn passed.", Toast.LENGTH_SHORT).show();
+
+                    String tile = "rightcard";
+
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+                    String mDrawableName = "squaregrid";
+                    int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+                    toChange.setBackgroundResource(resID);
+
+                    currentPlayer = "human";
+
+                    View visibility;
+
+                    visibility = findViewById(R.id.skipTurn);
+                    visibility.setVisibility(View.VISIBLE);
+
+                    visibility = findViewById(R.id.save);
+                    visibility.setVisibility(View.VISIBLE);
+                }
+
+                //Draw another card
+                else {
+                    //Returned false so draw another card
+                    board.AddCardToComputerHand();
+                    PrintComputerHand();
+                    ComputerTurn();
+                }
+            }
+        }
+    }
+
+
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
+    public void rightCardClick(View view){
+
+        if(gameState.equals("play")) {
+            //If the size is 0 can't get more cards or human hand is full
+            if (board.GetDeckSize() != 0 && board.GetSizeOfHumanHand() != 40) {
+                board.AddCardToHumanHand();
+                PrintHumanHand();
+
+                //Can become 0 after drawing the last card
+                //Update the visual
+                if (board.GetDeckSize() == 0) {
+                    String tile = "rightcard";
+
+                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+                    String mDrawableName = "squaregrid";
+                    int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+                    toChange.setBackgroundResource(resID);
+
+                    View visibility;
+
+                    visibility = findViewById(R.id.skipTurn);
+                    visibility.setVisibility(View.VISIBLE);
+
+
+                }
+            }
+
+            //If the deck is empty then say something
+            else {
+                if (board.GetDeckSize() == 0) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("The deck size is 0. No more cards to draw.");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+                }
+                else if (board.GetSizeOfHumanHand() == 40) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("Your hand is full, you cannot draw anymore cards.");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
+            }
+        }
+
     }
 
     public void ResetGame(){
@@ -275,197 +593,6 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
-    private Runnable ComputerRunnable = new Runnable() {
-        @Override
-        public void run() {
-            ComputerTurn();
-        }
-    };
-
-    private void ComputerTurn(){
-        board.printCompHand();
-
-        if(currentPlayer.equals("computer")){
-
-            //Decide computer move
-            if(computer.DecideMove(board)){
-                UpdateTrashCard();
-                PrintComputerHand();
-
-                //Check if the computer won
-                if(board.GetSizeOfComputerHand() == 0){
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("The computer won by getting rid of all cards! Play again?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    ResetGame();
-                                    board.ResetGame();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                    finish();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
-                }
-
-                //Computer gets to go again because it played an 8
-                else if(board.GetTopTrashCard().contains("8")){
-                    ComputerTurn();
-                    Toast.makeText(getApplicationContext(), "The computer played an 8, playing another card.", Toast.LENGTH_SHORT).show();
-                }
-
-                //The computer played a card, now the humans turn
-                else {
-                    currentPlayer = "human";
-                    View visibility;
-                    visibility = findViewById(R.id.save);
-                    visibility.setVisibility(View.VISIBLE);
-
-                    if(board.GetDeckSize() == 0){
-                        String tile = "rightcard";
-
-                        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-                        ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-                        String mDrawableName = "squaregrid";
-                        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-                        toChange.setBackgroundResource(resID);
-
-                        visibility = findViewById(R.id.skipTurn);
-                        visibility.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            //The computer could not play a card
-            else{
-                //Check if it's impossible for either player to win
-                if(board.CheckForUnwinnableCondition() == false){
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                    builder1.setMessage("Neither player can make a move. No winner.");
-                    builder1.setCancelable(false)
-
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    finish();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-                }
-
-                //Check if the deck is empty
-                else if(board.GetDeckSize() == 0){
-                    Toast.makeText(getApplicationContext(), "The computer cannot make a move, turn passed.", Toast.LENGTH_SHORT).show();
-
-                    String tile = "rightcard";
-
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-                    String mDrawableName = "squaregrid";
-                    int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-                    toChange.setBackgroundResource(resID);
-
-                    currentPlayer = "human";
-
-                    View visibility;
-
-                    visibility = findViewById(R.id.skipTurn);
-                    visibility.setVisibility(View.VISIBLE);
-
-                    visibility = findViewById(R.id.save);
-                    visibility.setVisibility(View.VISIBLE);
-                }
-
-                //Draw another card
-                else {
-                    //Returned false so draw another card
-                    board.AddCardToComputerHand();
-                    PrintComputerHand();
-                    ComputerTurn();
-                }
-            }
-        }
-    }
-
-    public void rightCardClick(View view){
-
-        if(gameState.equals("play")) {
-            //If the size is 0 can't get more cards or human hand is full
-            if (board.GetDeckSize() != 0 && board.GetSizeOfHumanHand() != 40) {
-                board.AddCardToHumanHand();
-                PrintHumanHand();
-
-                //Can become 0 after drawing the last card
-                //Update the visual
-                if (board.GetDeckSize() == 0) {
-                    String tile = "rightcard";
-
-                    int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-                    ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-                    String mDrawableName = "squaregrid";
-                    int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-                    toChange.setBackgroundResource(resID);
-
-                    View visibility;
-
-                    visibility = findViewById(R.id.skipTurn);
-                    visibility.setVisibility(View.VISIBLE);
-
-
-                }
-            }
-
-            //If the deck is empty then say something
-            else {
-                if (board.GetDeckSize() == 0) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                    builder1.setMessage("The deck size is 0. No more cards to draw.");
-                    builder1.setCancelable(false)
-
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-
-                }
-                else if (board.GetSizeOfHumanHand() == 40) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                    builder1.setMessage("Your hand is full, you cannot draw anymore cards.");
-                    builder1.setCancelable(false)
-
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-                }
-
-            }
-        }
-
-    }
-
     //Get the first card to be placed in the trash pile and distribute cards
     public void leftCardClick(View view) {
 
@@ -521,50 +648,6 @@ public class Crazy8sActivity extends AppCompatActivity {
         toChange.setBackgroundResource(resID);
     }
 
-    private void PrintComputerHand(){
-        String tile = "computerCards";
-        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
-
-        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
-
-        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        TextView toChange = (TextView) findViewById(idOriginal);
-
-        toChange.setText(cardNum);
-
-    }
-
-    private void PrintHumanHand(){
-        String tile;
-        Integer humanHandSize = board.GetSizeOfHumanHand();
-
-        //Show the cards
-        for(int i = 0; i < humanHandSize; i++){
-            tile = "Tile" + i;
-
-            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-            ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-            String mDrawableName = board.GetHumanCard(i);
-            int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-        }
-
-        //Clear the blank cards
-        for(int i = humanHandSize; i < 40; i++){
-            tile = "Tile" + i;
-
-            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-            ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-            String mDrawableName = "squaregrid";
-            int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-        }
-    }
-
     public void skipClick(View view){
         if(currentPlayer.equals("human")){
             currentPlayer = "computer";
@@ -575,7 +658,7 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
-    public void saveGame(View view){
+    public void SaveGame(View view){
         //Only let the human save on it's turn
         if(currentPlayer.equals("human")) {
 

@@ -16,6 +16,27 @@ import java.util.Scanner;
 
 public class BattleshipSave {
 
+    /**
+     * Name:
+     * serializationToFile
+     *
+     * Synopsis:
+     * public void serializationToFile(String fileName, BattleshipBoard board);
+     * @param fileName -> The file name to save to.
+     * @param board -> The battleship board to save.
+     *
+     * Description:
+     * Used in order to save the current state of the battleship board and exit the game.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/23/2017
+     */
     public void serializationToFile(String fileName, BattleshipBoard board) {
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
 
@@ -145,6 +166,27 @@ public class BattleshipSave {
 
     }
 
+    /**
+     * Name:
+     * serializationFromFile
+     *
+     * Synopsis:
+     * public boolean serializationFromFile(String fileName, BattleshipBoard board);
+     * @param fileName -> The file name to read from.
+     * @param board -> The board to update with the contents from the save file.
+     *
+     * Description:
+     * Used in order to update the game with contents from a save file.
+     *
+     * Return:
+     * @return Boolean, true if it was able to read the save, false if it was unable to read the save.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/23/2017
+     */
     public boolean serializationFromFile(String fileName, BattleshipBoard board) {
         //The final string consisting of the entire serialized file read in
         String finalString;

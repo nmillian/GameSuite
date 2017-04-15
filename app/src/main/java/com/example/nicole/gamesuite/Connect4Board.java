@@ -482,6 +482,52 @@ public class Connect4Board {
 
     /**
      * Name:
+     * GetNumberOfEmptyTiles
+     *
+     * Synopsis:
+     * public Integer GetNumberOfEmptyTiles();
+     * No params.
+     *
+     * Description:
+     * Used in order to check how many blank spaces are left on the board. If the board has no more
+     * blanks and no one has won, the game should end in a draw.
+     *
+     * Returns:
+     * @return Integer, the number of blank tiles remaining on the board.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/23/2017
+     */
+    public Integer GetNumberOfEmptyTiles(){
+        Integer count = 0;
+
+        String row;
+        String column;
+        String tile;
+
+        //Row
+        for(int i = 1; i < 7; i++ ){
+            //Column
+            for(int j = 1; j < 8; j++){
+                row = String.valueOf(i);
+                column = String.valueOf(j);
+
+                tile = row + column;
+
+                if(connect4Board.get(tile).equals("B")){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Name:
      * ResetBoard
      *
      * Synopsis:

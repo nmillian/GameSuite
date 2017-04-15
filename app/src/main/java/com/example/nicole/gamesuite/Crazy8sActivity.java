@@ -112,10 +112,14 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     /**
      * Name:
+     * Crazy8sActivity
      *
      * Synopsis:
+     * public Crazy8sActivity();
+     * No params.
      *
      * Description:
+     * The constructor used in order to initialize the board, computer, and save for the crazy 8s game.
      *
      * Returns:
      * None.
@@ -335,7 +339,6 @@ public class Crazy8sActivity extends AppCompatActivity {
             }
         }
     }
-
 
     /* *********************************************
 `   * Public functions

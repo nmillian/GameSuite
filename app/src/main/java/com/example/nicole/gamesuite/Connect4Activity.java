@@ -186,6 +186,28 @@ public class Connect4Activity extends AppCompatActivity {
 
                 }
 
+                else if(board.GetNumberOfEmptyTiles() == 0){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
+                    builder1.setMessage("There are no more possible moves. The game is a draw. Play again?");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    ResetBoard();
+                                }
+                            })
+
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
                 else{
                     currentPlayer = "C";
                     Handler compHandler = new Handler();
@@ -194,7 +216,6 @@ public class Connect4Activity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
     /**
@@ -305,6 +326,28 @@ public class Connect4Activity extends AppCompatActivity {
             if (board.CheckForWinComputer()) {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
                 builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
+                builder1.setCancelable(false)
+
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                ResetBoard();
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+            else if(board.GetNumberOfEmptyTiles() == 0){
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
+                builder1.setMessage("There are no more possible moves. The game is a draw. Play again?");
                 builder1.setCancelable(false)
 
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {

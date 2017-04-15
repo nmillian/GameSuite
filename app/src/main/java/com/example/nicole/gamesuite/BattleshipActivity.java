@@ -915,8 +915,6 @@ public class BattleshipActivity extends AppCompatActivity {
         visibility = findViewById(R.id.save);
         visibility.setVisibility(View.GONE);
 
-        playing = "play";
-
         String row;
         String column;
         String tile;

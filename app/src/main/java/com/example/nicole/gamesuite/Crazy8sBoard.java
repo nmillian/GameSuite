@@ -11,6 +11,9 @@ import java.util.Hashtable;
 
 public class Crazy8sBoard {
 
+    /* *********************************************
+`   * Private class variables
+    ********************************************* */
     private String topCard = "bluesquaregrid";
 
     //Hold the hands for the comp and human
@@ -21,6 +24,9 @@ public class Crazy8sBoard {
     //Key is Suite/Value, second value
     private static ArrayList<String> deck = new ArrayList();
 
+    /* *********************************************
+`   * Constructor
+    ********************************************* */
     public Crazy8sBoard(){
         handComputer.clear();
         handHuman.clear();
@@ -33,23 +39,9 @@ public class Crazy8sBoard {
         topCard = deck.get(0);
     }
 
-    public void ClearGame(){
-        handComputer.clear();
-        handHuman.clear();
-        deck.clear();
-    }
-
-    public void ResetGame(){
-        handComputer.clear();
-        handHuman.clear();
-        deck.clear();
-
-        InitializeDeck();
-        InitializeComputerHand();
-        InitializeHumanHand();
-
-        topCard = deck.get(0);
-    }
+    /* *********************************************
+`   * Private functions
+    ********************************************* */
 
     private void InitializeComputerHand(){
         for(int i = 0; i < 7; i++){
@@ -83,6 +75,98 @@ public class Crazy8sBoard {
             System.out.println(deck.get(i));
         }
         */
+    }
+
+    private void InitializeDeck(){
+        //Spades
+
+        deck.add("spadesace");
+        deck.add("spadesjack");
+        deck.add("spadesqueen");
+        deck.add("spadesking");
+        deck.add("spades2");
+        deck.add("spades3");
+        deck.add("spades4");
+        deck.add("spades5");
+        deck.add("spades6");
+        deck.add("spades7");
+        deck.add("spades8");
+        deck.add("spades9");
+        deck.add("spades10");
+
+
+        //Diamonds
+        deck.add("diamondsace");
+        deck.add("diamondsjack");
+        deck.add("diamondsqueen");
+        deck.add("diamondsking");
+        deck.add("diamonds2");
+        deck.add("diamonds3");
+        deck.add("diamonds4");
+        deck.add("diamonds5");
+        deck.add("diamonds6");
+        deck.add("diamonds7");
+        deck.add("diamonds8");
+        deck.add("diamonds9");
+        deck.add("diamonds10");
+
+        //Clubs
+        deck.add("clubsace");
+        deck.add("clubsjack");
+        deck.add("clubsqueen");
+        deck.add("clubsking");
+        deck.add("clubs2");
+        deck.add("clubs3");
+        deck.add("clubs4");
+        deck.add("clubs5");
+        deck.add("clubs6");
+        deck.add("clubs7");
+        deck.add("clubs8");
+        deck.add("clubs9");
+        deck.add("clubs10");
+
+        //Hearts
+        deck.add("heartsace");
+        deck.add("heartsjack");
+        deck.add("heartsqueen");
+        deck.add("heartsking");
+        deck.add("hearts2");
+        deck.add("hearts3");
+        deck.add("hearts4");
+        deck.add("hearts5");
+        deck.add("hearts6");
+        deck.add("hearts7");
+        deck.add("hearts8");
+        deck.add("hearts9");
+        deck.add("hearts10");
+
+        Collections.shuffle(deck);
+
+        for(int i = 0; i < deck.size(); i++){
+            System.out.println(deck.get(i));
+        }
+    }
+
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
+
+    public void ClearGame(){
+        handComputer.clear();
+        handHuman.clear();
+        deck.clear();
+    }
+
+    public void ResetGame(){
+        handComputer.clear();
+        handHuman.clear();
+        deck.clear();
+
+        InitializeDeck();
+        InitializeComputerHand();
+        InitializeHumanHand();
+
+        topCard = deck.get(0);
     }
 
     public void AddCardComputerFromSerial(String value){
@@ -217,76 +301,6 @@ public class Crazy8sBoard {
         System.out.println("DECK " + deck.size());
 
         return deck.size();
-    }
-
-    private void InitializeDeck(){
-        //Spades
-
-        deck.add("spadesace");
-        deck.add("spadesjack");
-        deck.add("spadesqueen");
-        deck.add("spadesking");
-        deck.add("spades2");
-        deck.add("spades3");
-        deck.add("spades4");
-        deck.add("spades5");
-        deck.add("spades6");
-        deck.add("spades7");
-        deck.add("spades8");
-        deck.add("spades9");
-        deck.add("spades10");
-
-        
-        //Diamonds
-        deck.add("diamondsace");
-        deck.add("diamondsjack");
-        deck.add("diamondsqueen");
-        deck.add("diamondsking");
-        deck.add("diamonds2");
-        deck.add("diamonds3");
-        deck.add("diamonds4");
-        deck.add("diamonds5");
-        deck.add("diamonds6");
-        deck.add("diamonds7");
-        deck.add("diamonds8");
-        deck.add("diamonds9");
-        deck.add("diamonds10");
-
-        //Clubs
-        deck.add("clubsace");
-        deck.add("clubsjack");
-        deck.add("clubsqueen");
-        deck.add("clubsking");
-        deck.add("clubs2");
-        deck.add("clubs3");
-        deck.add("clubs4");
-        deck.add("clubs5");
-        deck.add("clubs6");
-        deck.add("clubs7");
-        deck.add("clubs8");
-        deck.add("clubs9");
-        deck.add("clubs10");
-
-        //Hearts
-        deck.add("heartsace");
-        deck.add("heartsjack");
-        deck.add("heartsqueen");
-        deck.add("heartsking");
-        deck.add("hearts2");
-        deck.add("hearts3");
-        deck.add("hearts4");
-        deck.add("hearts5");
-        deck.add("hearts6");
-        deck.add("hearts7");
-        deck.add("hearts8");
-        deck.add("hearts9");
-        deck.add("hearts10");
-
-        Collections.shuffle(deck);
-
-        for(int i = 0; i < deck.size(); i++){
-            System.out.println(deck.get(i));
-        }
     }
 
     public void RemoveCardFromDeck(int value){

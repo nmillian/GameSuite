@@ -308,44 +308,9 @@ public class Connect4Activity extends AppCompatActivity {
             Log.d("COMP", currentPlayer);
 
             //Decide move
-            String move = computerPlayer.DecideRandomMove(board);
+            String move = computerPlayer.DecideMove(board);
 
-            String compRow = Character.toString(move.charAt(0));
-            String compCol = Character.toString(move.charAt(1));
-
-            //Change color
-            String tile = "Tile" + compRow + compCol;
-            int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-
-            ImageButton toChange = (ImageButton)findViewById(idOriginal);
-            toChange.setBackgroundResource(R.drawable.yellowcircle);
-
-            //Update in board hashtable
-            board.UpdateComputerMove(compRow, compCol);
-
-            if (board.CheckForWinComputer()) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
-                builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
-                builder1.setCancelable(false)
-
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                ResetBoard();
-                            }
-                        })
-
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                finish();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-            }
-
-            else if(board.GetNumberOfEmptyTiles() == 0){
+            if(move.equals("none")){
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
                 builder1.setMessage("There are no more possible moves. The game is a draw. Play again?");
                 builder1.setCancelable(false)
@@ -368,13 +333,68 @@ public class Connect4Activity extends AppCompatActivity {
             }
 
             else {
-                currentPlayer = "H";
+                String compRow = Character.toString(move.charAt(0));
+                String compCol = Character.toString(move.charAt(1));
 
-                //Show the save button again
-                View visibility;
+                //Change color
+                String tile = "Tile" + compRow + compCol;
+                int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
 
-                visibility = findViewById(R.id.save);
-                visibility.setVisibility(View.VISIBLE);
+                ImageButton toChange = (ImageButton) findViewById(idOriginal);
+                toChange.setBackgroundResource(R.drawable.yellowcircle);
+
+                //Update in board hashtable
+                board.UpdateComputerMove(compRow, compCol);
+
+                if (board.CheckForWinComputer()) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
+                    builder1.setMessage("The computer won by getting 4 in a row! Would you like to play again?");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    ResetBoard();
+                                }
+                            })
+
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                } else if (board.GetNumberOfEmptyTiles() == 0) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(Connect4Activity.this);
+                    builder1.setMessage("There are no more possible moves. The game is a draw. Play again?");
+                    builder1.setCancelable(false)
+
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    ResetBoard();
+                                }
+                            })
+
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                } else {
+                    currentPlayer = "H";
+
+                    //Show the save button again
+                    View visibility;
+
+                    visibility = findViewById(R.id.save);
+                    visibility.setVisibility(View.VISIBLE);
+                }
             }
         }
     };

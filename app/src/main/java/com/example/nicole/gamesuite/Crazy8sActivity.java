@@ -142,10 +142,14 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     /**
      * Name:
+     * PrintComputerHand
      *
      * Synopsis:
+     * private void PrintComputerHand();
+     * No params.
      *
      * Description:
+     * Used in order to update the number of cards the computer hand has.
      *
      * Returns:
      * None.
@@ -171,10 +175,14 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     /**
      * Name:
+     * PrintHumanHand
      *
      * Synopsis:
+     * private void PrintHumanHand();
+     * No params.
      *
      * Description:
+     * Used in order to update which cards are displayed for the human player.
      *
      * Returns:
      * None.
@@ -216,6 +224,26 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Name:
+     * ComputerRunnable
+     *
+     * Synopsis:
+     * private Runnable ComputerRunnable = new Runnable();
+     * No params.
+     *
+     * Description:
+     * Used in order to call the ComputerTurn function on a delay so actions aren't instant.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     private Runnable ComputerRunnable = new Runnable() {
         @Override
         public void run() {
@@ -223,6 +251,26 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Name:
+     * ComputerTurn
+     *
+     * Synopsis:
+     * private void ComputerTurn();
+     * No params.
+     *
+     * Description:
+     * Used in order to decide what card the computer player should play and checks if the computer player won after making a move.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     private void ComputerTurn(){
         board.printCompHand();
 
@@ -343,6 +391,197 @@ public class Crazy8sActivity extends AppCompatActivity {
     /* *********************************************
 `   * Public functions
     ********************************************* */
+
+    /**
+     * Name:
+     * ResetGame
+     *
+     * Synopsis:
+     * public void ResetGame();
+     *
+     * Description:
+     * Used in order to reset the game to it's original state.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
+    public void ResetGame(){
+        View visibility;
+        visibility = findViewById(R.id.skipTurn);
+        visibility.setVisibility(View.GONE);
+
+        visibility = findViewById(R.id.save);
+        visibility.setVisibility(View.GONE);
+
+        //Set top trash card to the click to play card
+        String tile = "leftcard";
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        String mDrawableName = "tapcard";
+        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Set the right card to the top deck card
+        tile = "rightcard";
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        toChange = (ImageButton) findViewById(idOriginal);
+
+        mDrawableName = "topofcard";
+        resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Clear the human cards
+        //Show the cards
+        for(int i = 0; i < 40; i++){
+            tile = "Tile" + i;
+
+            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            toChange = (ImageButton) findViewById(idOriginal);
+
+            mDrawableName = "squaregrid";
+            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+
+        //Update computer text
+        tile = "computerCards";
+        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        TextView textToChange = (TextView) findViewById(idOriginal);
+
+        textToChange.setText("0");
+
+        gameState = "start";
+        board.ResetGame();
+    }
+
+    /**
+     * Name:
+     * UpdateTrashCard
+     *
+     * Synopsis:
+     * public void UpdateTrashCard();
+     *
+     * Description:
+     * Used in order to update the trash card, the left card pile, with the most recent addition to the pile.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
+    public void UpdateTrashCard(){
+        //Make card the top card
+        String leftCard = "leftcard";
+        int idOriginal = getResources().getIdentifier(leftCard, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        System.out.println("CARD TO SET " + board.GetTopTrashCard());
+        String mDrawableName = board.GetTopTrashCard();
+        Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+    }
+
+    /**
+     * Name:
+     * SetSerializedBoard
+     *
+     * Synopsis:
+     * public void SetSerializedBoard();
+     *
+     * Description:
+     * Used in order to update the board with the values from a serialized file. The computer hand, human hand, trash, and deck are all updated.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
+    public void SetSerializedBoard(){
+        //Set top trash card
+        String tile = "leftcard";
+        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        ImageButton toChange = (ImageButton) findViewById(idOriginal);
+
+        String mDrawableName = board.GetTopTrashCard();
+        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+
+        toChange.setBackgroundResource(resID);
+
+        //Set human hand
+        Integer humanHandSize = board.GetSizeOfHumanHand();
+
+        //Show the cards
+        for(int i = 0; i < humanHandSize; i++){
+            tile = "Tile" + i;
+
+            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+            toChange = (ImageButton) findViewById(idOriginal);
+
+            mDrawableName = board.GetHumanCard(i);
+            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+
+            toChange.setBackgroundResource(resID);
+        }
+
+
+        //Update computer text
+        tile = "computerCards";
+        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
+
+        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
+        System.out.println("PRINTING COMP HAND");
+        board.printCompHand();
+
+        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
+        TextView textToChange = (TextView) findViewById(idOriginal);
+
+        textToChange.setText(cardNum);
+
+        gameState = "play";
+        currentPlayer = "human";
+    }
+
+    /**
+     * Name:
+     * rightCardClick
+     *
+     * Synopsis:
+     * public void rightCardClick(View view);
+     * @param view -> The crazy 8s activity view.
+     *
+     * Description:
+     * Used in order to handle when a player taps the top of the deck of cards, and gives the player a card if possible.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void rightCardClick(View view){
 
         if(gameState.equals("play")) {
@@ -410,106 +649,26 @@ public class Crazy8sActivity extends AppCompatActivity {
 
     }
 
-    public void ResetGame(){
-        View visibility;
-        visibility = findViewById(R.id.skipTurn);
-        visibility.setVisibility(View.GONE);
-
-        visibility = findViewById(R.id.save);
-        visibility.setVisibility(View.GONE);
-
-        //Set top trash card to the click to play card
-        String tile = "leftcard";
-        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-        String mDrawableName = "tapcard";
-        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-        toChange.setBackgroundResource(resID);
-
-        //Set the right card to the top deck card
-        tile = "rightcard";
-        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        toChange = (ImageButton) findViewById(idOriginal);
-
-        mDrawableName = "topofcard";
-        resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-        toChange.setBackgroundResource(resID);
-
-        //Clear the human cards
-        //Show the cards
-        for(int i = 0; i < 40; i++){
-            tile = "Tile" + i;
-
-            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-            toChange = (ImageButton) findViewById(idOriginal);
-
-            mDrawableName = "squaregrid";
-            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-        }
-
-        //Update computer text
-        tile = "computerCards";
-        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
-
-        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        TextView textToChange = (TextView) findViewById(idOriginal);
-
-        textToChange.setText("0");
-
-        gameState = "start";
-        board.ResetGame();
-    }
-
-    public void SetSerializedBoard(){
-        //Set top trash card
-        String tile = "leftcard";
-        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-        String mDrawableName = board.GetTopTrashCard();
-        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-        toChange.setBackgroundResource(resID);
-
-        //Set human hand
-        Integer humanHandSize = board.GetSizeOfHumanHand();
-
-        //Show the cards
-        for(int i = 0; i < humanHandSize; i++){
-            tile = "Tile" + i;
-
-            idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-            toChange = (ImageButton) findViewById(idOriginal);
-
-            mDrawableName = board.GetHumanCard(i);
-            resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-
-            toChange.setBackgroundResource(resID);
-        }
-
-
-        //Update computer text
-        tile = "computerCards";
-        String cardNum = Integer.toString(board.GetSizeOfComputerHand());
-
-        System.out.println("COMPUTER SIZE " + board.GetSizeOfComputerHand());
-        System.out.println("PRINTING COMP HAND");
-        board.printCompHand();
-
-        idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        TextView textToChange = (TextView) findViewById(idOriginal);
-
-        textToChange.setText(cardNum);
-
-        gameState = "play";
-        currentPlayer = "human";
-    }
-
+    /**
+     * Name:
+     * TileClick
+     *
+     * Synopsis:
+     * public void TileClick(View view);
+     * @param view -> The crazy 8s activity view.
+     *
+     * Description:
+     * Used in order to handle the human player choosing a card from their hand to add to the trash pile.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void TileClick(View view){
         boolean valid = false;
 
@@ -596,7 +755,26 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
-    //Get the first card to be placed in the trash pile and distribute cards
+    /**
+     * Name:
+     * leftCardClick
+     *
+     * Synopsis:
+     * public void leftCardClick(View view);
+     * @param view -> The crazy 8s activity view.
+     *
+     * Description:
+     * Get the first card to be placed in the trash pile and distribute cards
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void leftCardClick(View view) {
 
         if(gameState.equals("start")) {
@@ -638,19 +816,26 @@ public class Crazy8sActivity extends AppCompatActivity {
         */
     }
 
-    public void UpdateTrashCard(){
-        //Make card the top card
-        String leftCard = "leftcard";
-        int idOriginal = getResources().getIdentifier(leftCard, "id", getPackageName());
-        ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-        System.out.println("CARD TO SET " + board.GetTopTrashCard());
-        String mDrawableName = board.GetTopTrashCard();
-        Integer resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
-
-        toChange.setBackgroundResource(resID);
-    }
-
+    /**
+     * Name:
+     * skipClick
+     *
+     * Synopsis:
+     * public void skipClick(View view);
+     * @param view -> The crazy 8s activity view.
+     *
+     * Description:
+     * Used in order to skip the human player's turn. The option is hidden until the deck is at 0.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void skipClick(View view){
         if(currentPlayer.equals("human")){
             currentPlayer = "computer";
@@ -661,6 +846,27 @@ public class Crazy8sActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Name:
+     * SaveGame
+     *
+     * Description:
+     * public void SaveGame(View view);
+     * @param view -> The crazy 8s activity view.
+     *
+     * Description:
+     * Used in order to save the current game state and exit. Only available on the human players turn.
+     * The human player is asked to enter a file name to save to.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void SaveGame(View view){
         //Only let the human save on it's turn
         if(currentPlayer.equals("human")) {

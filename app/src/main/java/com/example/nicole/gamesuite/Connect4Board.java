@@ -287,6 +287,30 @@ public class Connect4Board {
 
     /**
      * Name:
+     * GetValueUsingTile
+     *
+     * Synopsis:
+     * public String GetValueUsingTile(String a_tile);
+     * @param a_tile -> The tile to get the value at.
+     *
+     * Description:
+     * Used in order to get the value at a specified tile.
+     *
+     * Returns:
+     * @return String, the value at the specified tile, either H for human or C for computer.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
+    public String GetValueUsingTile(String a_tile){
+        return connect4Board.get(a_tile);
+    }
+
+    /**
+     * Name:
      * CheckForWinHuman
      *
      * Synopsis:

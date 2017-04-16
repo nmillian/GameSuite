@@ -6,10 +6,31 @@ package com.example.nicole.gamesuite;
 
 public class Crazy8sComputer {
 
-    public Crazy8sComputer(){
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
 
-    }
-
+    /**
+     * Name:
+     * DecideMove
+     *
+     * Synopsis:
+     * public boolean DecideMove(Crazy8sBoard board);
+     * @param board -> The crazy 8s game board, which contains all the cards currently in play.
+     *
+     * Description:
+     * Used in order to determine which card the computer player should play. Prioritizes matching the top card on the trash pile before having
+     * to use the 8s wildcard.
+     *
+     * Returns:
+     * @return Boolean, true if the computer is able to play a card, false if the computer is unable to play a card with it's current hand.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/15/2017
+     */
     public boolean DecideMove(Crazy8sBoard board){
         boolean haveAnEight = false;
         int locationOf8Card = 0;

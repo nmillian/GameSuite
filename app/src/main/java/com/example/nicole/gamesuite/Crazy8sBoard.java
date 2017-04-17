@@ -27,6 +27,27 @@ public class Crazy8sBoard {
     /* *********************************************
 `   * Constructor
     ********************************************* */
+
+    /**
+     * Name:
+     * Crazy8sBoard
+     *
+     * Synopsis:
+     * public Crazy8sBoard();
+     * No params.
+     *
+     * Description:
+     * The constructor used in order to initialize the board, computer, and save for the crazy 8s game board.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public Crazy8sBoard(){
         handComputer.clear();
         handHuman.clear();
@@ -43,6 +64,26 @@ public class Crazy8sBoard {
 `   * Private functions
     ********************************************* */
 
+    /**
+     * Name:
+     * InitializeComputerHand
+     *
+     * Synopsis:
+     * private void InitializeComputerHand()
+     * No params.
+     *
+     * Description:
+     * Used in order to initialize the computer hand with the first 7 cards from the deck.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     private void InitializeComputerHand(){
         for(int i = 0; i < 7; i++){
             //Add to the computer
@@ -54,6 +95,26 @@ public class Crazy8sBoard {
         }
     }
 
+    /**
+     * Name:
+     * InitializeHumanHand
+     *
+     * Synopsis:
+     * private void InitializeHumanHand()
+     * No params.
+     *
+     * Description:
+     * Used in order to initialize the human hand with 7 cards from the deck.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     private void InitializeHumanHand(){
         for(int i = 0; i < 7; i++){
             //Add to the human hand
@@ -77,6 +138,26 @@ public class Crazy8sBoard {
         */
     }
 
+    /**
+     * Name:
+     * InitializeDeck
+     *
+     * Synopsis:
+     * private void InitializeDeck();
+     * No params.
+     *
+     * Description:
+     * Used in order to initialize the deck with all the possible cards that can be found in it and shuffle them randomly.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     private void InitializeDeck(){
         //Spades
 
@@ -151,12 +232,52 @@ public class Crazy8sBoard {
 `   * Public functions
     ********************************************* */
 
+    /**
+     * Name:
+     * ClearGame
+     *
+     * Synopsis:
+     * public void ClearGame();
+     * No params.
+     *
+     * Description:
+     * Used in order to clear the handComputer, handHuman, and deck array lists.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void ClearGame(){
         handComputer.clear();
         handHuman.clear();
         deck.clear();
     }
 
+    /**
+     * Name:
+     * ResetGame
+     *
+     * Synopsis:
+     * public void ResetGame();
+     * No params.
+     *
+     * Description:
+     * Used in order to clear the handComputer, handHuman, and deck array lists and to re-initialize them with their original values.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void ResetGame(){
         handComputer.clear();
         handHuman.clear();
@@ -169,22 +290,122 @@ public class Crazy8sBoard {
         topCard = deck.get(0);
     }
 
+    /**
+     * Name:
+     * AddCardComputerFromSerial
+     *
+     * Synopsis:
+     * public void AddCardComputerFromSerial(String value);
+     * @param value -> The card to add to the computer hand.
+     *
+     * Description:
+     * Used in order to add a single card to the computer hand from a serialized text file.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void AddCardComputerFromSerial(String value){
         handComputer.add(value);
     }
 
+    /**
+     * Name:
+     * AddCardHumanFromSerial
+     *
+     * Synopsis:
+     * public void AddCardHumanFromSerial(String value);
+     * @param value -> The card to add to the computer hand.
+     *
+     * Description:
+     * Used in order to add a single card to the human hand from a serialized text file.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void AddCardHumanFromSerial(String value){
         handHuman.add(value);
     }
 
+    /**
+     * Name:
+     * AddCardDeckFromSerial
+     *
+     * Synopsis:
+     * public void AddCardDeckFromSerial(String value);
+     * @param value -> The card to add to the computer hand.
+     *
+     * Description:
+     * Used in order to add a single card to the deck from a serialized text file.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void AddCardDeckFromSerial(String value){
         deck.add(value);
     }
 
+    /**
+     * Name:
+     * SetTopTrashCard
+     *
+     * Synopsis:
+     * public void SetTopTrashCard(String value);
+     * @param value -> The card value to update the trash card to.
+     *
+     * Description:
+     * Used in order to update the top card of the trash pile, which is the left pile.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void SetTopTrashCard(String value){
         topCard = value;
     }
 
+    /**
+     * Name:
+     * AddCardToHumanHand
+     *
+     * Synopsis:
+     * public void AddCardToHumanHand();
+     * No params.
+     *
+     * Description:
+     * Used in order to add a card to the human hand from the top of the deck.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void AddCardToHumanHand(){
         //Add the first card to the human hand
         handHuman.add(deck.get(0));
@@ -193,6 +414,26 @@ public class Crazy8sBoard {
         deck.remove(0);
     }
 
+    /**
+     * Name:
+     * AddCardToComputerHand
+     *
+     * Synopsis:
+     * public void AddCardToComputerHand();
+     * No params.
+     *
+     * Description:
+     * Used in order to add a card from the top of the deck to the computer hand.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void AddCardToComputerHand(){
         //Add the first card to the computer
         handComputer.add(deck.get(0));
@@ -201,6 +442,27 @@ public class Crazy8sBoard {
         deck.remove(0);
     }
 
+    /**
+     * Name:
+     * VerifyHumanChoice
+     *
+     * Synopsis:
+     * public boolean VerifyHumanChoice(int value);
+     * @param value -> The card to check if it's able to be played.
+     *
+     * Description:
+     * Used in order to verify that the human player selected a card to play that is valid. It must either
+     * match the top trash card in rank or suit.
+     *
+     * Returns:
+     * @return Boolean, true if the card is able to be played, false if the card is unable to be played.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public boolean VerifyHumanChoice(int value){
         String card = handHuman.get(value);
         System.out.print("CARD IN VERIFY HUMAN" + card);
@@ -276,45 +538,243 @@ public class Crazy8sBoard {
         return false;
     }
 
+    /**
+     * Name:
+     * ComputerUpdateTopCard
+     *
+     * Synopsis:
+     * public void ComputerUpdateTopCard(int value);
+     * @param value -> The card to check if it's able to be played.
+     *
+     * Description:
+     * Used in order to update the trash card with the card the computer player is going to play.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void ComputerUpdateTopCard(int value){
         topCard = handComputer.get(value);
     }
 
+    /**
+     * Name:
+     * GetHumanCard
+     *
+     * Synopsis:
+     * public String GetHumanCard(int value);
+     * @param value -> The place to get the card from the human hand.
+     *
+     * Description:
+     * Used in order to get the value of the card at a specified place in the array list.
+     *
+     * Returns:
+     * @return String, the value of the card at the specified location.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public String GetHumanCard(int value){
         return handHuman.get(value);
     }
 
+    /**
+     * Name:
+     * GetComputerCard
+     *
+     * Synopsis:
+     * public String GetComputerCard(int value);
+     * @param value -> The place to get the card from the computer hand.
+     *
+     * Description:
+     * Used in order to get the value of a card at a specified location in the computer hand.
+     *
+     * Returns:
+     * @return String, the value of the card at the specified location.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public String GetComputerCard(int value){
         return handComputer.get(value);
     }
 
+    /**
+     * Name:
+     * GetSizeOfHumanHand
+     *
+     * Synopsis:
+     * public int GetSizeOfHumanHand();
+     * No params.
+     *
+     * Description:
+     * Used in order to get the remaining number of cards the human player has.
+     *
+     * Returns:
+     * @return Integer, the number of cards the human player has remaining.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public int GetSizeOfHumanHand(){
         System.out.println("SIZE " + handHuman.size() );
         return handHuman.size();
     }
 
+    /**
+     * Name:
+     * GetSizeOfComputerHand
+     *
+     * Synopsis:
+     * public int GetSizeOfComputerHand();
+     * No params.
+     *
+     * Description:
+     * Used in order to get the remaining number of cards the computer player has.
+     *
+     * Returns:
+     * @return Integer, the number of cards the computer player has remaining.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public int GetSizeOfComputerHand(){
         return handComputer.size();
     }
 
+    /**
+     * Name:
+     * GetDeckSize
+     *
+     * Synopsis:
+     * public int GetDeckSize();
+     * No params.
+     *
+     * Description:
+     * Get the number of cards remaining in the deck.
+     *
+     * Returns:
+     * @return Integer, the number of cards remaining in the playing deck.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public int GetDeckSize(){
         System.out.println("DECK " + deck.size());
 
         return deck.size();
     }
 
+    /**
+     * Name:
+     * RemoveCardFromDeck
+     *
+     * Synopsis:
+     * public void RemoveCardFromDeck(int value);
+     * @param value
+     *
+     * Description:
+     * Used in order to remove a card from the deck at a specified location.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void RemoveCardFromDeck(int value){
         deck.remove(value);
     }
 
+    /**
+     * Name:
+     * RemoveCardFromHuman
+     *
+     * Synopsis:
+     * public void RemoveCardFromHuman(int value);
+     * @param value -> The location where the card should be removed from.
+     *
+     * Description:
+     * Used in order to remove a card from the human hand from a specified location.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void RemoveCardFromHuman(int value){
         handHuman.remove(value);
     }
 
+    /**
+     * Name:
+     * RemoveCardFromComputer
+     *
+     * Synopsis:
+     * public void RemoveCardFromComputer(int value);
+     * @param value -> The location where the card should be removed from.
+     *
+     * Description:
+     * Used in order to remove a card from the computer hand from a specified location.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void RemoveCardFromComputer(int value){
         handComputer.remove(value);
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * No params.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public boolean CheckForUnwinnableCondition(){
         int humanSize = GetSizeOfHumanHand();
         int computerSize = GetSizeOfComputerHand();
@@ -431,15 +891,27 @@ public class Crazy8sBoard {
         return false;
     }
 
-    //Top trash card, the left pile
+    /**
+     * Name:
+     *
+     * Synopsis:
+     *
+     * No params.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public String GetTopTrashCard(){
         //System.out.println("TOP: " + topCard);
         return topCard;
-    }
-
-    //Get the top card in the deck
-    public String GetTopCard(int value){
-        return deck.get(value);
     }
 
     public String GetDeckCard(int value){

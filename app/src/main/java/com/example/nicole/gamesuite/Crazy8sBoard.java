@@ -759,15 +759,17 @@ public class Crazy8sBoard {
 
     /**
      * Name:
+     * CheckForUnwinnableCondition
      *
      * Synopsis:
-     *
+     * public boolean CheckForUnwinnableCondition();
      * No params.
      *
      * Description:
+     * Check if it's impossible for the human or computer player to win if there are no more cards able to be drawn from the deck.
      *
      * Returns:
-     * @return
+     * @return Boolean, true if it's possible for either player to make a move, false if it's impossible for either player to make a move.
      *
      * Author:
      * Nicole Millian
@@ -893,15 +895,17 @@ public class Crazy8sBoard {
 
     /**
      * Name:
+     * GetTopTrashCard
      *
      * Synopsis:
-     *
+     * public String GetTopTrashCard();
      * No params.
      *
      * Description:
+     * Used in order to get the top card of the trash pile, the left deck.
      *
      * Returns:
-     * @return
+     * @return String, the value of the card at the top of the trash pile.
      *
      * Author:
      * Nicole Millian
@@ -914,10 +918,50 @@ public class Crazy8sBoard {
         return topCard;
     }
 
+    /**
+     * Name:
+     * GetDeckCard
+     *
+     * Synopsis:
+     * public String GetDeckCard(int value);
+     * @param value -> The location of the card to get the value at.
+     *
+     * Description:
+     * Get the value of a card at a specified location in the deck.
+     *
+     * Returns:
+     * @return String, the value of a card at a specified location.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public String GetDeckCard(int value){
         return deck.get(value);
     }
 
+    /**
+     * Name:
+     * printCompHand
+     *
+     * Synopsis:
+     * public void printCompHand();
+     * No params.
+     *
+     * Description:
+     * Used in order to print the computer hand to the console for debugging.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void printCompHand(){
         for(int i = 0; i < GetSizeOfComputerHand(); i++){
             System.out.println(handComputer.get(i));

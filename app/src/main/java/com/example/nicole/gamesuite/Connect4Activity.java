@@ -503,6 +503,7 @@ public class Connect4Activity extends AppCompatActivity {
             }
         }
 
+        currentPlayer = "H";
     }
 
 }

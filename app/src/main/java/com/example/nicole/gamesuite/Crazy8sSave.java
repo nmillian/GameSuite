@@ -16,6 +16,31 @@ import java.util.Scanner;
 
 public class Crazy8sSave {
 
+    /* *********************************************
+`   * Public functions
+    ********************************************* */
+
+    /**
+     * Name:
+     * serializationToFile
+     *
+     * Synopsis:
+     * public void serializationToFile(String fileName, Crazy8sBoard board )
+     * @param fileName -> The file name to save the game state to.
+     * @param board -> The board of the game to be saved, includes the top card, deck, human hand, and computer hand.
+     *
+     * Description:
+     * Used in order to save the state of a game to a text file and then exits the game.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public void serializationToFile(String fileName, Crazy8sBoard board ){
 
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
@@ -114,6 +139,30 @@ public class Crazy8sSave {
 
     }
 
+    /**
+     * Name:
+     * serializationFromFile
+     *
+     * Synopsis:
+     * public boolean serializationFromFile(String fileName, Crazy8sBoard board);
+     * @param fileName -> The file name to read from.
+     * @param board -> The board to be updated with the contents from the file.
+     *
+     * Description:
+     * Validates that the file is for the correct game type and reads in the top trash card, deck, computer hand, and human hand.
+     *
+     * Returns:
+     * @return Boolean, true if the file is able to be read, false if there is an error with the file.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/12/2017
+     */
     public boolean serializationFromFile(String fileName, Crazy8sBoard board){
         System.out.println("IN SERIAL FROM FILE");
 

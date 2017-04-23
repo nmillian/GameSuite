@@ -13,16 +13,38 @@ public class Connect4Computer {
     /* *********************************************
 `   * Public functions
     ********************************************* */
+
+    /**
+     * Name:
+     * DecideMove
+     *
+     * Synopsis:
+     * public String DecideMove(Connect4Board a_board );
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 2/3/2017
+     */
     public String DecideMove(Connect4Board a_board ){
         String checkWin;
         String checkBasic;
         String checkThirdPiece;
+        String checkSecondPiece;
         String checkForBlockWinning;
 
         checkWin = MakeWinningMove(a_board);
         checkBasic = DecideBasicMove(a_board);
         checkForBlockWinning = BlockWinningMove(a_board);
         checkThirdPiece = AddThirdPiece(a_board);
+        checkSecondPiece = AddSecondPiece(a_board);
 
         if(!checkWin.equals("none")){
             return checkWin;
@@ -36,6 +58,10 @@ public class Connect4Computer {
             return checkThirdPiece;
         }
 
+        if(!checkSecondPiece.equals("none")){
+            return checkSecondPiece;
+        }
+
         if(!checkBasic.equals("none")){
             return checkBasic;
         }
@@ -46,6 +72,24 @@ public class Connect4Computer {
     /* *********************************************
 `   * Private functions
     ********************************************* */
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 4/22/2017
+     */
     private String MakeWinningMove(Connect4Board a_board){
         //Check for three in a row
 
@@ -98,10 +142,56 @@ public class Connect4Computer {
             }
         }
 
-        //Check missing middle left
-        
-
         //Check missing middle right
+        for(int i = 1; i < 7; i++) {
+            //Column
+            for(int j = 7; j > 3; j--){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //should be filled
+                String tileOne = rowString + Integer.toString(j);
+
+                //Missing piece to place
+                String tileTwo = rowString + Integer.toString(j-1);
+
+                //Should be filled
+                String tileThree = rowString + Integer.toString(j-2);
+                String tileFour = rowString + Integer.toString(j-3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j-1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+
+        //Check missing middle left
+        for(int i = 1; i < 7; i++) {
+            //Column
+            for(int j = 7; j > 3; j--){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //should be filled
+                String tileOne = rowString + Integer.toString(j);
+                String tileTwo = rowString + Integer.toString(j-1);
+
+                //Missing piece
+                String tileThree = rowString + Integer.toString(j-2);
+
+                //Should be filled
+                String tileFour = rowString + Integer.toString(j-3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j-2))){
+                        return tileThree;
+                    }
+                }
+            }
+        }
 
         //Check vertical win
         //Column
@@ -169,6 +259,23 @@ public class Connect4Computer {
 
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 4/22/2017
+     */
     private String AddThirdPiece(Connect4Board a_board){
         //Check for two in a row
         String noMove = "none";
@@ -223,6 +330,7 @@ public class Connect4Computer {
             }
         }
 
+
         //Check vertical win
         //Column
         for(int i = 1; i < 8; i++){
@@ -249,7 +357,7 @@ public class Connect4Computer {
 
         }
 
-        //Check diagonal win up
+        //Check diagonal
         //Row
         for(int i = 1; i < 4; i++){
             //Column
@@ -271,7 +379,7 @@ public class Connect4Computer {
             }
         }
 
-        //Check diagonal win down
+        //Check diagonal
         //Row
         for(int i = 6; i > 3; i--){
             //Column
@@ -297,6 +405,176 @@ public class Connect4Computer {
         return noMove;
     }
 
+    /**
+     * Name:
+     *
+     * Synopsis:
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 4/22/2017
+     */
+    private String AddSecondPiece(Connect4Board a_board){
+        String noMove = "none";
+
+        //Check horizontal
+        //Row
+        for(int i = 1; i < 7; i++) {
+            //Column - only have to check to the middle column
+            for(int j = 1; j < 5; j++){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //Filled
+                String tileOne = rowString + Integer.toString(j);
+
+                //Place
+                String tileTwo = rowString + Integer.toString(j+1);
+
+                //Blank
+                String tileThree = rowString + Integer.toString(j+2);
+                String tileFour = rowString + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("B") && a_board.GetValueUsingTile(tileFour).equals("B")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //Right to left horizontal
+        //Row
+        for(int i = 1; i < 7; i++) {
+            //Column
+            for(int j = 7; j > 3; j--){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //Filled
+                String tileOne = rowString + Integer.toString(j);
+
+                //Place
+                String tileTwo = rowString + Integer.toString(j-1);
+
+                //Blank
+                String tileThree = rowString + Integer.toString(j-2);
+                String tileFour = rowString + Integer.toString(j-3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("B") && a_board.GetValueUsingTile(tileFour).equals("B")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j-1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+
+        //Check vertical win
+        //Column
+        for(int i = 1; i < 8; i++){
+            //Row - only have to check until the middle row
+            for(int j = 1; j < 4; j++){
+                //Column stays the same, column moves up until it gets to the middle, 3
+                String columnString = Integer.toString(i);
+
+                //Filled
+                String tileOne = Integer.toString(j) + columnString;
+
+                //Place
+                String tileTwo = Integer.toString(j + 1) + columnString;
+
+                //Blank
+                String tileThree = Integer.toString(j + 2) + columnString;
+                String tileFour = Integer.toString(j + 3) + columnString;
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("B") && a_board.GetValueUsingTile(tileFour).equals("B")){
+                    if(a_board.ValidateMove(Integer.toString(j + 1), columnString)){
+                        return tileTwo;
+                    }
+                }
+            }
+
+        }
+
+        //Check diagonal win up
+        //Row
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+
+                //Filled
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                //Place
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+
+                //Blanks
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("B") && a_board.GetValueUsingTile(tileFour).equals("B")){
+                    if(a_board.ValidateMove(Integer.toString(i+1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //Check diagonal win down
+        //Row
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+
+                //Filled
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                //Place
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+
+                //Blank
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("B") && a_board.GetValueUsingTile(tileFour).equals("B")){
+                    if(a_board.ValidateMove(Integer.toString(i-1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //No way to win
+        return noMove;
+
+    }
+
+    /**
+     * Name:
+     *
+     * Synopsis:
+     * @param a_board -> The board object, used in order to keep track of the piece at each tile.
+     *
+     * Description:
+     *
+     * Returns:
+     * @return
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 4/22/2017
+     */
     private String BlockWinningMove(Connect4Board a_board){
         //Check for three in a row
         String noMove = "none";
@@ -348,6 +626,58 @@ public class Connect4Computer {
                 }
             }
         }
+
+        //Check missing middle right
+        for(int i = 1; i < 7; i++) {
+            //Column
+            for(int j = 7; j > 3; j--){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //should be filled
+                String tileOne = rowString + Integer.toString(j);
+
+                //Missing piece to place
+                String tileTwo = rowString + Integer.toString(j-1);
+
+                //Should be filled
+                String tileThree = rowString + Integer.toString(j-2);
+                String tileFour = rowString + Integer.toString(j-3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j-1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+
+        //Check missing middle left
+        for(int i = 1; i < 7; i++) {
+            //Column
+            for(int j = 7; j > 3; j--){
+                //Row stays the same, column moves to the right until it gets to the middle, 4
+                String rowString = Integer.toString(i);
+
+                //should be filled
+                String tileOne = rowString + Integer.toString(j);
+                String tileTwo = rowString + Integer.toString(j-1);
+
+                //Missing piece
+                String tileThree = rowString + Integer.toString(j-2);
+
+                //Should be filled
+                String tileFour = rowString + Integer.toString(j-3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileTwo).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H")){
+                    if(a_board.ValidateMove(rowString, Integer.toString(j-2))){
+                        return tileThree;
+                    }
+                }
+            }
+        }
+
 
         //Check vertical win
         //Column
@@ -418,10 +748,10 @@ public class Connect4Computer {
 
     /**
      * Name:
-     * DecideRandomMove
+     * DecideBasicMove
      *
      * Synopsis:
-     * public String DecideRandomMove(Connect4Board a_board);
+     * public String DecideBasicMove(Connect4Board a_board);
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:

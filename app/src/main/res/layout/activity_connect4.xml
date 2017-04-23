@@ -303,48 +303,48 @@
             <ImageButton
                 android:id="@+id/Tile11"
                 android:layout_width="74dp"
-                android:layout_height="81dp"
+                android:layout_height="82dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile12"
                 android:layout_width="74dp"
-                android:layout_height="80dp"
+                android:layout_height="82dp"
                 android:layout_marginLeft="1dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile13"
                 android:layout_width="77dp"
-                android:layout_height="80dp"
+                android:layout_height="82dp"
                 android:layout_marginLeft="1dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile14"
                 android:layout_width="81dp"
-                android:layout_height="81dp"
-                android:layout_marginTop="9dp"
+                android:layout_height="82dp"
+                android:layout_marginTop="8dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile15"
                 android:layout_width="75dp"
-                android:layout_height="80dp"
+                android:layout_height="82dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="7dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton
                 android:id="@+id/Tile16"
                 android:layout_width="74dp"
-                android:layout_height="79dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:onClick="TileClick"
                 android:background="@drawable/whitecircle"/>
             <ImageButton

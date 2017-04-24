@@ -23,9 +23,10 @@ public class Connect4Computer {
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:
+     * Used in order to decide which move is the best move the computer can make given the situation of the board.
      *
      * Returns:
-     * @return
+     * @return -> String, the tile that the computer should place.
      *
      * Author:
      * Nicole Millian
@@ -75,14 +76,17 @@ public class Connect4Computer {
 
     /**
      * Name:
+     * MakeWinningMove
      *
      * Synopsis:
+     * private String MakeWinningMove(Connect4Board a_board);
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:
+     * Used in order to determine if the computer player is able to make a winning move by placing the fourth piece of a line.
      *
      * Returns:
-     * @return
+     * @return String, the tile to place the computer's piece, or none if there is no suitable move to be made.
      *
      * Author:
      * Nicole Millian
@@ -261,14 +265,17 @@ public class Connect4Computer {
 
     /**
      * Name:
+     * AddThirdPiece
      *
      * Synopsis:
+     * private String AddThirdPiece(Connect4Board a_board);
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:
+     * Used in order to place a third connect 4 piece down when there are already two computer pieces lined up.
      *
      * Returns:
-     * @return
+     * @return String, the tile to place the computer's piece, or none if there is no suitable move to be made.
      *
      * Author:
      * Nicole Millian
@@ -407,14 +414,17 @@ public class Connect4Computer {
 
     /**
      * Name:
+     * AddSecondPiece
      *
      * Synopsis:
+     * private String AddSecondPiece(Connect4Board a_board);
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:
+     * Used in order to place a second computer piece down when a single piece has already been placed.
      *
      * Returns:
-     * @return
+     * @return String, the tile to place the computer's piece, or none if there is no suitable move to be made.
      *
      * Author:
      * Nicole Millian
@@ -560,14 +570,17 @@ public class Connect4Computer {
 
     /**
      * Name:
+     * BlockWinningMove
      *
      * Synopsis:
+     * private String BlockWinningMove(Connect4Board a_board);
      * @param a_board -> The board object, used in order to keep track of the piece at each tile.
      *
      * Description:
+     * Used in order to block a human players winning move by placing a computer tile at the fourth slot if possible.
      *
      * Returns:
-     * @return
+     * @return String, the tile to place the computer's piece, or none if there is no suitable move to be made.
      *
      * Author:
      * Nicole Millian

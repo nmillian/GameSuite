@@ -239,6 +239,68 @@ public class Connect4Computer {
             }
         }
 
+        //Diagonal up missing middle right(third piece)
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+
+                //tile to place
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+
+                //should be filled
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i+2), Integer.toString(j+2))){
+                        return tileThree;
+                    }
+                }
+            }
+        }
+
+        //Diagonal up missing middle left (second piece)
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                //Place
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+
+                //filled
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i+1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //Diagonal up missing first (first piece)
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //missing
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                //filled
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i), Integer.toString(j))){
+                        return tileOne;
+                    }
+                }
+            }
+        }
+
+
         //Check diagonal win down
         //Row
         for(int i = 6; i > 3; i--){
@@ -253,6 +315,67 @@ public class Connect4Computer {
                 if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C")){
                     if(a_board.ValidateMove(Integer.toString(i-3), Integer.toString(j+3))){
                         return tileFour;
+                    }
+                }
+            }
+        }
+
+        //(TileTwo)
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+
+                //Place
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+
+                //Filled
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i-2), Integer.toString(j+2))){
+                        return tileThree;
+                    }
+                }
+            }
+        }
+
+        //(TileThree)
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                //Place
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+
+                //Filled
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i-1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //(TileOne)
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //Place
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                //Filled
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileTwo).equals("C") && a_board.GetValueUsingTile(tileThree).equals("C") && a_board.GetValueUsingTile(tileFour).equals("C")){
+                    if(a_board.ValidateMove(Integer.toString(i), Integer.toString(j))){
+                        return tileOne;
                     }
                 }
             }
@@ -735,6 +858,66 @@ public class Connect4Computer {
             }
         }
 
+        //TileOne
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //Place
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                //Filled
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i), Integer.toString(j))){
+                        return tileOne;
+                    }
+                }
+            }
+        }
+
+        //TileTwo
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                //Place
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+
+                //Filled
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i+1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //TileThree
+        for(int i = 1; i < 4; i++){
+            //Column
+            for(int j = 1; j < 5; j++){
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i+1) + Integer.toString(j+1);
+
+                //Place
+                String tileThree = Integer.toString(i+2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i+3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i+2), Integer.toString(j+2))){
+                        return tileThree;
+                    }
+                }
+            }
+        }
+
+
         //Check diagonal win down
         //Row
         for(int i = 6; i > 3; i--){
@@ -749,6 +932,65 @@ public class Connect4Computer {
                 if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileTwo).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H")){
                     if(a_board.ValidateMove(Integer.toString(i-3), Integer.toString(j+3))){
                         return tileFour;
+                    }
+                }
+            }
+        }
+
+        //TileOne
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //Place
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileTwo).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i), Integer.toString(j))){
+                        return tileOne;
+                    }
+                }
+            }
+        }
+
+        //TileTwo
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //Place
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileThree).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i-1), Integer.toString(j+1))){
+                        return tileTwo;
+                    }
+                }
+            }
+        }
+
+        //TileThree
+        for(int i = 6; i > 3; i--){
+            //Column
+            for(int j = 1; j < 5; j++){
+                //Place
+                String tileOne = Integer.toString(i) + Integer.toString(j);
+                String tileTwo = Integer.toString(i-1) + Integer.toString(j+1);
+
+                String tileThree = Integer.toString(i-2) + Integer.toString(j+2);
+
+                String tileFour = Integer.toString(i-3) + Integer.toString(j+3);
+
+                if(a_board.GetValueUsingTile(tileOne).equals("H") && a_board.GetValueUsingTile(tileFour).equals("H") && a_board.GetValueUsingTile(tileTwo).equals("H")){
+                    if(a_board.ValidateMove(Integer.toString(i-2), Integer.toString(j+2))){
+                        return tileThree;
                     }
                 }
             }

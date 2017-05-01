@@ -804,16 +804,6 @@ public class Crazy8sActivity extends AppCompatActivity {
             visibility.setVisibility(View.VISIBLE);
         }
 
-        /*
-        String tile = "imageButton";
-        int idOriginal = getResources().getIdentifier(tile, "id", getPackageName());
-        ImageButton toChange = (ImageButton) findViewById(idOriginal);
-
-        mDrawableName = "redsquaregrid";
-        resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-
-        toChange.setBackgroundResource(resID);
-        */
     }
 
     /**

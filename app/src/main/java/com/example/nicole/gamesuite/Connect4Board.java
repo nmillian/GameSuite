@@ -426,7 +426,6 @@ public class Connect4Board {
      * Date:
      * 2/3/2017
      */
-    //Check if the computer player won the game
     public boolean CheckForWinComputer(){
         //Check horizontal win
         //Row

@@ -409,7 +409,7 @@ public class Crazy8sActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/14/2017
      */
     public void ResetGame(){
         View visibility;
@@ -824,7 +824,7 @@ public class Crazy8sActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/14/2017
      */
     public void skipClick(View view){
         if(currentPlayer.equals("human")){
@@ -855,7 +855,7 @@ public class Crazy8sActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/16/2017
      */
     public void SaveGame(View view){
         //Only let the human save on it's turn

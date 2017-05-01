@@ -46,7 +46,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/10/2017
      */
     public Crazy8sBoard(){
         handComputer.clear();
@@ -82,7 +82,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/10/2017
      */
     private void InitializeComputerHand(){
         for(int i = 0; i < 7; i++){
@@ -113,7 +113,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/10/2017
      */
     private void InitializeHumanHand(){
         for(int i = 0; i < 7; i++){
@@ -156,7 +156,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/10/2017
      */
     private void InitializeDeck(){
         //Spades
@@ -250,7 +250,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/13/2017
      */
     public void ClearGame(){
         handComputer.clear();
@@ -276,7 +276,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/20/2017
      */
     public void ResetGame(){
         handComputer.clear();
@@ -308,7 +308,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/26/2017
      */
     public void AddCardComputerFromSerial(String value){
         handComputer.add(value);
@@ -332,7 +332,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/26/2017
      */
     public void AddCardHumanFromSerial(String value){
         handHuman.add(value);
@@ -356,7 +356,7 @@ public class Crazy8sBoard {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/26/2017
      */
     public void AddCardDeckFromSerial(String value){
         deck.add(value);

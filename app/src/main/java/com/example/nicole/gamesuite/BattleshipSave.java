@@ -35,7 +35,7 @@ public class BattleshipSave {
      * Nicole Millian
      *
      * Date:
-     * 2/23/2017
+     * 3/22/2017
      */
     public void serializationToFile(String fileName, BattleshipBoard board) {
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
@@ -185,7 +185,7 @@ public class BattleshipSave {
      * Nicole Millian
      *
      * Date:
-     * 2/23/2017
+     * 3/22/2017
      */
     public boolean serializationFromFile(String fileName, BattleshipBoard board) {
         //The final string consisting of the entire serialized file read in

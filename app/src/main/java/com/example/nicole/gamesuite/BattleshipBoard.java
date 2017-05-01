@@ -41,7 +41,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/7/2017
      */
     public BattleshipBoard(){
         //Initialize the Hashtable with the defualt values at default locations
@@ -79,7 +79,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void ResetGame(){
         InitializeBoardHuman();
@@ -106,7 +106,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetBlankComputer(String tile){
         battleshipBoardComputer.put(tile, "B");
@@ -130,7 +130,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetBlankHuman(String tile){
         battleshipBoardHuman.put(tile, "B");
@@ -154,7 +154,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetShipComputer(String tile){
         battleshipBoardComputer.put(tile, "S");
@@ -178,7 +178,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetShipHuman(String tile){
         battleshipBoardHuman.put(tile, "S");
@@ -202,7 +202,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetShipHitComputer(String tile){
         battleshipBoardComputer.put(tile, "H");
@@ -226,7 +226,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetBlankHitComputer(String tile){
         battleshipBoardComputer.put(tile, "BH");
@@ -250,7 +250,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetShipHitHuman(String tile){
         battleshipBoardHuman.put(tile, "H");
@@ -274,7 +274,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public void SetBlankHitHuman(String tile){
         battleshipBoardHuman.put(tile, "BH");
@@ -298,7 +298,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public String GetPieceAtSpaceComputer(String tile){
         return battleshipBoardComputer.get(tile);
@@ -322,7 +322,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/8/2017
      */
     public String GetPieceAtSpaceHuman(String tile){
         return battleshipBoardHuman.get(tile);
@@ -381,7 +381,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/9/2017
      */
     public String CheckForHumanShipHit(String tile){
         //Hit ship
@@ -415,7 +415,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/9/2017
      */
     public Integer GetNumberOfComputerShipTiles(){
         Integer count = 0;
@@ -449,7 +449,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/9/2017
      */
     public Integer GetNumberOfHumanShipTiles(){
         Integer count = 0;
@@ -466,7 +466,7 @@ public class BattleshipBoard {
         return count;
     }
 
-    //Remove
+    //Print
     public void print(){
         //Row
         for(int i = 8; i > 0; i-- ){
@@ -501,7 +501,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/7/2017
      */
     private void InitializeBoardComputer(){
         battleshipBoardComputer.clear();
@@ -543,7 +543,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/7/2017
      */
     private void InitializeBoardHuman(){
         battleshipBoardHuman.clear();
@@ -584,7 +584,7 @@ public class BattleshipBoard {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/7/2017
      */
     private void PlaceOriginalShipsComputer(){
         /*

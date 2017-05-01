@@ -47,7 +47,7 @@ public class BattleshipComputer {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/10/2017
      */
     public BattleshipComputer(){
         state = "search";
@@ -80,7 +80,7 @@ public class BattleshipComputer {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/10/2017
      */
     public String PlayGame(BattleshipBoard board){
         String tile = "00";
@@ -391,7 +391,7 @@ public class BattleshipComputer {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/11/2017
      */
     private void ResetTilesToCheck(){
         direction = "NONE";
@@ -423,7 +423,7 @@ public class BattleshipComputer {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/11/2017
      */
     private void GenerateTilesToCheck(){
         char row = lastHitTile.charAt(0);
@@ -488,7 +488,7 @@ public class BattleshipComputer {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/11/2017
      */
     private String RandomMove(BattleshipBoard board){
         int row;

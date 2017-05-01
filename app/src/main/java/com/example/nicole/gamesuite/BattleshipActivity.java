@@ -57,7 +57,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/10/2017
+     * 3/3/2017
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/10/2017
+     * 3/3/2017
      */
     public BattleshipActivity(){
         startRow = "0";
@@ -163,7 +163,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/3/2017
      */
     public void SetSerializedBoard(){
         String row;
@@ -285,7 +285,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/10/2017
+     * 3/3/2017
      */
     public void hTileClick(View view){
 
@@ -447,7 +447,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/10/2017
+     * 3/3/2017
      */
     public void cTileClick(View view){
         Integer shipsLeft;
@@ -545,7 +545,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/3/2017
      */
     public boolean validateTiles(){
 
@@ -822,7 +822,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/3/2017
      */
     public void SaveGame(View view){
         //Only let the human save on it's turn
@@ -879,7 +879,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/14/2017
+     * 3/3/2017
      */
     public void ResetGame(){
         currentPlayer = "human";
@@ -1031,7 +1031,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/6/2017
      */
     private Runnable ComputerRunnable = new Runnable() {
         public void run() {
@@ -1057,7 +1057,7 @@ public class BattleshipActivity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/13/2017
+     * 3/6/2017
      */
     private void ComputerMove(){
         //Make move

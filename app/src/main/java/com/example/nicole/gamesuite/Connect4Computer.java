@@ -32,7 +32,7 @@ public class Connect4Computer {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     public String DecideMove(Connect4Board a_board ){
         String checkWin;
@@ -1019,7 +1019,7 @@ public class Connect4Computer {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     private String DecideBasicMove(Connect4Board a_board){
         String noMove = "none";

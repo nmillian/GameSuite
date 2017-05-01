@@ -117,7 +117,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public boolean ChoiceValid(String a_row, String a_column){
         String tile = a_row + a_column;
@@ -149,7 +149,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public boolean ValidateMove(String a_row, String a_column){
         Integer rowInt = Integer.parseInt(a_row);
@@ -197,7 +197,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public void UpdateHumanMove(String a_row, String a_column){
         String tile = a_row + a_column;
@@ -223,7 +223,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public void UpdateComputerMove(String a_row, String a_column){
         String tile = a_row + a_column;
@@ -249,7 +249,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public void UpdateBlankMove(String a_row, String a_column){
         String tile = a_row + a_column;
@@ -278,7 +278,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public String GetValueAtTile(String a_row, String a_column){
         String tile = a_row + a_column;
@@ -303,7 +303,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public String GetValueUsingTile(String a_tile){
         return connect4Board.get(a_tile);
@@ -327,7 +327,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public boolean CheckForWinHuman(){
         //Check horizontal win
@@ -424,7 +424,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/16/2017
      */
     public boolean CheckForWinComputer(){
         //Check horizontal win
@@ -567,7 +567,7 @@ public class Connect4Board {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/18/2017
      */
     public void ResetBoard(){
         connect4Board.clear();

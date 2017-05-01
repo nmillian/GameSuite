@@ -17,6 +17,27 @@ import java.util.Scanner;
 
 public class Connect4Save {
 
+    /**
+     * Name:
+     * serializationToFile
+     *
+     * Synopsis:
+     * public void serializationToFile(String fileName, Crazy8sBoard board )
+     * @param fileName -> The file name to save the game state to.
+     * @param board -> The board of the game to be saved and the location of the pieces.
+     *
+     * Description:
+     * Used in order to save the state of a game to a text file and then exits the game.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/8/2017
+     */
     public void serializationToFile(String fileName, Connect4Board board ){
 
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
@@ -100,6 +121,30 @@ public class Connect4Save {
 
     }
 
+    /**
+     * Name:
+     * serializationFromFile
+     *
+     * Synopsis:
+     * public boolean serializationFromFile(String fileName, Crazy8sBoard board);
+     * @param fileName -> The file name to read from.
+     * @param board -> The board to saved and the location of the pieces.
+     *
+     * Description:
+     * Validates that the file is for the correct game type and reads in pieces and location and updates them within the board class.
+     *
+     * Returns:
+     * @return Boolean, true if the file is able to be read, false if there is an error with the file.
+     *
+     * Returns:
+     * None.
+     *
+     * Author:
+     * Nicole Millian
+     *
+     * Date:
+     * 3/8/2017
+     */
     public boolean serializationFromFile(String fileName, Connect4Board board){
         //The final string consisting of the entire serialized file read in
         String finalString;

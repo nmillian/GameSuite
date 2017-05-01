@@ -48,7 +48,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     public Connect4Activity(){
         board = new Connect4Board();
@@ -139,7 +139,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     public void TileClick(View view){
 
@@ -237,7 +237,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/18/2017
      */
     public void SaveGame(View view){
 
@@ -300,7 +300,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/13/2017
      */
     private Runnable ComputerRunnable = new Runnable() {
         @Override
@@ -418,7 +418,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/18/2017
      */
     private void setSerializedBoard(){
         String row;
@@ -477,7 +477,7 @@ public class Connect4Activity extends AppCompatActivity {
      * Nicole Millian
      *
      * Date:
-     * 2/3/2017
+     * 2/18/2017
      */
     private void ResetBoard(){
         board.ResetBoard();

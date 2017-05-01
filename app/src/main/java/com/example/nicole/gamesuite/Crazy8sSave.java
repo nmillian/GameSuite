@@ -39,7 +39,7 @@ public class Crazy8sSave {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/26/2017
      */
     public void serializationToFile(String fileName, Crazy8sBoard board ){
 
@@ -161,7 +161,7 @@ public class Crazy8sSave {
      * Nicole Millian
      *
      * Date:
-     * 3/12/2017
+     * 3/26/2017
      */
     public boolean serializationFromFile(String fileName, Crazy8sBoard board){
         System.out.println("IN SERIAL FROM FILE");
